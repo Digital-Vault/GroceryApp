@@ -1,19 +1,27 @@
 # Group_02
 
+## Project Description
+
+To be written.
+
 ## Team Members
 
-### Jacky Tea
-- Github: JackyTea
+### Jacky Tea @JackyTea
+
 - Skype: live:teajacks_1
 - Role: Not assigned yet.
-### Abiram Kaimathuruthy
-- Github: abiram31
+
+### Abiram Kaimathuruthy @abiram31
+
 - Skype: live:e09ff44e106efd35
 - Role: Not assigned yet.
-### Sang Min (Rick) Park
-- Github: 9714park
+
+### Sang Min (Rick) Park @9714park
+
 - Skype: live:9714park
 - Role: Not assigned yet.
 
-## Project Description
-To be written.
+### Brian Smith @blackHatMonkey
+
+- Skype: live:9fea3ac00220d3e2
+- Role: Not assigned yet.
