@@ -2,7 +2,7 @@
 
 ## Project Description
 Expiry Date Checker: 
-This project will consist of an application for all smartphones. This application lets the user select a food item, and displays the the expiry date. It also sends the user notifications when the item is close to its expiry date.
+This project will consist of an application for all smartphones. This application lets the user select a food item, and displays the expiry date. It also sends the user notifications when the item is close to its expiry date.
 
 ## Team Members
 
@@ -25,4 +25,3 @@ This project will consist of an application for all smartphones. This applicatio
 - Github: blackHatMonkey
 - Skype: live:9fea3ac00220d3e2
 - Role: UI Design, Documentation, Implementation
-
