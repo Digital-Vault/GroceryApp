@@ -45,7 +45,7 @@ Users (anyone that is using the application)
 The user has the application installed on their smartphone and has clicked the "Create Account" button to navigate to the registration form.
 
 #### Basic flow
-The user enters the required information into the registration form by clicking on the available text input fields and inputting text via the on-screen keyboard on their smart phone. All inputted text is validated via client side algorithmns (see Alternate / Exception Flows below). Once all required information is inputted (eg. first name, last name, username, password, email, etc...) into the form, the "Register Account" button will be made available for the user to click. All data on the form will then be parsed for integrity/validity and stored into a database as user credentials for future login operations.
+The user enters the required information into the registration form by clicking on the available text input fields and inputting text via the on-screen keyboard on their smart phone. All inputted text is validated via client side algorithms (see Alternate / Exception Flows below). Once all required information is inputted (eg. first name, last name, username, password, email, etc...) into the form, the "Register Account" button will be made available for the user to click. All data on the form will then be parsed for integrity/validity and stored into a database as user credentials for future login operations.
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Incorrect Input_**
