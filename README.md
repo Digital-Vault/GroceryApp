@@ -79,12 +79,15 @@ The user taps on the floating action button (FAB) which opens a new screen with 
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Product Name_**
+
 The add to list button will be disabled until the user inputs a value.
 
 **_Alternate Flow 2: User presses back button_**
+
 In case of a user pressing the back button, the application won't save the new item and will redirect the user back to grocery list screen.
 
 **_Alternate Flow 3: Other Issues_**
+
 An error message will appear in case of any unexpected errors.
 
 #### Post-conditions
