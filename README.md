@@ -63,3 +63,8 @@ An error message will be displayed to the user if any issues arise while their d
 
 #### Post-conditions
 The user account and all associated data is created and saved to the backend database. The user is now able to login to the application and access its features as well as utilize its intended functionality.
+
+### Sync Accounts 
+
+####Brief description
+This use case is the process that a user goes through to sync their account with another account to ensure a common grocery list.
