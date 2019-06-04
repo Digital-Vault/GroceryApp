@@ -66,5 +66,5 @@ The user account and all associated data is created and saved to the backend dat
 
 ### Sync Accounts 
 
-####Brief description
+#### Brief description
 This use case is the process that a user goes through to sync their account with another account to ensure a common grocery list.
