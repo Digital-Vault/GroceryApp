@@ -79,15 +79,12 @@ The user taps on the floating action button (FAB) which opens a new screen with 
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Product Name_**
-
 The add to list button will be disabled until the user inputs a value.
 
 **_Alternate Flow 2: User presses back button_**
-
 In case of a user pressing the back button, the application won't save the new item and will redirect the user back to grocery list screen.
 
 **_Alternate Flow 3: Other Issues_**
-
 An error message will appear in case of any unexpected errors.
 
 #### Post-conditions
@@ -96,7 +93,7 @@ A new item is added to the grocery list.
 ### Sync Accounts
 
 #### Brief description
-This use case is the process that a user goes through to create a family account and sync multiple accounts together
+This use case is the process that a user goes through to create a family account and sync multiple accounts together.
 
 #### Preconditions
 All the users must have a registered account with the application and the user creating the family account must be signed in.
@@ -106,12 +103,15 @@ The user clicks the "Create Family Account" button located in the home page of t
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Invalid Email_**
+
 If the email is not recognized by the application as a valid email, the user will get a notification saying "invalid email" and will be prompted to enter the email again.
 
 **_Alternate Flow 1: Missing Email_**
+
 The Save button will be disabled until atleast one valid email is entered.
 
 **_Alternate Flow 3: Other Issues_**
+
 An appropriate error message will be shown in case of unexpected errors.
 
 #### Post-conditions
