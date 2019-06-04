@@ -93,7 +93,7 @@ A new item is added to the grocery list.
 ### Sync Accounts
 
 #### Brief description
-This use case is the process that a user goes through to sync their account with another account to ensure a common grocery list.
+This use case is the process that a user goes through to create a family account and sync multiple accounts together
 
 #### Preconditions
 All the users must have a registered account with the application and the user creating the family account must be signed in.
