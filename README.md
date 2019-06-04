@@ -64,17 +64,17 @@ An error message will be displayed to the user if any issues arise while their d
 #### Post-conditions
 The user account and all associated data is created and saved to the backend database. The user is now able to login to the application and access its features as well as utilize its intended functionality.
 
-###Add an item to the grocery list
-####Brief description
+### Add an item to the grocery list
+#### Brief description
 This use case describes the process of a user adding a new item to the grocery list.
 
-####Actors
+#### Actors
 Typical user
 
-####Preconditions
+#### Preconditions
 The user has opened the application and is currently in the grocery list section.
 
-####Basic flow
+#### Basic flow
 The user taps on the floating action button (FAB) which opens a new screen with text fields for product name and additional notes. The user then fills in the information and when ready taps on the add to list button. The application then redirects the user back to the grocery list screen.
 
 #### Alternate / Exception Flows
@@ -87,5 +87,5 @@ In case of a user pressing the back button, the application won't save the new i
 **_Alternate Flow 3: Other Issues_**
 An error message will appear in case of any unexpected errors.
 
-####Post-conditions
+#### Post-conditions
 A new item is added to the grocery list.
