@@ -69,7 +69,7 @@ The user account and all associated data is created and saved to the backend dat
 This use case describes the process of a user adding a new item to the grocery list.
 
 #### Actors
-Typical user
+User(Anyone that uses the application)
 
 #### Preconditions
 The user has opened the application and is currently in the grocery list section.
@@ -94,6 +94,9 @@ A new item is added to the grocery list.
 
 #### Brief description
 This use case is the process that a user goes through to create a family account and sync multiple accounts together.
+
+#### Actors
+Typical user
 
 #### Preconditions
 The user must have the application installed and opened
