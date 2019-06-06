@@ -109,7 +109,7 @@ The user clicks the "Send Sync Invite" button located in the home page of the ap
 
 If the email is not recognized by the application as a valid email, the user will get a notification saying "invalid email" and will be prompted to enter the email again.
 
-**_Alternate Flow 1: Missing Email_**
+**_Alternate Flow 2: Missing Email_**
 
 The Save button will be disabled until atleast one valid email is entered.
 
