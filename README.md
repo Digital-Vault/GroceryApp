@@ -90,10 +90,10 @@ An error message will appear in case of any unexpected errors.
 #### Post-conditions
 A new item is added to the grocery list.
 
-### Create Family account
+### Sync Accounts
 
 #### Brief description
-This use case is the process that a user goes through to create a family account and sync multiple accounts together.
+This use case is the process that a user goes through to sync multiple accounts together.
 
 #### Actors
 User(Anyone that uses the application)
@@ -102,7 +102,7 @@ User(Anyone that uses the application)
 The user must have the application installed and opened
 
 #### Basic flow
-The user clicks the "Create Family Account" button located in the home page of the app. This will navigate them to a page where they can enter additional users. They will be prompted to enter the email of the additional user into a textfield. If they need to keep adding new users, there will be a "+ add new user" button at the end, which will keep creating new rows that will ask for the email of the additional user. Once they have added all the users, they can click the "Save" button.
+The user clicks the "Send Sync Invite" button located in the home page of the app. This will navigate them to a page where they can enter additional users. They will be prompted to enter the email of the additional user into a textfield. If they need to keep adding new users, there will be a "+ add new user" button at the end, which will keep creating new rows that will ask for the email of the additional user. Once they have added all the users, they can click the "Save" button.
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Invalid Email_**
