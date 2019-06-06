@@ -89,3 +89,33 @@ An error message will appear in case of any unexpected errors.
 
 #### Post-conditions
 A new item is added to the grocery list.
+
+### Sync Accounts
+
+#### Brief description
+This use case is the process that a user goes through to sync multiple accounts together.
+
+#### Actors
+User(Anyone that uses the application)
+
+#### Preconditions
+The user must have the application installed and opened
+
+#### Basic flow
+The user clicks the "Send Sync Invite" button located in the home page of the app. This will navigate them to a page where they can enter additional users. They will be prompted to enter the email of the additional user into a textfield. If they need to keep adding new users, there will be a "+ add new user" button at the end, which will keep creating new rows that will ask for the email of the additional user. Once they have added all the users, they can click the "Save" button.
+
+#### Alternate / Exception Flows
+**_Alternate Flow 1: Invalid Email_**
+
+If the email is not recognized by the application as a valid email, the user will get a notification saying "invalid email" and will be prompted to enter the email again.
+
+**_Alternate Flow 2: Missing Email_**
+
+The Save button will be disabled until atleast one valid email is entered.
+
+**_Alternate Flow 3: Other Issues_**
+
+An appropriate error message will be shown in case of unexpected errors.
+
+#### Post-conditions
+A request of confirmation is sent out to all the users being added to the family account.
