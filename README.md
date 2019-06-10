@@ -96,7 +96,7 @@ A new item is added to the grocery list.
 ### Sync Accounts
 
 #### Brief description
-This use case is the process that a user goes through to sync multiple accounts together.
+This use case is the process that a user goes through to invite multiple accounts to sync together.
 
 #### Actors
 Typical User
