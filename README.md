@@ -111,7 +111,7 @@ If the email is not recognized by the application as a valid email, the user wil
 
 **_Alternate Flow 2: Missing Email_**
 
-The Save button will be disabled until atleast one valid email is entered.
+The Save button will be disabled until at least one valid email is entered.
 
 **_Alternate Flow 3: Other Issues_**
 
@@ -121,7 +121,6 @@ An appropriate error message will be shown in case of unexpected errors.
 A request of confirmation is sent out to all the users being added to the family account.
 A new item is added to the grocery list.
 
-## Use Cases
 
 ### Crossing out items from the grocery list, and adding expiry date
 
@@ -140,7 +139,7 @@ The user looks through the selected grocery list and clicks an item to cross out
 
 #### Alternate and/or exception flows
 **_Alternate Flow 1: Missing Expiry Date Input_**
-If the user decides to not enter in an expiry date, the user can click a button by the drop-down list to allow a predefined date to be automatically inserted. If the the applicatoin cannot provide a predifined date for the item, it will alert the user that no expiry date was provided and leave it blank.
+If the user decides to not enter in an expiry date, the user can click a button by the drop-down list to allow a predefined date to be automatically inserted. If the the application cannot provide a predefined date for the item, it will alert the user that no expiry date was provided and leave it blank.
 
 #### Post-conditions
 Once completed button is clicked, the crossed-out items will be added “My Items” page possibly with its expiry date. A notification will be automatically scheduled for all the expiry dates.
