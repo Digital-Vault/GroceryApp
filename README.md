@@ -93,7 +93,7 @@ An error message will appear in case of any unexpected errors.
 #### Post-conditions
 A new item is added to the grocery list.
 
-### Sync Accounts
+### Invite Users to Sync Accounts
 
 #### Brief description
 This use case is the process that a user goes through to invite multiple accounts to sync together.
