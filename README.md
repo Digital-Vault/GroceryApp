@@ -136,7 +136,7 @@ The user is on the grocery list view page of the app.
 The user has inserted at least one item to the list
 
 #### Basic flow
-The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will dispaly a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format. The user has entered in the dates for the items and clicks complete. The application will redirect the user back to the grocery list page.
+The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will display a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format. The user has entered in the dates for the items and clicks complete. The application will redirect the user back to the grocery list page.
 
 #### Alternate and/or exception flows
 **_Alternate Flow 1: Missing Expiry Date Input_**
