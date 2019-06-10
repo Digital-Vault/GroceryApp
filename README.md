@@ -79,12 +79,15 @@ The user taps on the floating action button (FAB) which opens a new screen with 
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Product Name_**
+
 The add to list button will be disabled until the user inputs a value.
 
 **_Alternate Flow 2: User presses back button_**
+
 In case of a user pressing the back button, the application won't save the new item and will redirect the user back to grocery list screen.
 
 **_Alternate Flow 3: Other Issues_**
+
 An error message will appear in case of any unexpected errors.
 
 #### Post-conditions
@@ -139,6 +142,7 @@ The user looks through the selected grocery list and clicks an item to cross out
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Expiry Date Input_**
+
 If the user decides to not enter in an expiry date, the user can click a button by the drop-down list to allow a predefined date to be automatically inserted. If the the application cannot provide a predefined date for the item, it will alert the user that no expiry date was provided and leave it blank.
 
 #### Post-conditions
