@@ -36,7 +36,7 @@ Our app allows users to keep track of their shopping list in a simple format. Th
 ### Create User Account
 
 #### Brief Description
-This use case is the process that a user goes through in order to create their account for the application.
+This use case describes the process that a new user goes through in order to create their account for the application.
 
 #### Actors
 First time users (new users)
