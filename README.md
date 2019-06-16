@@ -147,3 +147,23 @@ If the user decides to not enter in an expiry date, the user can click a button 
 
 #### Post-conditions
 Once completed button is clicked, the crossed-out items will be added “My Items” page possibly with its expiry date. A notification will be automatically scheduled for all the expiry dates.
+
+## Technological Choices
+
+### Front-End Technologies
+
+Describe the project's front-end techologies here (eg. client side, app design, user-experience). 
+
+*Note: Add any additional information here.*
+
+### Back-End Technologies
+
+Describe the project's back-end techologies here (eg. server side, databases, security).
+
+*Note: Add any additional information here.*
+
+### Application Programming Interfaces (APIs)
+
+Describe any APIs used in the project here (eg. external services).
+
+*Note: Add any additional information here.*
