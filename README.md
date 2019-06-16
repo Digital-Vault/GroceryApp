@@ -158,9 +158,12 @@ Describe the project's front-end techologies here (eg. client side, app design, 
 
 ### Back-End Technologies
 
-Describe the project's back-end techologies here (eg. server side, databases, security).
+For our back-end, we will be using Google's [Firebase](https://firebase.google.com/). Firebase is a mobile and web development platform that utilizes many products to help build apps faster. We chose Firebase because it is backed by Google, making it an ideal platform for developing mobile apps. They are a reliabile company that provides support in their easy to follow documentation. Firebase is our primary platform for performing back-end tasks such as server management, and setting up the database because of the following features: 
 
-*Note: Add any additional information here.*
+[Realtime Database](https://firebase.google.com/docs/database): A cloud-hosted database that stores JSON formatted data and synchronizes data in realtime across multiple platforms such as iOS and Android to every connected client. Realtime Database allows us to implement a database that is cross platform, where all the users share one Realtime Database instance which automatically updates with the newest data. This feature can be used to implement our database to store all the expiry date information and sync user grocery lists. 
+
+[Cloud Storage](https://firebase.google.com/docs/hosting): Easy storage of user generated content like photos. This technology can be used in the future if we want to implement a photo storage system for users who want to take pictures of the expiry dates on their food. 
+
 
 ### Application Programming Interfaces (APIs)
 
