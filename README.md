@@ -152,15 +152,17 @@ Once completed button is clicked, the crossed-out items will be added “My Item
 
 ### Front-End Technologies
 
-Describe the project's front-end techologies here (eg. client side, app design, user-experience). 
+This project will utilize the [Flutter](https://flutter.dev/ "Flutter's Homepage") mobile application framework to unite back-end and application programming interfaces (APIs) with the application's front-end to create a rich and intuitive user experience. [Flutter](https://flutter.dev/ "Flutter's Homepage") is an open-source framework created by [Google](https://www.google.com/search?rlz=1C1CHBF_enCA758CA758&q=Google&stick=H4sIAAAAAAAAAONgecRYxy3w8sc9YanSSWtOXmPM5-IKzsgvd80rySypFLLhYoOyZLh4pTj1c_UNTEyTzZM0GKS4uRBcKREtIc7LDKz7jKM8agR9c5f8XjvlgpySshH_rkvTzrFxCi7g-PI4KybI4dHqzlWsTAYMTftWHGJj4WAUYOBZxMrmnp-fnpMKAFVTOpyMAAAA&sa=X&ved=2ahUKEwiOuveQ4vDiAhUGoZ4KHTTOBdYQ6RMwFnoECAsQBA&biw=1536&bih=754 "Google Company Info") designed to aid in the development of Android, iOS and desktop applications. The framework's consistent design language, available libraries and built-in features will help us optimize our application to run natively on a majority of mobile platforms.
 
-*Note: Add any additional information here.*
+The design philosophy of this application will follow the [Material](https://material.io/design/, "Material Design Homepage") language, which emphasizes flexible, intuitive and aesthetic visual layouts. 
+
 
 ### Back-End Technologies
 
 Describe the project's back-end techologies here (eg. server side, databases, security).
 
 *Note: Add any additional information here.*
+
 
 ### Application Programming Interfaces (APIs)
 
