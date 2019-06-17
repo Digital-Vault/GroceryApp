@@ -164,6 +164,12 @@ Describe the project's back-end techologies here (eg. server side, databases, se
 
 ### Application Programming Interfaces (APIs)
 
-Describe any APIs used in the project here (eg. external services).
+The app will use Google Sign-In to allow users to log in using their Google Accounts and connecting them with Google services (Google Drive, Google Pay, Calendar) in a secure manner.
+
+Authentication process will be tasked by Firebase, which can allow users to sign in to your app using multiple authentication providers by linking auth provider credentials to an existing user account.
+
+Firebase is adopted because it provides various backend services for multiple platforms (Android, iOS, websites, and other applications). It offers authentication, real-time database, Cloud Firestore (file storage), analytics and server-side functionality without having to own and manage infrastructure and software required for server-side support. Using Firebase, you can access google cloud store for storing images, files, and data from your app, and build server-side functionality for you app.
+
+The app will use Crashlytics provided by Firebase for crash reporting, application logging, online review and statistical analysis of application logs. It is a lightweight, yet powerful SDK that helps you track, prioritize, and fix stability issues that erode your app quality.
 
 *Note: Add any additional information here.*
