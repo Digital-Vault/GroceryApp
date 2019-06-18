@@ -152,14 +152,13 @@ Once completed button is clicked, the crossed-out items will be added “My Item
 
 ### Front-End Technologies
 
-This project will be written in [Dart](https://dart.dev/) programming language and utilizing the [Flutter](https://flutter.dev/) mobile application framework. We chose flutter because it is backed by Google, has well written documentation and allows us to target both Android and IOS platforms with a single code base. This will save us considerable amount of work and time compared to separately writing native Android and IOS applications. Additionally Flutter integrates with [Firebase](https://firebase.google.com/) which is where we host our data.
+This project will be written [Dart](https://dart.dev/), a client-optimized programming language and will utilize the [Flutter](https://flutter.dev/) mobile application framework. We chose flutter because it is backed by Google, has well written documentation and allows us to target both Android and IOS platforms with a single code base. This will save us a considerable amount of work and time compared to writing native Android and IOS applications separately. Additionally, [Flutter](https://flutter.dev/) integrates with [Firebase](https://firebase.google.com/) which is where we will host our data.
 
-The design philosophy of this application will follow the [Material](https://material.io/design/) language, which emphasizes flexible, intuitive and aesthetic visual layouts. This ensures that the User Interface (UI) is consistent throughout our application. Flutter includes many pre-made Material components that reduces our implementation time.
+The design philosophy of this application will follow the [Material](https://material.io/design/) design language, which emphasizes flexible, intuitive and aesthetic visual layouts. This ensures that the User Interface (UI) is consistent throughout our application. Flutter includes many pre-made Material components that reduces our implementation time.
 
-We will write the application on [Visual Studio Code](https://code.visualstudio.com/) along with [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) extensions. We chose VSCode because all team members have previously used it and are comfortable with it.
+We will write the application on [Visual Studio Code](https://code.visualstudio.com/) along with [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) extensions. We chose Visual Studio Code because all team members have previously used it and are comfortable with it.
 
 Additionally Android and IOS emulators verify the progress of the application locally.
-
 
 ### Back-End Technologies
 
