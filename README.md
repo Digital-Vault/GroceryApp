@@ -152,9 +152,13 @@ Once completed button is clicked, the crossed-out items will be added “My Item
 
 ### Front-End Technologies
 
-This project will utilize the [Flutter](https://flutter.dev/ "Flutter's Homepage") mobile application framework to unite back-end and application programming interfaces (APIs) with the application's front-end to create a rich and intuitive user experience. [Flutter](https://flutter.dev/ "Flutter's Homepage") is an open-source framework created by [Google](https://www.google.com/search?rlz=1C1CHBF_enCA758CA758&q=Google&stick=H4sIAAAAAAAAAONgecRYxy3w8sc9YanSSWtOXmPM5-IKzsgvd80rySypFLLhYoOyZLh4pTj1c_UNTEyTzZM0GKS4uRBcKREtIc7LDKz7jKM8agR9c5f8XjvlgpySshH_rkvTzrFxCi7g-PI4KybI4dHqzlWsTAYMTftWHGJj4WAUYOBZxMrmnp-fnpMKAFVTOpyMAAAA&sa=X&ved=2ahUKEwiOuveQ4vDiAhUGoZ4KHTTOBdYQ6RMwFnoECAsQBA&biw=1536&bih=754 "Google Company Info") designed to aid in the development of Android, iOS and desktop applications. The framework's consistent design language, available libraries and built-in features will help us optimize our application to run natively on a majority of mobile platforms.
+This project will be written in [Dart](https://dart.dev/) programming language and utilizing the [Flutter](https://flutter.dev/) mobile application framework. We chose flutter because it is backed by Google, has well written documentation and allows us to target both Android and IOS platforms with a single code base. This will save us considerable amount of work and time compared to separately writing native Android and IOS applications. Additionally Flutter integrates with [Firebase](https://firebase.google.com/) which is where we host our data.
 
-The design philosophy of this application will follow the [Material](https://material.io/design/, "Material Design Homepage") language, which emphasizes flexible, intuitive and aesthetic visual layouts. 
+The design philosophy of this application will follow the [Material](https://material.io/design/) language, which emphasizes flexible, intuitive and aesthetic visual layouts. This ensures that the User Interface (UI) is consistent throughout our application. Flutter includes many pre-made Material components that reduces our implementation time.
+
+We will write the application on [Visual Studio Code](https://code.visualstudio.com/) along with [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) extensions. We chose VSCode because all team members have previously used it and are comfortable with it.
+
+Additionally Android and IOS emulators verify the progress of the application locally.
 
 
 ### Back-End Technologies
