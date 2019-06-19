@@ -138,7 +138,7 @@ The user is on the grocery list view page of the app.
 The user has inserted at least one item to the list
 
 #### Basic flow
-The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will display a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format. The user enters in the dates for the items and clicks complete. The application will redirect the user back to the grocery list page.
+The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will display a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format.  The user enters in the dates for the items and clicks complete. The database will update the status of the crossed-out gorcery lists to purchased and add on the expiry date information. the The application will redirect the user back to the grocery list page. 
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Expiry Date Input_**
@@ -146,7 +146,7 @@ The user looks through the selected grocery list and clicks an item to cross out
 If the user decides to not enter in an expiry date, the user can click a button by the drop-down list to allow a predefined date to be automatically inserted. If the the application cannot provide a predefined date for the item, it will alert the user that no expiry date was provided and leave it blank.
 
 #### Post-conditions
-Once completed button is clicked, the crossed-out items will be added “My Items” page possibly with its expiry date. A notification will be automatically scheduled for all the expiry dates.
+Once completed button is clicked, the crossed-out items will be added “My Items” page possibly with its expiry date. A notification will be automatically scheduled for all the expiry dates. The crossed-out grocery list's status is modified to purchased and expiry date information will be added to the database.
 
 ## Technological Choices
 
