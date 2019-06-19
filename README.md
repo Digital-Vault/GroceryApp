@@ -162,7 +162,7 @@ Additionally Android and IOS emulators verify the progress of the application lo
 
 ### Back-End Technologies
 
-For our back-end, we will be using Google's [Firebase](https://firebase.google.com/). Firebase is a mobile and web development platform that utilizes many products to help build apps faster. We chose Firebase because it is backed by Google, making it an ideal platform for developing mobile apps. They are a reliabile company that provides support in their easy to follow documentation. Firebase is our primary platform for performing back-end tasks such as server management, and setting up the database because of the following features: 
+For our back-end, we will be using Google's [Firebase](https://firebase.google.com/). Firebase is a mobile and web development platform that utilizes many products to help build apps faster. We chose Firebase because it is backed by Google, making it an ideal platform for developing mobile apps. They are a reliable company that provides support in their easy to follow documentation. Firebase is our primary platform for performing back-end tasks such as server management, and setting up the database because of the following features: 
 
 [Realtime Database](https://firebase.google.com/docs/database): A cloud-hosted database that stores JSON formatted data and synchronizes data in realtime across multiple platforms such as iOS and Android to every connected client. Realtime Database allows us to implement a database that is cross platform, where all the users share one Realtime Database instance which automatically updates with the newest data. This feature can be used to implement our database to store all the expiry date information and sync user grocery lists. 
 
