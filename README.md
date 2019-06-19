@@ -152,7 +152,7 @@ Once completed button is clicked, the crossed-out items will be added “My Item
 
 ### Front-End Technologies
 
-This project will be written in [Dart](https://dart.dev/), a client-optimized programming language and will utilize the [Flutter](https://flutter.dev/) mobile application framework. We chose flutter because it is backed by Google, has well written documentation and allows us to target both Android and IOS platforms with a single code base. This will save us a considerable amount of work and time compared to writing native Android and IOS applications separately. Additionally, [Flutter](https://flutter.dev/) integrates with [Firebase](https://firebase.google.com/) which is where we will host our data.
+This project will be written in [Dart](https://dart.dev/), a client-optimized programming language and will utilize the [Flutter](https://flutter.dev/) mobile application framework. We chose Flutter because it is backed by Google, has well written documentation and allows us to target both Android and IOS platforms with a single code base. This will save us a considerable amount of work and time compared to writing native Android and IOS applications separately. Additionally, Flutter integrates with [Firebase](https://firebase.google.com/) which is where we will host our data.
 
 The design philosophy of this application will follow the [Material](https://material.io/design/) design language, which emphasizes flexible, intuitive and aesthetic visual layouts. This ensures that the User Interface (UI) is consistent throughout our application. Flutter includes many pre-made Material components that reduces our implementation time.
 
