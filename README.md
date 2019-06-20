@@ -75,23 +75,19 @@ Typical user
 The user has opened the application and is currently in the grocery list section.
 
 #### Basic flow
-The user taps on the floating action button (FAB) which opens a new screen with text fields for product name and additional notes. The user then fills in the information and when ready taps on the add to list button. The application then redirects the user back to the grocery list screen.
+The user taps on the floating action button (FAB) which opens a new screen with text fields for product name and additional notes. The user then fills in the information and when ready taps on the add to list button. The application adds the new item to the database and redirects the user back to the grocery list screen.
 
 #### Alternate / Exception Flows
-**_Alternate Flow 1: Missing Product Name_**
-
-The add to list button will be disabled until the user inputs a value.
-
-**_Alternate Flow 2: User presses back button_**
+**_Alternate Flow 1: User presses back button_**
 
 In case of a user pressing the back button, the application won't save the new item and will redirect the user back to grocery list screen.
 
-**_Alternate Flow 3: Other Issues_**
+**_Alternate Flow 2: Other Issues_**
 
 An error message will appear in case of any unexpected errors.
 
 #### Post-conditions
-A new item is added to the grocery list.
+A new item is added to the database as well as the grocery list.
 
 ### Invite Users to Sync Accounts
 
@@ -138,7 +134,7 @@ The user is on the grocery list view page of the app.
 The user has inserted at least one item to the list
 
 #### Basic flow
-The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will display a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format.  The user enters in the dates for the items and clicks complete. The database will update the status of the crossed-out gorcery lists to purchased and add on the expiry date information. the The application will redirect the user back to the grocery list page. 
+The user looks through the selected grocery list and clicks an item to cross out of the list. Once the item is crossed out, the application will display a new page to ask the user to enter in an estimated expiry date for the item that has been crossed out in a drop-down list format.  The user enters in the dates for the items and clicks complete. The database will update the status of the crossed-out grocery lists to purchased and add on the expiry date information. the The application will redirect the user back to the grocery list page. 
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Missing Expiry Date Input_**
