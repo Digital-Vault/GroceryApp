@@ -101,7 +101,7 @@ Typical User
 The user must have the application installed and opened
 
 #### Basic flow
-The user clicks the "Send Sync Invite" button located in the home page of the app. This will navigate them to a page where they can enter additional users. They will be prompted to enter the email of the additional user into a textfield. If they need to keep adding new users, there will be a "+ add new user" button at the end, which will keep creating new rows that will ask for the email of the additional user. Once they have added all the users, they can click the "Save" button.
+The user clicks the "Send Sync Invite" button located in the home page of the app. This will navigate them to a page where they can enter additional users. They will be prompted to enter the email of the additional user into a textfield. If they need to keep adding new users, there will be a "+ add new user" button at the end, which will keep creating new rows that will ask for the email of the additional user. Once they have added all the users, they can click the "Save" button which sends an email to all specified users.
 
 #### Alternate / Exception Flows
 **_Alternate Flow 1: Invalid Email_**
@@ -118,7 +118,6 @@ An appropriate error message will be shown in case of unexpected errors.
 
 #### Post-conditions
 A request of confirmation is sent out to all the users being added to the family account.
-A new item is added to the grocery list.
 
 
 ### Crossing Out Items From the Grocery List and Adding Expiry Date
