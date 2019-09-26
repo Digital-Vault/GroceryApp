@@ -32,15 +32,7 @@ class MyAppState extends State<MyApp> {
         body:  Container(
           child:  Center(
             // Use future builder and DefaultAssetBundle to load the local JSON file
-            child:  FutureBuilder(
-                future: DefaultAssetBundle.of(context)
-                    .loadString('assets/grocery_list.json'),
-                builder: (context, snapshot) {
-                  List<GroceryItem> groceries = groceryListItems;
-                  return groceries.isNotEmpty
-                      ?  GroceryList(grocery: groceries)
-                      :  Center(child:  CircularProgressIndicator());
-                }),
+            child:  GroceryList(grocery: groceryListItems,)
           ),
         ));
   }
