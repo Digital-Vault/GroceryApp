@@ -19,3 +19,4 @@ The grocery app will have the following classes for this iteration:
 * **Purchased** (Boolean) - This is a field that a user can toggle to check off an item that they already bought on the list. (eg. True = item already purchased, False = item not yet purchased)
 
 # Domain Model
+![alt text](./Images/grocery_list_app_domain_diagram.png "Domain Model")
