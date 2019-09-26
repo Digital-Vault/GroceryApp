@@ -11,6 +11,7 @@ class GroceryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.all(16),
         itemCount: grocery == null ? 0 : grocery.length,
         itemBuilder: (BuildContext context, int index) {
           return GroceryCard(item: grocery[index]);

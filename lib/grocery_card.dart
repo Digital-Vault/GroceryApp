@@ -13,6 +13,7 @@ class GroceryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.only(bottom: 16),
       child: InkWell(
         onTap: () {
           Navigator.push(
