@@ -17,32 +17,22 @@ class GroceryCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DetailedPage(item: item)));
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailedPage(item: item),
+            ),
+          );
         },
-        child: Container(
-          child: Center(
-              child: Column(
-            // Stretch the cards in horizontal axis
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                // Read the name field value and set it in the Text widget
-                item.name,
-                // set some style to text
-                style: TextStyle(fontSize: 20.0, color: Colors.black),
-              ),
-              Text(
-                // Read the name field value and set it in the Text widget
-                "Quantity: " + item.quantity.toString(),
-                // set some style to text
-                style: TextStyle(fontSize: 20.0, color: Colors.grey),
-              ),
-            ],
-          )),
-          padding: const EdgeInsets.all(15.0),
-        ),
+        child: _buildTile(),
+      ),
+    );
+  }
+
+  Widget _buildTile() {
+    return ListTile(
+      trailing: Text("${item.quantity}x"),
+      title: Text(
+        item.name,
       ),
     );
   }
