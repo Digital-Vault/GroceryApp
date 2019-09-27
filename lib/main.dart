@@ -1,22 +1,21 @@
-
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/card.dart';
 import 'data.dart';
 
 void main() {
-  runApp( MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme:  ThemeData(
+    theme: ThemeData(
       primaryColor: Colors.blue,
     ),
-    home:  MyApp(),
+    home: MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
   @override
-  MyAppState createState() =>  MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<MyApp> {
@@ -24,16 +23,19 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar:  AppBar(
-          title:  Text("Grocery List",
-            style:  TextStyle(color: Colors.white),),
-        ),
-        body:  Container(
-          child:  Center(
-            // Use future builder and DefaultAssetBundle to load the local JSON file
-            child:  GroceryList(grocery: groceryListItems,)
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Grocery List",
+            style: TextStyle(color: Colors.white),
           ),
+        ),
+        body: Container(
+          child: Center(
+              // Use future builder and DefaultAssetBundle to load the local JSON file
+              child: GroceryList(
+            grocery: groceryListItems,
+          )),
         ));
   }
 }
