@@ -1,7 +1,7 @@
 ﻿# Group_02
 - Jacky Tea
 - Abiram Kaimathuruthy
-- San Min (Rick) Park
+- Sang Min (Rick) Park
 - Brian Smith
 
 # System Description

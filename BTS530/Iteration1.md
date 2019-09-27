@@ -22,19 +22,8 @@ The grocery app will have the following classes for this iteration:
 * **Id** (Generated value) - the unique identifier value for a list.
 * **Title** (String) - the user inputted title for the name of the list.
 * **Items** (GroceryItem class instance) - items in the list.
-* **Created Date** (Date) - date that the list was created.
-* **Created By** (User class instance) - the user profile that created the list.
 
-## User
-* **Id** (Generated value) - unique identifer of the user in the database.
-* **Password** (Hashed string) - the password of the user, inputted in string format, but encrypted for security in the database. 
-* **Name** (String) - The user's desired screen name.
-* **Email** (String, email format) - The user's email for notifications, account verification and access to features of the application.
 
-## Date
-* **Year** (Date) - year that an item expires in.
-* **Month** (Date) - month that an item expires in.
-* **Day** (Date) - day of the month that an item expires on.
 
 # Domain Model
 ![alt text](./Images/grocery_list_app_domain_diagram.png "Domain Model")
