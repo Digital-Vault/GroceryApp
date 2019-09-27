@@ -11,12 +11,30 @@ The following swimlane activity diagram demonstrates the process of the system r
 
 The grocery app will have the following classes for this iteration:
 
-## Grocery Item
+## GroceryItem
 
 * **Name** (String) - The name of the grocery item. (eg. carrots, tomatoes, pork chops, Coca-Cola, etc...)
 * **Expiry Date** (Date) - The expiry date of the item (eg. 2019-04-15)
 * **Quantity** (Integer) - The amount of said item that the user has bought. (eg. 10 carrots)
 * **Purchased** (Boolean) - This is a field that a user can toggle to check off an item that they already bought on the list. (eg. True = item already purchased, False = item not yet purchased)
+
+## GroceryList
+* **Id** (Generated value) - the unique identifier value for a list.
+* **Title** (String) - the user inputted title for the name of the list.
+* **Items** (GroceryItem class instance) - items in the list.
+* **Created Date** (Date) - date that the list was created.
+* **Created By** (User class instance) - the user profile that created the list.
+
+## User
+* **Id** (Generated value) - unique identifer of the user in the database.
+* **Password** (Hashed string) - the password of the user, inputted in string format, but encrypted for security in the database. 
+* **Name** (String) - The user's desired screen name.
+* **Email** (String, email format) - The user's email for notifications, account verification and access to features of the application.
+
+## Date
+* **Year** (Date) - year that an item expires in.
+* **Month** (Date) - month that an item expires in.
+* **Day** (Date) - day of the month that an item expires on.
 
 # Domain Model
 ![alt text](./Images/grocery_list_app_domain_diagram.png "Domain Model")
