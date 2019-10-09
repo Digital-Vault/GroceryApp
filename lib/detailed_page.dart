@@ -12,8 +12,17 @@ class DetailedPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('${item.name} Details'),
         ),
-        body: DetailCard(
-          item: item,
-        ));
+        body: Column(children: <Widget>[
+          DetailCard(
+            item: item,
+          ), 
+          RaisedButton(
+            child: Text("Delete Item", style: TextStyle(color: Colors.white),),
+            color: Colors.red,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ]));
   }
 }
