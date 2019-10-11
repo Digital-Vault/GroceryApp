@@ -1,15 +1,22 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
-import 'package:grocery_app/card.dart';
-import 'data.dart';
+import 'package:grocery_app/grocery_card.dart';
+import 'package:grocery_app/grocery_item.dart';
+import 'package:grocery_app/item_provider.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      primaryColor: Colors.blue,
+  runApp(
+    ItemProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.blue,
+        ),
+        home: MyApp(),
+      ),
     ),
-    home: MyApp(),
-  ));
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -22,19 +29,30 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final itemBloc = ItemProvider.of(context);
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Grocery List",
-            style: TextStyle(color: Colors.white),
+      appBar: AppBar(
+        title: Text(
+          "Grocery List",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Container(
+        child: Center(
+          // Use future builder and DefaultAssetBundle to load the local JSON file
+          child: StreamBuilder<UnmodifiableListView<GroceryItem>>(
+            stream: itemBloc.items,
+            initialData: UnmodifiableListView<GroceryItem>([]),
+            builder: (context, snapshot) {
+              return ListView(
+                children:
+                    snapshot.data.map((i) => GroceryCard(item: i)).toList(),
+              );
+            },
           ),
         ),
-        body: Container(
-          child: Center(
-              // Use future builder and DefaultAssetBundle to load the local JSON file
-              child: GroceryList(
-            grocery: groceryListItems,
-          )),
-        ));
+      ),
+    );
   }
 }
