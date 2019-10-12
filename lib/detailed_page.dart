@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/detail_card.dart';
+import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 
 class DetailedPage extends StatelessWidget {
@@ -36,13 +37,20 @@ class DetailedPage extends StatelessWidget {
           "Are you sure you want to delete this item? ${item.name} Quantity: ${item.quantity}x"),
       actions: <Widget>[
         FlatButton(
-          child: Text("Yes", style: TextStyle(color: Colors.green),),
+          child: Text(
+            "Yes",
+            style: TextStyle(color: Colors.green),
+          ),
           onPressed: () {
-            //delete functionality here...
+            deleteGroceryItem(context, item);
+            Navigator.pop(context);
           },
         ),
         FlatButton(
-            child: Text("No", style: TextStyle(color: Colors.red),),
+          child: Text(
+            "No",
+            style: TextStyle(color: Colors.red),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -55,5 +63,10 @@ class DetailedPage extends StatelessWidget {
         builder: (BuildContext context) {
           return confirmationDialog;
         });
+  }
+
+  void deleteGroceryItem(BuildContext context, GroceryItem item) {
+    final itemBloc = ItemProvider.of(context);
+    itemBloc.removeItem.add(item);
   }
 }

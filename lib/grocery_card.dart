@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'detailed_page.dart';
-import 'item_bloc.dart';
 
 class GroceryCard extends StatelessWidget {
   final GroceryItem item;
