@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
-
+import 'package:grocery_app/item_provider.dart';
 import 'detailed_page.dart';
+import 'item_bloc.dart';
 
 class GroceryCard extends StatelessWidget {
   final GroceryItem item;
@@ -38,6 +39,18 @@ class GroceryCard extends StatelessWidget {
           item.name,
         ),
       ),
+      onDismissed: (direction) {
+        deleteGroceryItem(context, item);
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Deleted ${item.name}!"),
+          action: SnackBarAction(
+            label: "UNDO",
+            onPressed: () {
+              restoreGroceryItem(context, item);
+            },
+          ),
+        ));
+      },
     );
   }
 
@@ -51,5 +64,15 @@ class GroceryCard extends StatelessWidget {
         color: Colors.white,
       ),
     );
+  }
+
+  void deleteGroceryItem(BuildContext context, GroceryItem item) {
+    final itemBloc = ItemProvider.of(context);
+    itemBloc.removeItem.add(item);
+  }
+
+  void restoreGroceryItem(BuildContext context, GroceryItem item) {
+    final itemBloc = ItemProvider.of(context);
+    itemBloc.addItem.add(item);
   }
 }
