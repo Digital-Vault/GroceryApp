@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  datetime_picker_formfield: ^0.4.3
   rxdart: ^0.22.3
   flutter:
     sdk: flutter
