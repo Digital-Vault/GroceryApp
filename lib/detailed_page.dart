@@ -13,12 +13,17 @@ class DetailedPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('${item.name} Details'),
         ),
-        body: Column(children: <Widget>[
-          DetailCard(
-            item: item,
-          ),
-          _buildDeleteButton(context)
-        ]));
+        body: Builder(
+          builder: (BuildContext context) {
+            return Column(children: <Widget>[
+              DetailCard(
+                item: item,
+              ),
+              _buildDeleteButton(context)
+            ]);
+          },
+        )
+    );
   }
 
   Widget _buildDeleteButton(BuildContext context) {
