@@ -24,49 +24,29 @@ class DetailedPage extends StatelessWidget {
             ),
             color: Colors.red,
             onPressed: () {
-              confirmItemDeletion(context);
+              deleteGroceryItem(context, item);
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text("Deleted ${item.name}!"),
+                action: SnackBarAction(
+                  label: "UNDO",
+                  onPressed: () {
+                    restoreGroceryItem(context, item);
+                  },
+                ),
+              ));
+              Navigator.pop(context);
             },
           )
         ]));
   }
 
-  void confirmItemDeletion(BuildContext context) {
-    var confirmationDialog = AlertDialog(
-      title: Text("Delete This Item?"),
-      content: Text(
-          "Are you sure you want to delete this item? ${item.name} Quantity: ${item.quantity}x"),
-      actions: <Widget>[
-        FlatButton(
-          child: Text(
-            "Yes",
-            style: TextStyle(color: Colors.green),
-          ),
-          onPressed: () {
-            deleteGroceryItem(context, item);
-            Navigator.pop(context);
-          },
-        ),
-        FlatButton(
-          child: Text(
-            "No",
-            style: TextStyle(color: Colors.red),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
-    );
-
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return confirmationDialog;
-        });
-  }
-
   void deleteGroceryItem(BuildContext context, GroceryItem item) {
     final itemBloc = ItemProvider.of(context);
     itemBloc.removeItem.add(item);
+  }
+
+  void restoreGroceryItem(BuildContext context, GroceryItem item) {
+    final itemBloc = ItemProvider.of(context);
+    itemBloc.addItem.add(item);
   }
 }
