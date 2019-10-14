@@ -17,27 +17,31 @@ class DetailedPage extends StatelessWidget {
           DetailCard(
             item: item,
           ),
-          RaisedButton(
-            child: Text(
-              "Delete Item",
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.red,
-            onPressed: () {
-              deleteGroceryItem(context, item);
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text("Deleted ${item.name}!"),
-                action: SnackBarAction(
-                  label: "UNDO",
-                  onPressed: () {
-                    restoreGroceryItem(context, item);
-                  },
-                ),
-              ));
-              Navigator.pop(context);
-            },
-          )
+          _buildDeleteButton(context)
         ]));
+  }
+
+  Widget _buildDeleteButton(BuildContext context) {
+    return RaisedButton(
+      child: Text(
+        "Delete Item",
+        style: TextStyle(color: Colors.white),
+      ),
+      color: Colors.red,
+      onPressed: () {
+        deleteGroceryItem(context, item);
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Deleted ${item.name}!"),
+          action: SnackBarAction(
+            label: "UNDO",
+            onPressed: () {
+              restoreGroceryItem(context, item);
+            },
+          ),
+        ));
+        Navigator.pop(context);
+      },
+    );
   }
 
   void deleteGroceryItem(BuildContext context, GroceryItem item) {
