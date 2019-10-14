@@ -14,37 +14,28 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 
 ## Iteration 1 Tasks
 
-### To do:
-- Create a grocery item (class structure)
-- Create the main screen
-- Create a list of dummy (placeholder) items
-
-### Completed:
+- [x] Create a grocery item (class structure)
+- [x] Create the main screen
+- [x] Create a list of dummy (placeholder) items
+- [x] Add continuous integration
 
 ## Iteration 2 Tasks
 
-### To do:
-- Remove item
-- Add item
+- [ ] Remove item
+- [ ] Add item
+- [ ] Edit item
 
-### Completed:
 
 ## Iteration 3 Tasks
 
-### To do:
-- Integrate firebase authentication
-- Edit item
+- [ ] Integrate firebase authentication
+- [ ] Create a login page
 
-### Completed:
 
 ## Iteration 4 Tasks
 
-### To do:
-- Create a login page
-- Add item search
-- Send notification
-
-### Completed:
+- [ ] Add item search
+- [ ] Send notification
 
 
 
@@ -61,3 +52,4 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
  - Add item search
  - Add item sort (based on category, etc)
  - Send notification
+ - Add continuous integration
