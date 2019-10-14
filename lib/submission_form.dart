@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/detailed_page.dart';
 import 'package:grocery_app/grocery_item.dart';
+import 'package:grocery_app/main.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:grocery_app/item_provider.dart';
@@ -17,10 +18,10 @@ class _SubmissionFormState extends State<SubmissionForm> {
   _SubmissionFormState({this.item});
   final formKey = GlobalKey<FormState>();
   String _name;
-  num _quantity;
   final format = DateFormat("yyyy-MM-dd");
   DateTime _date;
   String _appBarTitle;
+  var sliderValue = 1.0;
   @override
   Widget build(BuildContext context) {
     if (item == null) {
@@ -43,16 +44,14 @@ class _SubmissionFormState extends State<SubmissionForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextFormField(
+
                     initialValue: item.name,
                     decoration: InputDecoration(labelText: 'Item Name:'),
+                    validator: (input) => input.isEmpty ? 'Name must be entered' : null,
                     onSaved: (input) => _name = input,
                   ),
-                  TextFormField(
-                    initialValue: item.quantity.toString(),
-                    decoration: InputDecoration(labelText: 'Quantity:'),
-                    onSaved: (input) => _quantity = int.parse(input),
-                  ),
-                  DateTimeField(
+
+              DateTimeField(
                     format: format,
                     initialValue: item.expiryDate,
                     decoration: InputDecoration(labelText: 'Date'),
@@ -63,7 +62,28 @@ class _SubmissionFormState extends State<SubmissionForm> {
                           initialDate: currentValue ?? DateTime.now(),
                           lastDate: DateTime(2100));
                     },
+                    validator: (input) => input.toString() == "null" ? 'Date must be entered' : null,
                     onSaved: (input) => _date = input,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child:  Slider(
+                      min: 1.0,
+                      max: 50.0,
+                      divisions: 100,
+                      value: sliderValue,
+                      label: 'Quantity',
+                      onChanged: (newValue){
+                        setState(() {
+                          sliderValue = newValue;
+                        });
+
+                      },
+                    ),
+                  ),
+
+
+                  Text("Quantity : ${sliderValue.round()}",
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -85,21 +105,24 @@ class _SubmissionFormState extends State<SubmissionForm> {
   }
 
   void _submit() {
-    formKey.currentState.save();
-    final itemBloc = ItemProvider.of(context);
+    if(formKey.currentState.validate()){
+      formKey.currentState.save();
+      final itemBloc = ItemProvider.of(context);
 
-    GroceryItem EditedItem = GroceryItem(
-      name: _name,
-      expiryDate: _date,
-      quantity: _quantity,
-      purchased: false,
-    );
-    itemBloc.addItem.add(EditedItem);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailedPage(item: EditedItem),
-      ),
-    );
+      GroceryItem EditedItem = GroceryItem(
+        name: _name,
+        expiryDate: _date,
+        quantity: sliderValue.round(),
+        purchased: false,
+      );
+      itemBloc.addItem.add(EditedItem);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyApp(),
+        ),
+      );
+    }
+
   }
 }

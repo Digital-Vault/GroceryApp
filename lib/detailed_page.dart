@@ -12,7 +12,15 @@ class DetailedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
+        onWillPop: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyApp(),
+            ),
+          );
+          return false;
+        } ,
         child: Scaffold(
             appBar: AppBar(
               title: Text('${item.name} Details'),
