@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_card.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
+import 'package:grocery_app/submission_form.dart';
 
 void main() {
   runApp(
@@ -52,6 +53,16 @@ class MyAppState extends State<MyApp> {
             },
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SubmissionForm()),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
       ),
     );
   }
