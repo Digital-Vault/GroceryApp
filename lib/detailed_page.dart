@@ -23,48 +23,49 @@ class DetailedPage extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('${item.name} Details'),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyApp(),
-                ),
-              );
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.edit),
+          appBar: AppBar(
+            title: Text('${item.name} Details'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
               onPressed: () {
-                final itemBloc = ItemProvider.of(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SubmissionForm(item: item),
+                    builder: (context) => MyApp(),
                   ),
                 );
-                itemBloc.removeItem.add(item);
               },
-            )
-          ],
-        ),
-        body: Builder(
-          builder: (BuildContext context) {
-            return Column(children: <Widget>[
-              DetailCard(
-                item: item,
-              ),
-              _buildDeleteButton(context)
-            ]);
-          },
-        )
-      ),
+            ),
+            actions: [_backButton(context)],
+          ),
+          body: _detailCard(context)),
     );
   }
+
+  Widget _detailCard(BuildContext context) => Builder(
+        builder: (BuildContext context) {
+          return Column(children: <Widget>[
+            DetailCard(
+              item: item,
+            ),
+            _buildDeleteButton(context)
+          ]);
+        },
+      );
+
+  Widget _backButton(BuildContext context) => IconButton(
+        icon: Icon(Icons.edit),
+        onPressed: () {
+          final itemBloc = ItemProvider.of(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SubmissionForm(item: item),
+            ),
+          );
+          itemBloc.removeItem.add(item);
+        },
+      );
 
   Widget _buildDeleteButton(BuildContext context) {
     return RaisedButton(
