@@ -3,7 +3,6 @@ import 'package:grocery_app/detail_card.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/submission_form.dart';
-import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/main.dart';
 
 class DetailedPage extends StatelessWidget {
@@ -36,7 +35,10 @@ class DetailedPage extends StatelessWidget {
                 );
               },
             ),
-            actions: [_backButton(context)],
+            actions: [
+              _editButton(context),
+              _deleteButton(context)
+            ],
           ),
           body: _detailCard(context)),
     );
@@ -48,12 +50,22 @@ class DetailedPage extends StatelessWidget {
             DetailCard(
               item: item,
             ),
-            _buildDeleteButton(context)
           ]);
         },
       );
-
-  Widget _backButton(BuildContext context) => IconButton(
+  Widget _deleteButton(BuildContext context) => IconButton(
+    icon: Icon(Icons.delete_forever),
+    onPressed: () {
+      deleteGroceryItem(context, item);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyApp(),
+        ),
+      );
+    },
+  );
+  Widget _editButton(BuildContext context) => IconButton(
         icon: Icon(Icons.edit),
         onPressed: () {
           final itemBloc = ItemProvider.of(context);
@@ -66,29 +78,6 @@ class DetailedPage extends StatelessWidget {
           itemBloc.removeItem.add(item);
         },
       );
-
-  Widget _buildDeleteButton(BuildContext context) {
-    return RaisedButton(
-      child: Text(
-        "Delete Item",
-        style: TextStyle(color: Colors.white),
-      ),
-      color: Colors.red,
-      onPressed: () {
-        deleteGroceryItem(context, item);
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Deleted ${item.name}!"),
-          action: SnackBarAction(
-            label: "UNDO",
-            onPressed: () {
-              restoreGroceryItem(context, item);
-            },
-          ),
-        ));
-        Navigator.pop(context);
-      },
-    );
-  }
 
   void deleteGroceryItem(BuildContext context, GroceryItem item) {
     final itemBloc = ItemProvider.of(context);

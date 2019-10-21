@@ -20,14 +20,10 @@ void main() {
   );
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  MyAppState createState() => MyAppState();
-}
 
-class MyAppState extends State<MyApp> {
+
+class MyApp extends StatelessWidget {
   List data;
-
   @override
   Widget build(BuildContext context) {
     final itemBloc = ItemProvider.of(context);
@@ -48,7 +44,7 @@ class MyAppState extends State<MyApp> {
             builder: (context, snapshot) {
               return ListView(
                 children:
-                    snapshot.data.map((i) => GroceryCard(item: i)).toList(),
+                snapshot.data.map((i) => GroceryCard(item: i)).toList(),
               );
             },
           ),
