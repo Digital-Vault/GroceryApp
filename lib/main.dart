@@ -27,39 +27,44 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itemBloc = ItemProvider.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Grocery List",
-          style: TextStyle(color: Colors.white),
+    return WillPopScope(
+        onWillPop: () async => false,
+      child:Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Grocery List",
+            style: TextStyle(color: Colors.white),
+          ),
+          leading: Container(),
         ),
-      ),
-      body: Container(
-        child: Center(
-          // Use future builder and DefaultAssetBundle to load the local JSON file
-          child: StreamBuilder<UnmodifiableListView<GroceryItem>>(
-            stream: itemBloc.items,
-            initialData: UnmodifiableListView<GroceryItem>([]),
-            builder: (context, snapshot) {
-              return ListView(
-                children:
-                snapshot.data.map((i) => GroceryCard(item: i)).toList(),
-              );
-            },
+        body: Container(
+          child: Center(
+            // Use future builder and DefaultAssetBundle to load the local JSON file
+            child: StreamBuilder<UnmodifiableListView<GroceryItem>>(
+              stream: itemBloc.items,
+              initialData: UnmodifiableListView<GroceryItem>([]),
+              builder: (context, snapshot) {
+                return ListView(
+                  children:
+                  snapshot.data.map((i) => GroceryCard(item: i)).toList(),
+                );
+              },
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SubmissionForm()),
-          );
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
-      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SubmissionForm()),
+            );
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Colors.blue,
+        ),
+      )
     );
+
   }
 }
