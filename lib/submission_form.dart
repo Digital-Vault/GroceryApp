@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/main.dart';
 import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:grocery_app/item_provider.dart';
 
 class SubmissionForm extends StatefulWidget {
@@ -24,7 +23,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
   String _appBarTitle;
   final myController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  var _sliderValue = 1.0;
 
   @override
   void dispose() {
@@ -109,7 +107,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
       }
     }
 
-    print(_itemExpDate);
     InkWell inkWell = InkWell(
       onTap: _selectDate,
       child: IgnorePointer(

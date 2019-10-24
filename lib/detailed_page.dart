@@ -35,10 +35,7 @@ class DetailedPage extends StatelessWidget {
                 );
               },
             ),
-            actions: [
-              _editButton(context),
-              _deleteButton(context)
-            ],
+            actions: [_editButton(context), _deleteButton(context)],
           ),
           body: _detailCard(context)),
     );
@@ -54,17 +51,17 @@ class DetailedPage extends StatelessWidget {
         },
       );
   Widget _deleteButton(BuildContext context) => IconButton(
-    icon: Icon(Icons.delete_forever),
-    onPressed: () {
-      deleteGroceryItem(context, item);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyApp(),
-        ),
+        icon: Icon(Icons.delete_forever),
+        onPressed: () {
+          deleteGroceryItem(context, item);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyApp(),
+            ),
+          );
+        },
       );
-    },
-  );
   Widget _editButton(BuildContext context) => IconButton(
         icon: Icon(Icons.edit),
         onPressed: () {
