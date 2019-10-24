@@ -37,7 +37,14 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [ ] Add item search
 - [ ] Send notification
 
+## Future Possible Tasks
 
+- [ ] Create "My Fridge" list
+- [ ] Compliant with landscape orientation
+- [ ] Create multiple "Grocery" list
+- [ ] Add "coloured visual cues" to grocery item
+- [ ] Add "move grocery item(s)" capabaility
+- [ ] Add "grocery store" as a member of grocery item
 
 ## Full Task List:
  - Create a grocery item (class structure)
