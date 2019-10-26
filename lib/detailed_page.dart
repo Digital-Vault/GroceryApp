@@ -12,18 +12,11 @@ class DetailedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: Text('${item.name} Details'),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            actions: [_editButton(context), _deleteButton(context)],
-          ),
-          body: _detailCard(context)
-  );
+        appBar: AppBar(
+          title: Text('${item.name} Details'),
+          actions: [_editButton(context), _deleteButton(context)],
+        ),
+        body: _detailCard(context));
   }
 
   Widget _detailCard(BuildContext context) => Builder(
@@ -64,10 +57,5 @@ class DetailedPage extends StatelessWidget {
   void _deleteGroceryItem(BuildContext context, GroceryItem item) {
     final itemBloc = ItemProvider.of(context);
     itemBloc.removeItem.add(item);
-  }
-
-  void _restoreGroceryItem(BuildContext context, GroceryItem item) {
-    final itemBloc = ItemProvider.of(context);
-    itemBloc.addItem.add(item);
   }
 }

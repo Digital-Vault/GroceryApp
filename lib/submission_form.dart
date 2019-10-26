@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/main.dart';
 import 'package:intl/intl.dart';
 import 'package:grocery_app/item_provider.dart';
 
@@ -13,10 +12,11 @@ class SubmissionForm extends StatefulWidget {
 
 class _SubmissionFormState extends State<SubmissionForm> {
   _SubmissionFormState({this.item});
-
+  DateTime _currentDate = DateTime.now();
   GroceryItem item;
   String _itemName;
   num _itemQty;
+  final twoYearsInDays = 730;
   DateTime _itemExpDate;
   bool _datePicked = false;
   final String _dateFormat = "yyyy-MM-dd";
@@ -36,7 +36,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   Widget build(BuildContext context) {
     if (item == null) {
       _appBarTitle = "Add Item";
-      item = GroceryItem(name: "", expiryDate: DateTime.now());
+      item = GroceryItem(name: "", expiryDate: _currentDate);
     } else {
       _appBarTitle = "Update Item";
     }
@@ -73,7 +73,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
       );
 
   Widget _itemQuantityInput() => TextFormField(
-        initialValue: item.quantity.toString(),
+        initialValue: _initialQuantity(item),
         decoration: InputDecoration(hintText: 'Quantity:'),
         validator: (input) {
           if (input.isEmpty) {
@@ -91,14 +91,21 @@ class _SubmissionFormState extends State<SubmissionForm> {
     if (!_datePicked) {
       _itemExpDate = item.expiryDate;
     }
-    myController.text = DateFormat(_dateFormat).format(_itemExpDate);
 
+    if (item.name != "") {
+      myController.text = DateFormat(_dateFormat).format(item.expiryDate);
+    } else if (_datePicked) {
+      myController.text = DateFormat(_dateFormat).format(_itemExpDate);
+    } else {
+      _itemExpDate = item.expiryDate;
+      myController.text = null;
+    }
     Future _selectDate() async {
       DateTime picked = await showDatePicker(
           context: context,
-          firstDate: DateTime(1900),
-          initialDate: DateTime.now(),
-          lastDate: DateTime(2100));
+          firstDate: _currentDate,
+          initialDate: _currentDate,
+          lastDate: _currentDate.add(Duration(days: twoYearsInDays)));
       if (picked != null) {
         setState(() {
           _itemExpDate = picked;
@@ -147,6 +154,14 @@ class _SubmissionFormState extends State<SubmissionForm> {
       );
       itemBloc.addItem.add(EditedItem);
       Navigator.pop(context);
+    }
+  }
+
+  String _initialQuantity(GroceryItem item) {
+    if (item.quantity == 0) {
+      return null;
+    } else {
+      return item.quantity.toString();
     }
   }
 }
