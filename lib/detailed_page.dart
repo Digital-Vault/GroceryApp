@@ -53,7 +53,7 @@ class DetailedPage extends StatelessWidget {
   Widget _deleteButton(BuildContext context) => IconButton(
         icon: Icon(Icons.delete_forever),
         onPressed: () {
-          deleteGroceryItem(context, item);
+          _deleteGroceryItem(context, item);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -76,12 +76,12 @@ class DetailedPage extends StatelessWidget {
         },
       );
 
-  void deleteGroceryItem(BuildContext context, GroceryItem item) {
+  void _deleteGroceryItem(BuildContext context, GroceryItem item) {
     final itemBloc = ItemProvider.of(context);
     itemBloc.removeItem.add(item);
   }
 
-  void restoreGroceryItem(BuildContext context, GroceryItem item) {
+  void _restoreGroceryItem(BuildContext context, GroceryItem item) {
     final itemBloc = ItemProvider.of(context);
     itemBloc.addItem.add(item);
   }
