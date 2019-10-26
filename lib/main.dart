@@ -5,6 +5,7 @@ import 'package:grocery_app/grocery_card.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(
@@ -37,14 +38,23 @@ class MyApp extends StatelessWidget {
           body: Container(
             child: Center(
               // Use future builder and DefaultAssetBundle to load the local JSON file
-              child: StreamBuilder<UnmodifiableListView<GroceryItem>>(
-                stream: itemBloc.items,
-                initialData: UnmodifiableListView<GroceryItem>([]),
-                builder: (context, snapshot) {
-                  return ListView(
-                    children:
-                        snapshot.data.map((i) => GroceryCard(item: i)).toList(),
-                  );
+              child: StreamBuilder<QuerySnapshot>(
+                stream:
+                    Firestore.instance.collection('grocery_items').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError)
+                    return new Text('Error: ${snapshot.error}');
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Text('Loading...');
+                    default:
+                      return ListView(
+                        children: snapshot.data.documents
+                            .map((i) => GroceryCard(item: i))
+                            .toList(),
+                      );
+                  }
                 },
               ),
             ),
