@@ -146,12 +146,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
         purchased: false,
       );
       itemBloc.addItem.add(EditedItem);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyApp(),
-        ),
-      );
+      Navigator.pop(context);
     }
   }
 }

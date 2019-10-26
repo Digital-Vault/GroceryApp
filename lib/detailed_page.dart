@@ -11,34 +11,19 @@ class DetailedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyApp(),
-          ),
-        );
-        return false;
-      },
-      child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text('${item.name} Details'),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
             actions: [_editButton(context), _deleteButton(context)],
           ),
-          body: _detailCard(context)),
-    );
+          body: _detailCard(context)
+  );
   }
 
   Widget _detailCard(BuildContext context) => Builder(
