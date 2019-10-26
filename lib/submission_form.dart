@@ -112,7 +112,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
       child: IgnorePointer(
         child: TextFormField(
           controller: myController,
-          // initialValue: DateFormat(_dateFormat).format(_itemExpDate),
           decoration: InputDecoration(hintText: "Expiry date"),
           onSaved: (String val) {},
         ),
