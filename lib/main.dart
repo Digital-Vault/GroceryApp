@@ -1,8 +1,5 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_card.dart';
-import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +20,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final itemBloc = ItemProvider.of(context);
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(

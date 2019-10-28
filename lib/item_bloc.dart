@@ -43,5 +43,7 @@ class ItemBloc {
   /// Closes all the Sinks and Streams.
   void dispose() {
     _itemSubject.close();
+    _addItemController.close();
+    _removeItemController.close();
   }
 }
