@@ -25,12 +25,16 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [x] Add item
 - [x] Edit item
 
-
 ## Iteration 3 Tasks
 
 - [ ] Integrate firebase authentication
 - [ ] Create a login page
-
+- [x] Refactor code
+- [ ] Firestore database setup
+- [ ] Create new database item
+- [ ] Remove from database
+- [ ] Add to database
+- [ ] Edit database item
 
 ## Iteration 4 Tasks
 
