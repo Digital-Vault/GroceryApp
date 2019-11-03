@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -72,9 +73,10 @@ class MyApp extends StatelessWidget {
     List<Widget> items = [];
 
     for (final itemInfo in data) {
+      final groceryItem = GroceryItem.fromJson(itemInfo.data);
       final row = ListTile(
-        title: Text(itemInfo['name']),
-        trailing: Text("${itemInfo['quantity']}x"),
+        title: Text(groceryItem.name),
+        trailing: Text("${groceryItem.quantity}x"),
       );
       items.add(row);
     }
