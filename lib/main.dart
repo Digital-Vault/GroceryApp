@@ -10,9 +10,8 @@ void main() {
   runApp(
     ItemProvider(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.blue,
+          primarySwatch: Colors.blue,
         ),
         home: MyApp(),
       ),
