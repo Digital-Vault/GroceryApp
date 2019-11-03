@@ -2,22 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+void main() async {
+  final FirebaseApp app = await FirebaseApp.configure(
+    name: 'app',
+    options: const FirebaseOptions(
+      googleAppID: '1:498366100462:android:1af1d802ede9d55fc614ff',
+      apiKey: 'AIzaSyBL6UHw8CgVpFvsHTKthWSZ8O4jhx248vQ',
+      projectID: 'group2-2afd3',
+    ),
+  );
+  final Firestore firestore = Firestore(app: app);
+
   runApp(
     ItemProvider(
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyApp(),
+        home: MyApp(
+          firestore: firestore,
+        ),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({this.firestore});
+  final Firestore firestore;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +47,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildBody() {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('grocery_items').snapshots(),
+      stream: firestore.collection('grocery_items').snapshots(),
       builder: _builder,
     );
   }
@@ -55,33 +71,25 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _loading() {
-    return CircularProgressIndicator();
+    return Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildList(List<DocumentSnapshot> data) {
-    List<Widget> itemRows = _buildItemRows(data);
-
+  Widget _buildList(List<DocumentSnapshot> availableDocuments) {
     return ListView.builder(
-      itemCount: itemRows.length,
-      itemBuilder: (BuildContext _context, int position) {
-        return itemRows[position];
+      itemCount: availableDocuments.length,
+      itemBuilder: (BuildContext _context, int index) {
+        return _buildItemRow(availableDocuments[index]);
       },
     );
   }
 
-  List<Widget> _buildItemRows(List<DocumentSnapshot> data) {
-    List<Widget> items = [];
+  Widget _buildItemRow(DocumentSnapshot document) {
+    final groceryItem = GroceryItem.fromJson(document.data);
 
-    for (final itemInfo in data) {
-      final groceryItem = GroceryItem.fromJson(itemInfo.data);
-      final row = ListTile(
-        title: Text(groceryItem.name),
-        trailing: Text("${groceryItem.quantity}x"),
-      );
-      items.add(row);
-    }
-
-    return items;
+    return ListTile(
+      title: Text(groceryItem.name),
+      trailing: Text("${groceryItem.quantity}x"),
+    );
   }
 
   Widget _buildAddFab(BuildContext context) {
