@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/grocery_card.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,51 +19,78 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "Grocery List",
-              style: TextStyle(color: Colors.white),
-            ),
-            leading: Container(),
-          ),
-          body: Container(
-            child: Center(
-              // Use future builder and DefaultAssetBundle to load the local JSON file
-              child: StreamBuilder<QuerySnapshot>(
-                stream:
-                    Firestore.instance.collection('grocery_items').snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError)
-                    return new Text('Error: ${snapshot.error}');
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return new Text('Loading...');
-                    default:
-                      return ListView(
-                        children: snapshot.data.documents
-                            .map((i) => GroceryCard(item: i))
-                            .toList(),
-                      );
-                  }
-                },
-              ),
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SubmissionForm()),
-              );
-            },
-            child: Icon(Icons.add),
-            backgroundColor: Colors.blue,
-          ),
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Grocery List"),
+      ),
+      body: _buildBody(),
+      floatingActionButton: _buildAddFab(context),
+    );
+  }
+
+  Widget _buildBody() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('grocery_items').snapshots(),
+      builder: _builder,
+    );
+  }
+
+  Widget _builder(BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasError) {
+      return _error();
+    } else if (_waiting(snapshot)) {
+      return _loading();
+    } else {
+      return _buildList(snapshot.data.documents);
+    }
+  }
+
+  Widget _error() {
+    return Center(child: Text('Failed to retrieve data from our servers!'));
+  }
+
+  bool _waiting(AsyncSnapshot<QuerySnapshot> snapshot) {
+    return snapshot.connectionState == ConnectionState.waiting;
+  }
+
+  Widget _loading() {
+    return CircularProgressIndicator();
+  }
+
+  Widget _buildList(List<DocumentSnapshot> data) {
+    List<Widget> itemRows = _buildItemRows(data);
+
+    return ListView.builder(
+      itemCount: itemRows.length,
+      itemBuilder: (BuildContext _context, int position) {
+        return itemRows[position];
+      },
+    );
+  }
+
+  List<Widget> _buildItemRows(List<DocumentSnapshot> data) {
+    List<Widget> items = [];
+
+    for (final itemInfo in data) {
+      final row = ListTile(
+        title: Text(itemInfo['name']),
+        trailing: Text("${itemInfo['quantity']}x"),
+      );
+      items.add(row);
+    }
+
+    return items;
+  }
+
+  Widget _buildAddFab(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SubmissionForm()),
+        );
+      },
+      child: Icon(Icons.add),
+    );
   }
 }
