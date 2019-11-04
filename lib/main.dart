@@ -5,7 +5,8 @@ import 'package:grocery_app/grocery_card.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
-
+import 'auth.dart';
+import 'root.dart';
 void main() {
   runApp(
     ItemProvider(
@@ -13,13 +14,28 @@ void main() {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyApp(),
+        home:  RootPage(auth: Auth()),
       ),
     ),
   );
 }
 
+
+
+
 class MyApp extends StatelessWidget {
+  const MyApp({this.onSignedOut, this.auth});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await auth.signOut();
+      onSignedOut();
+    } catch (e) {
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final itemBloc = ItemProvider.of(context);
@@ -32,6 +48,12 @@ class MyApp extends StatelessWidget {
               "Grocery List",
               style: TextStyle(color: Colors.white),
             ),
+            actions: [
+              FlatButton(
+                child: Text('Logout', style: TextStyle(fontSize: 17.0, color: Colors.white)),
+                onPressed: () => _signOut(context),
+              )
+            ],
             leading: Container(),
           ),
           body: Container(
