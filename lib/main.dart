@@ -5,6 +5,8 @@ import 'package:grocery_app/submission_form.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'detailed_page.dart';
+
 void main() async {
   final FirebaseApp app = await FirebaseApp.configure(
     name: 'app',
@@ -88,6 +90,15 @@ class MyApp extends StatelessWidget {
     return ListTile(
       title: Text(groceryItem.name),
       trailing: Text("${groceryItem.quantity}x"),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                DetailedPage(documentReference: document.reference),
+          ),
+        );
+      },
     );
   }
 

@@ -17,8 +17,6 @@ class DetailCard extends StatelessWidget {
           children: <Widget>[
             _buildName(),
             _buildQuantity(),
-            _buildExpiryDate(),
-            _buildDetailedExpiryDate(),
           ],
         ),
       ),
@@ -48,42 +46,6 @@ class DetailCard extends StatelessWidget {
           fontSize: 24,
           letterSpacing: 0,
         ),
-      ),
-    );
-  }
-
-  Widget _buildExpiryDate() {
-    Duration difference = item.expiryDate.difference(DateTime.now());
-
-    String message;
-    if (_expired(difference.inDays)) {
-      message = 'Expired ${difference.abs().inDays} day(s) ago';
-    } else {
-      message = 'Expires in ${difference.inDays} day(s)';
-    }
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(
-        message,
-        style: TextStyle(
-          fontSize: 24,
-          letterSpacing: 0,
-        ),
-      ),
-    );
-  }
-
-  bool _expired(int days) {
-    return days < 0;
-  }
-
-  Widget _buildDetailedExpiryDate() {
-    return Text(
-      '${item.expiryDate.day}-${item.expiryDate.month}-${item.expiryDate.year}',
-      style: TextStyle(
-        color: Colors.black87,
-        fontSize: 16,
-        letterSpacing: 0.15,
       ),
     );
   }
