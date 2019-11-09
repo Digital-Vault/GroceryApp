@@ -4,11 +4,10 @@ import 'package:flutter/foundation.dart';
 class GroceryItem {
   GroceryItem(
       {@required this.name,
-      @required this.expiryDate,
-      this.quantity = 0,
+      this.expiryDate,
+      this.quantity,
       this.purchased = false})
-      : assert(name != null),
-        assert(expiryDate != null);
+      : assert(name != null);
 
   String name;
   int quantity;
