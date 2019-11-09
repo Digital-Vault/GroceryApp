@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,8 +24,8 @@ void main() async {
           primarySwatch: Colors.blue,
         ),
         home: MyApp(),
-        ),
       ),
+    ),
   );
 }
 
@@ -57,7 +56,7 @@ class MyApp extends StatelessWidget {
     } else if (_waiting(snapshot)) {
       return _loading();
     } else {
-      return _buildList(snapshot.data.documents);
+      return _buildList(context, snapshot.data.documents);
     }
   }
 
@@ -73,16 +72,17 @@ class MyApp extends StatelessWidget {
     return Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildList(List<DocumentSnapshot> availableDocuments) {
+  Widget _buildList(
+      BuildContext context, List<DocumentSnapshot> availableDocuments) {
     return ListView.builder(
       itemCount: availableDocuments.length,
       itemBuilder: (BuildContext _context, int index) {
-        return _buildItemRow(availableDocuments[index]);
+        return _buildItemRow(context, availableDocuments[index]);
       },
     );
   }
 
-  Widget _buildItemRow(DocumentSnapshot document) {
+  Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
 
     return ListTile(

@@ -18,6 +18,7 @@ class FirestoreProvider extends InheritedWidget {
 
   /// Returns the [Firestore].
   static Firestore of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(FirestoreProvider) as FirestoreProvider)
+      (context.inheritFromWidgetOfExactType(FirestoreProvider)
+              as FirestoreProvider)
           .firestore;
 }

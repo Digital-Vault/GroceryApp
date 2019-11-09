@@ -47,7 +47,7 @@ class DetailedPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => SubmissionForm(item: item),
+              builder: (context) => SubmissionForm(),
             ),
           );
           itemBloc.removeItem.add(item);

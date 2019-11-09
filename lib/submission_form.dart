@@ -1,47 +1,54 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/item_provider.dart';
 
 class SubmissionForm extends StatefulWidget {
-  final GroceryItem item;
-  SubmissionForm({this.item});
+  SubmissionForm({this.document});
+
+  final DocumentSnapshot document;
 
   @override
   _SubmissionFormState createState() =>
-      _SubmissionFormState(item: item, title: _appBarTitle());
-
-  String _appBarTitle() {
-    if (item == null) {
-      return 'Add New Item';
-    } else {
-      return 'Edit ${item.name}';
-    }
-  }
+      _SubmissionFormState(document: document);
 }
 
 class _SubmissionFormState extends State<SubmissionForm> {
-  _SubmissionFormState({this.item, this.title});
+  _SubmissionFormState({this.document});
 
-  GroceryItem item;
-  final title;
+  DocumentSnapshot document;
+  GroceryItem _item;
   final _formKey = GlobalKey<FormState>();
+  Firestore _firestore;
 
   @override
   Widget build(BuildContext context) {
-    if (!itemExist()) {
-      item = GroceryItem(name: '');
+    _firestore = FirestoreProvider.of(context);
+
+    if (_newItem()) {
+      _item = GroceryItem();
+    } else {
+      _item = GroceryItem.fromJson(document.data);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(_appBarTitle()),
       ),
       body: _formBody(),
     );
   }
 
-  bool itemExist() {
-    return item != null;
+  bool _newItem() {
+    return document == null;
+  }
+
+  String _appBarTitle() {
+    if (_newItem()) {
+      return 'Add New Item';
+    } else {
+      return 'Edit ${_item.name}';
+    }
   }
 
   Widget _formBody() {
@@ -70,7 +77,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
         hintText: 'Milk',
         labelText: 'Name',
       ),
-      initialValue: item.name,
+      initialValue: _item.name,
       validator: _nameValid,
       onSaved: _onNameSaved,
     );
@@ -85,7 +92,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   }
 
   void _onNameSaved(String inputValue) {
-    item.name = inputValue;
+    _item.name = inputValue;
   }
 
   Padding _namePadding() {
@@ -105,10 +112,10 @@ class _SubmissionFormState extends State<SubmissionForm> {
       );
 
   String _itemInitialValue() {
-    if (item.quantity == null) {
+    if (_item.quantity == null) {
       return '';
     } else {
-      return item.quantity.toString();
+      return _item.quantity.toString();
     }
   }
 
@@ -123,7 +130,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   }
 
   void _onQuantitySaved(String inputValue) {
-    item.quantity = int.parse(inputValue);
+    _item.quantity = int.parse(inputValue);
   }
 
   Padding _quantityPadding() {
@@ -138,8 +145,10 @@ class _SubmissionFormState extends State<SubmissionForm> {
       padding: const EdgeInsets.all(16),
       child: RaisedButton(
         onPressed: _submitForm,
-        child: const Text('SAVE',
-            style: TextStyle(fontSize: 23, color: Colors.white)),
+        child: const Text(
+          'SAVE',
+          style: TextStyle(fontSize: 23, color: Colors.white),
+        ),
       ),
     );
   }
@@ -148,8 +157,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     if (_formValid()) {
       _formKey.currentState.save();
 
-      final itemBloc = ItemProvider.of(_formKey.currentContext);
-      itemBloc.addItem.add(item);
+      _updateDatabase();
 
       Navigator.pop(_formKey.currentContext);
     }
@@ -157,5 +165,15 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   bool _formValid() {
     return _formKey.currentState.validate();
+  }
+
+  void _updateDatabase() {
+    final jsonItem = _item.toJson();
+
+    if (_newItem()) {
+      _firestore.collection('user1_list').add(jsonItem);
+    } else {
+      document.reference.updateData(jsonItem);
+    }
   }
 }

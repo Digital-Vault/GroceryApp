@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'grocery_item.g.dart';
@@ -7,11 +6,7 @@ part 'grocery_item.g.dart';
 @JsonSerializable()
 class GroceryItem {
   GroceryItem(
-      {@required this.name,
-      this.expiryDate,
-      this.quantity,
-      this.purchased = false})
-      : assert(name != null);
+      {this.name, this.expiryDate, this.quantity, this.purchased = false});
 
   @JsonKey(nullable: false)
   String name;
