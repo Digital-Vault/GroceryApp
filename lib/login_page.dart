@@ -28,7 +28,7 @@ class _LoginPageState extends State<loginPage> {
     }
   }
 
-  void validateAndSubmit() async {
+  void validateAndSubmit(BuildContext context) async {
 
     if(validateAndSave()){
     try{
@@ -66,18 +66,19 @@ class _LoginPageState extends State<loginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
-        body:  Container(
-          padding: EdgeInsets.all(16.0),
-            child: Form(
-              key: formKey,
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children:
-                  buildInputs()+ buildSubmitButtons(),
-
-
-              )
-            )
+        body: Builder(
+          builder: (context) =>
+              Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Form(
+                      key: formKey,
+                      child:  Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children:
+                        buildInputs()+ buildSubmitButtons(context),
+                      )
+                  )
+              ),
         )
     );
   }
@@ -108,12 +109,19 @@ class _LoginPageState extends State<loginPage> {
     ];
   }
 
-  List<Widget> buildSubmitButtons() {
+  List<Widget> buildSubmitButtons(BuildContext context) {
     if (_formType == FormType.login){
       return [
         RaisedButton(
           child: Text('Login'),
-          onPressed: validateAndSubmit,
+          onPressed: () {
+            validateAndSubmit(context);
+            Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Processing'),
+                duration: Duration(seconds: 1)
+            )
+            );
+          }
 
         ),
         FlatButton(
@@ -125,7 +133,10 @@ class _LoginPageState extends State<loginPage> {
       return [
         RaisedButton(
           child: Text('Create an account'),
-          onPressed: validateAndSubmit,
+          onPressed:() {
+
+            validateAndSubmit(context);
+          }
         ),
         FlatButton(
           child: Text('Have an account? Login'),
