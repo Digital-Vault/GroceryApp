@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/submission_form.dart';
@@ -17,37 +18,35 @@ void main() async {
   final Firestore firestore = Firestore(app: app);
 
   runApp(
-    ItemProvider(
+    FirestoreProvider(
+      firestore: firestore,
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyApp(
-          firestore: firestore,
+        home: MyApp(),
         ),
       ),
-    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({this.firestore});
-  final Firestore firestore;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Grocery List"),
       ),
-      body: _buildBody(),
+      body: _buildBody(context),
       floatingActionButton: _buildAddFab(context),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
+    final firestore = FirestoreProvider.of(context);
+
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('grocery_items').snapshots(),
+      stream: firestore.collection('user1_list').snapshots(),
       builder: _builder,
     );
   }
