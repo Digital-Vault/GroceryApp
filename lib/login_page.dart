@@ -64,22 +64,31 @@ class _LoginPageState extends State<loginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Builder(
-          builder: (context) =>
-              Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Form(
-                      key: formKey,
-                      child:  Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        buildInputs()+ buildSubmitButtons(context),
-                      )
-                  )
-              ),
+    return SingleChildScrollView(
+      child:(
+        SizedBox(
+          width: 500.0,
+          height: 800.0,
+          child: Scaffold(
+              resizeToAvoidBottomPadding: false,
+              body: Builder(
+                builder: (context) =>
+                    Container(
+                        padding: EdgeInsets.all(16.0),
+                        child: Form(
+                            key: formKey,
+                            child:  Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              buildInputs()+ buildSubmitButtons(context),
+                            )
+                        )
+                    ),
+              )
+          ),
         )
+
+      ),
     );
   }
 
@@ -87,6 +96,7 @@ class _LoginPageState extends State<loginPage> {
     return [
     _buildIcon(context),
       _buildText(),
+      SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Email'),
         validator: (value){
@@ -100,6 +110,7 @@ class _LoginPageState extends State<loginPage> {
         }, 
         onSaved: (value) => _email = value,
       ),
+      SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Password'),
         obscureText: true,
@@ -112,6 +123,7 @@ class _LoginPageState extends State<loginPage> {
   List<Widget> buildSubmitButtons(BuildContext context) {
     if (_formType == FormType.login){
       return [
+        SizedBox(height: 50),
         RaisedButton(
           child: Text('Login'),
           onPressed: () {
@@ -131,6 +143,7 @@ class _LoginPageState extends State<loginPage> {
       ];
     } else {
       return [
+        SizedBox(height: 50),
         RaisedButton(
           child: Text('Create an account'),
           onPressed:() {
