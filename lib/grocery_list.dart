@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/submission_form.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'auth.dart';
-import 'root.dart';
 import 'detailed_page.dart';
 
 class GroceryList extends StatelessWidget {
@@ -37,7 +34,6 @@ class GroceryList extends StatelessWidget {
         ],
       ),
       body: _buildBody(context),
-      floatingActionButton: _buildAddFab(context),
     );
   }
 
@@ -97,18 +93,6 @@ class GroceryList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildAddFab(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SubmissionForm()),
-        );
-      },
-      child: Icon(Icons.add),
     );
   }
 }

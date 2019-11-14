@@ -3,11 +3,13 @@ import 'package:grocery_app/firestore_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/submission_form.dart';
 
 import 'auth.dart';
 import 'grocery_list.dart';
 import 'my_fridge.dart';
 import 'root.dart';
+import 'fab_bottom_app.dart';
 
 void main() async {
   final FirebaseApp app = await FirebaseApp.configure(
@@ -54,13 +56,10 @@ class _MyAppState extends State<MyApp> {
   int selectedPage = 0;
   final pageOptions = [GroceryList(), MyFridge()];
 
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      await auth.signOut();
-      onSignedOut();
-    } catch (e) {
-      print(e);
-    }
+  void _selectedTab(int index) {
+    setState(() {
+      selectedPage = index;
+    });
   }
 
   @override
@@ -68,40 +67,22 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         body: pageOptions[selectedPage],
-        bottomNavigationBar: _bottomNavBar(),
+        bottomNavigationBar: FABBottomAppBar(
+          onTabSelected: _selectedTab,
+          selectedColor: Colors.lightBlue,
+          items: [
+            FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+            FABBottomAppBarItem(iconData: Icons.list, text: 'My Fridge'),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SubmissionForm()),
+                )),
       ),
     );
-  }
-
-  Widget _bottomNavBar() => BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-            ),
-            title: Text(
-              "Grocery List",
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.assignment_ind,
-              size: 30,
-            ),
-            title: Text(
-              "My Fridge",
-              style: TextStyle(fontSize: 12),
-            ),
-          )
-        ],
-        onTap: _onTapped,
-        currentIndex: selectedPage,
-      );
-  void _onTapped(int index) {
-    setState(() {
-      selectedPage = index;
-    });
   }
 }
