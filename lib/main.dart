@@ -5,6 +5,8 @@ import 'package:grocery_app/submission_form.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'auth.dart';
+import 'root.dart';
 import 'detailed_page.dart';
 
 void main() async {
@@ -25,18 +27,38 @@ void main() async {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyApp(),
+        home: RootPage(auth: Auth()),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({this.onSignedOut, this.auth});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await auth.signOut();
+      onSignedOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Grocery List"),
+        actions: [
+          FlatButton(
+            child: Text('Logout',
+                style: TextStyle(fontSize: 17.0, color: Colors.white)),
+            onPressed: () => _signOut(context),
+          )
+        ],
       ),
       body: _buildBody(context),
       floatingActionButton: _buildAddFab(context),
