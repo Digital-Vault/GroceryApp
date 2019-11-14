@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/item_provider.dart';
-import 'detailed_page.dart';
 
 class GroceryCard extends StatelessWidget {
-  final GroceryItem item;
+  final DocumentSnapshot item;
 
   GroceryCard({Key key, @required this.item})
       : assert(item != null),
@@ -16,12 +16,12 @@ class GroceryCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailedPage(item: item),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => DetailedPage(item: item),
+          //   ),
+          // );
         },
         child: _buildTile(context),
       ),
@@ -30,22 +30,22 @@ class GroceryCard extends StatelessWidget {
 
   Widget _buildTile(BuildContext context) {
     return Dismissible(
-      key: ObjectKey(item.name),
+      key: ObjectKey(item['name']),
       background: deleteGroceryBackground(),
       child: ListTile(
-        trailing: Text("${item.quantity}x"),
+        trailing: Text("${item['quantity']}x"),
         title: Text(
-          item.name,
+          item['name'],
         ),
       ),
       onDismissed: (direction) {
-        deleteGroceryItem(context, item);
+        // deleteGroceryItem(context, item);
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Deleted ${item.name}!"),
+          content: Text("Deleted ${item['name']}!"),
           action: SnackBarAction(
             label: "UNDO",
             onPressed: () {
-              restoreGroceryItem(context, item);
+              // restoreGroceryItem(context, item);
             },
           ),
         ));

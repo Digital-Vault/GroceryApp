@@ -1,61 +1,73 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/detail_card.dart';
-import 'package:grocery_app/item_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:grocery_app/submission_form.dart';
-import 'package:grocery_app/main.dart';
 
 class DetailedPage extends StatelessWidget {
-  final GroceryItem item;
-  DetailedPage({this.item});
+  DetailedPage({this.documentReference}) : assert(documentReference != null);
 
+  final DocumentReference documentReference;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('${item.name} Details'),
-          actions: [_editButton(context), _deleteButton(context)],
-        ),
-        body: _detailCard(context));
+    return StreamBuilder<DocumentSnapshot>(
+      stream: documentReference.snapshots(),
+      builder: _builder,
+    );
   }
 
-  Widget _detailCard(BuildContext context) => Builder(
-        builder: (BuildContext context) {
-          return Column(children: <Widget>[
-            DetailCard(
-              item: item,
-            ),
-          ]);
-        },
+  Widget _builder(
+      BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+    if (snapshot.hasError) {
+      return Center(
+        child: Text('Failed to retrieve item details1'),
       );
-  Widget _deleteButton(BuildContext context) => IconButton(
-        icon: Icon(Icons.delete_forever),
-        onPressed: () {
-          _deleteGroceryItem(context, item);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MyApp(),
-            ),
-          );
-        },
+    }
+    if (snapshot.hasData && snapshot.data.data != null) {
+      final item = GroceryItem.fromJson(snapshot.data.data);
+
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('${item.name} Details'),
+            actions: [
+              _editButton(context, snapshot.data),
+              _deleteButton(context)
+            ],
+          ),
+          body: _detailCard(context, item));
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
       );
-  Widget _editButton(BuildContext context) => IconButton(
+    }
+  }
+
+  Widget _detailCard(BuildContext context, GroceryItem item) {
+    return DetailCard(item: item);
+  }
+
+  Widget _deleteButton(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.delete_forever),
+      onPressed: () {
+        documentReference.delete();
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  Widget _editButton(BuildContext context, DocumentSnapshot document) =>
+      IconButton(
         icon: Icon(Icons.edit),
         onPressed: () {
-          final itemBloc = ItemProvider.of(context);
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => SubmissionForm(item: item),
+              builder: (context) => SubmissionForm(
+                document: document,
+              ),
             ),
           );
-          itemBloc.removeItem.add(item);
         },
       );
-
-  void _deleteGroceryItem(BuildContext context, GroceryItem item) {
-    final itemBloc = ItemProvider.of(context);
-    itemBloc.removeItem.add(item);
-  }
 }
