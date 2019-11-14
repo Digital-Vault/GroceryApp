@@ -4,5 +4,5 @@
 ## Create Acccount
 ![alt text](./Images/BTS530_Iter3_Create-Account.png "Remove Item")
 
-## Create Acccount
+## Login
 ![alt text](./Images/BTS530_Iter3_Login.png "Remove Item")
