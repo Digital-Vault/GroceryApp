@@ -27,16 +27,16 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 
 ## Iteration 3 Tasks
 
-- [ ] Create "My Fridge" list
-- [ ] Integrate firebase authentication
-- [ ] Create a login page
+- [x] Create "My Fridge" list
+- [x] Integrate firebase authentication
+- [x] Create a login page
 - [x] Refactor code
-- [ ] Firestore database setup
-- [ ] Create new database item
-- [ ] Remove from database
-- [ ] Add to database
-- [ ] Edit database item
-- [ ] Redesign add item form
+- [x] Firestore database setup
+- [x] Create new database item
+- [x] Remove from database
+- [x] Add to database
+- [x] Edit database item
+- [x] Redesign add item form
 
 ## Iteration 4 Tasks
 
