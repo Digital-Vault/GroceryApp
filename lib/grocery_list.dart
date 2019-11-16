@@ -80,19 +80,46 @@ class GroceryList extends StatelessWidget {
 
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
+    final firestore = FirestoreProvider.of(context);
 
-    return ListTile(
-      title: Text(groceryItem.name),
-      trailing: Text("${groceryItem.quantity}x"),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                DetailedPage(documentReference: document.reference),
+    return Dismissible(
+      key: Key(document.documentID),
+      background: _dismissibleBackground(),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        firestore.collection('fridge_list').add(groceryItem.toJson());
+
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Moved ${groceryItem.name} to Fridge!'),
           ),
         );
       },
+      child: ListTile(
+        title: Text(groceryItem.name),
+        trailing: Text('${groceryItem.quantity}x'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  DetailedPage(documentReference: document.reference),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _dismissibleBackground() {
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.only(right: 20.0),
+      color: Colors.green,
+      child: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 }
