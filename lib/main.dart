@@ -54,7 +54,6 @@ class _MyAppState extends State<MyApp> {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   int selectedPage = 0;
-  final pageOptions = [GroceryList(), MyFridge()];
 
   void _selectedTab(int index) {
     setState(() {
@@ -64,6 +63,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final pageOptions = [
+      GroceryList(onSignedOut: onSignedOut, auth: auth),
+      MyFridge(onSignedOut: onSignedOut, auth: auth)
+    ];
+
     return MaterialApp(
       home: Scaffold(
         body: pageOptions[selectedPage],
