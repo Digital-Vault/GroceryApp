@@ -1,0 +1,32 @@
+name: Dart CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+
+    - name: Test formating
+      run: flutter format --dry-run --set-exit-if-changed lib
+
+    - name: Test analysis
+      run: flutter analyze
+
+    - name: Get dependencies
+      run: flutter pub get
+
+    - name: Build Android apk
+      run: flutter build apk
+    
