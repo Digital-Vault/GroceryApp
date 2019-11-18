@@ -43,6 +43,7 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [ ] Add item search functionality
 - [ ] Send notification to users
 - [ ] Add item sorting functionality
+- [ ] Research/Design how to implement multiple grocery lists
 
 ## Future Possible Tasks
 
