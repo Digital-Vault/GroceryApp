@@ -7,10 +7,10 @@ import 'auth.dart';
 import 'detailed_page.dart';
 
 class GroceryList extends StatelessWidget {
-  const GroceryList({this.onSignedOut, this.auth});
+  GroceryList({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
-
+  var _items = <GroceryItem>[];
   Future<void> _signOut(BuildContext context) async {
     try {
       await auth.signOut();
@@ -22,10 +22,19 @@ class GroceryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getData(context).then((list){
+        _items = list;
+        print(_items[1].name);
+    });
+    print(_items[1].name);
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Grocery List"),
         actions: [
+          IconButton(icon: Icon(Icons.search), onPressed: () {
+            print(_items[8].name);
+          }),
           FlatButton(
             child: Text('Logout',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
@@ -36,6 +45,7 @@ class GroceryList extends StatelessWidget {
       body: _buildBody(context),
     );
   }
+
 
   Widget _buildBody(BuildContext context) {
     final firestore = FirestoreProvider.of(context);
@@ -122,4 +132,16 @@ class GroceryList extends StatelessWidget {
       ),
     );
   }
+  Future<List<GroceryItem>> getData(BuildContext context) async {
+    var items = <GroceryItem>[];
+    QuerySnapshot queryList = await Firestore.instance.collection('user1_list').getDocuments();
+    var GroceryItems = queryList.documents;
+    for(int i =0; i < GroceryItems.length; i++){
+      items.add(GroceryItem.fromJson(GroceryItems[i].data));
+      print(items[i].name);
+    }
+    print(items[3].name);
+    return items;
+  }
+
 }
