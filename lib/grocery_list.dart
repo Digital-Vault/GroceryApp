@@ -23,17 +23,20 @@ class GroceryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData(context).then((list){
-        _items = list;
+    getData(context).then((list) {
+      _items = list;
     });
     return Scaffold(
-
       appBar: AppBar(
         title: Text("Grocery List"),
         actions: [
-          IconButton(icon: Icon(Icons.search), onPressed: () {
-            showSearch(context: context, delegate: DataSearch(items: _items, documents: _documents));
-          }),
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                    context: context,
+                    delegate: DataSearch(items: _items, documents: _documents));
+              }),
           FlatButton(
             child: Text('Logout',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
@@ -44,7 +47,6 @@ class GroceryList extends StatelessWidget {
       body: _buildBody(context),
     );
   }
-
 
   Widget _buildBody(BuildContext context) {
     final firestore = FirestoreProvider.of(context);
@@ -113,7 +115,6 @@ class GroceryList extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) =>
                   DetailedPage(documentReference: document.reference),
-
             ),
           );
         },
@@ -132,18 +133,18 @@ class GroceryList extends StatelessWidget {
       ),
     );
   }
+
   Future<List<GroceryItem>> getData(BuildContext context) async {
     var items = <GroceryItem>[];
     _documents.clear();
     items.clear();
-    QuerySnapshot queryList = await Firestore.instance.collection('user1_list').getDocuments();
+    QuerySnapshot queryList =
+        await Firestore.instance.collection('user1_list').getDocuments();
     var GroceryItems = queryList.documents;
-    for(int i =0; i < GroceryItems.length; i++){
+    for (int i = 0; i < GroceryItems.length; i++) {
       items.add(GroceryItem.fromJson(GroceryItems[i].data));
       _documents.add(GroceryItems[i]);
     }
     return items;
   }
-
 }
-

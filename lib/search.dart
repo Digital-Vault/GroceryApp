@@ -3,7 +3,7 @@ import 'package:grocery_app/grocery_item.dart';
 import 'detailed_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DataSearch extends SearchDelegate<String>{
+class DataSearch extends SearchDelegate<String> {
   DataSearch({this.items, this.documents});
   List<DocumentSnapshot> documents;
   List<GroceryItem> items;
@@ -12,9 +12,11 @@ class DataSearch extends SearchDelegate<String>{
   List<Widget> buildActions(BuildContext context) {
     //actions for app bar
     return [
-      IconButton(icon: Icon(Icons.clear), onPressed: () {
-        query = "";
-      } )
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = "";
+          })
     ];
   }
 
@@ -34,9 +36,8 @@ class DataSearch extends SearchDelegate<String>{
   @override
   Widget buildResults(BuildContext context) {
     return Card(
-        child: Text(query),
+      child: Text(query),
     );
-
   }
 
   @override
@@ -44,36 +45,33 @@ class DataSearch extends SearchDelegate<String>{
     //final suggestionList = items.where((n) => n.name.contains(query)).toList();
 
     final suggest = query.isEmpty
-    ? recentItems.where((a){
-      final x =GroceryItem.fromJson(a.data);
-      final b = x.name;
-      return b.contains(query);
-    }
-    ).toList()
-    : documents.where((a){
-      final x =GroceryItem.fromJson(a.data);
-      final b = x.name;
-      return b.contains(query);
-    }
-    ).toList();
+        ? recentItems.where((a) {
+            final x = GroceryItem.fromJson(a.data);
+            final b = x.name;
+            return b.contains(query);
+          }).toList()
+        : documents.where((a) {
+            final x = GroceryItem.fromJson(a.data);
+            final b = x.name;
+            return b.contains(query);
+          }).toList();
 
     return ListView(
-        children: suggest.map<ListTile>((a) => ListTile(
-          onTap: () {
-              recentItems.add(a);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        DetailedPage(documentReference: a.reference),
-              )
-              );
-          },
-          leading: Icon(Icons.restaurant),
-          title: Text(GroceryItem.fromJson(a.data).name),
-        )
-        ).toList()
-    );
+        children: suggest
+            .map<ListTile>((a) => ListTile(
+                  onTap: () {
+                    recentItems.add(a);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailedPage(documentReference: a.reference),
+                        ));
+                  },
+                  leading: Icon(Icons.restaurant),
+                  title: Text(GroceryItem.fromJson(a.data).name),
+                ))
+            .toList());
 
 //    return ListView.builder(
 //      itemBuilder: (context,index)=> ListTile(
@@ -100,6 +98,4 @@ class DataSearch extends SearchDelegate<String>{
 //      itemCount: suggestionList.length,
 //    );
   }
-
-
 }
