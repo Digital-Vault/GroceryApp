@@ -23,8 +23,8 @@ class GroceryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData(context).then((list) {
-      _items = list;
+    getData(context, 'user1_list').then((list) {
+      _documents = list;
     });
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +35,7 @@ class GroceryList extends StatelessWidget {
               onPressed: () {
                 showSearch(
                     context: context,
-                    delegate: DataSearch(items: _items, documents: _documents));
+                    delegate: DataSearch(documents: _documents));
               }),
           FlatButton(
             child: Text('Logout',
@@ -134,17 +134,18 @@ class GroceryList extends StatelessWidget {
     );
   }
 
-  Future<List<GroceryItem>> getData(BuildContext context) async {
-    var items = <GroceryItem>[];
-    _documents.clear();
-    items.clear();
+  Future<List<DocumentSnapshot>> getData(BuildContext context, String collectionName) async {
+   // var items = <GroceryItem>[];
+    var documents = <DocumentSnapshot>[];
+    documents.clear();
+    //items.clear();
     QuerySnapshot queryList =
-        await Firestore.instance.collection('user1_list').getDocuments();
+        await Firestore.instance.collection(collectionName).getDocuments();
     var GroceryItems = queryList.documents;
     for (int i = 0; i < GroceryItems.length; i++) {
-      items.add(GroceryItem.fromJson(GroceryItems[i].data));
-      _documents.add(GroceryItems[i]);
+     // items.add(GroceryItem.fromJson(GroceryItems[i].data));
+      documents.add(GroceryItems[i]);
     }
-    return items;
+    return documents;
   }
 }
