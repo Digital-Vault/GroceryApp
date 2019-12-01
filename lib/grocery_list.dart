@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'search.dart';
 import 'auth.dart';
 import 'detailed_page.dart';
 
@@ -11,6 +11,7 @@ class GroceryList extends StatelessWidget {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   var _items = <GroceryItem>[];
+  var _documents = <DocumentSnapshot>[];
   Future<void> _signOut(BuildContext context) async {
     try {
       await auth.signOut();
@@ -24,16 +25,14 @@ class GroceryList extends StatelessWidget {
   Widget build(BuildContext context) {
     getData(context).then((list){
         _items = list;
-        print(_items[1].name);
     });
-    print(_items[1].name);
     return Scaffold(
 
       appBar: AppBar(
         title: Text("Grocery List"),
         actions: [
           IconButton(icon: Icon(Icons.search), onPressed: () {
-            print(_items[8].name);
+            showSearch(context: context, delegate: DataSearch(items: _items, documents: _documents));
           }),
           FlatButton(
             child: Text('Logout',
@@ -114,6 +113,7 @@ class GroceryList extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) =>
                   DetailedPage(documentReference: document.reference),
+
             ),
           );
         },
@@ -134,14 +134,16 @@ class GroceryList extends StatelessWidget {
   }
   Future<List<GroceryItem>> getData(BuildContext context) async {
     var items = <GroceryItem>[];
+    _documents.clear();
+    items.clear();
     QuerySnapshot queryList = await Firestore.instance.collection('user1_list').getDocuments();
     var GroceryItems = queryList.documents;
     for(int i =0; i < GroceryItems.length; i++){
       items.add(GroceryItem.fromJson(GroceryItems[i].data));
-      print(items[i].name);
+      _documents.add(GroceryItems[i]);
     }
-    print(items[3].name);
     return items;
   }
 
 }
+
