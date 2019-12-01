@@ -48,12 +48,12 @@ class DataSearch extends SearchDelegate<String> {
         ? recentItems.where((a) {
             final x = GroceryItem.fromJson(a.data);
             final b = x.name;
-            return b.contains(query);
+            return b.toLowerCase().contains(query);
           }).toList()
         : documents.where((a) {
             final x = GroceryItem.fromJson(a.data);
             final b = x.name;
-            return b.contains(query);
+            return b.toLowerCase().contains(query);
           }).toList();
 
     return ListView(

@@ -10,7 +10,6 @@ class GroceryList extends StatelessWidget {
   GroceryList({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
-  var _items = <GroceryItem>[];
   var _documents = <DocumentSnapshot>[];
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -135,15 +134,12 @@ class GroceryList extends StatelessWidget {
   }
 
   Future<List<DocumentSnapshot>> getData(BuildContext context, String collectionName) async {
-   // var items = <GroceryItem>[];
     var documents = <DocumentSnapshot>[];
     documents.clear();
-    //items.clear();
     QuerySnapshot queryList =
         await Firestore.instance.collection(collectionName).getDocuments();
     var GroceryItems = queryList.documents;
     for (int i = 0; i < GroceryItems.length; i++) {
-     // items.add(GroceryItem.fromJson(GroceryItems[i].data));
       documents.add(GroceryItems[i]);
     }
     return documents;
