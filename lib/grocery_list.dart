@@ -133,7 +133,8 @@ class GroceryList extends StatelessWidget {
     );
   }
 
-  Future<List<DocumentSnapshot>> getData(BuildContext context, String collectionName) async {
+  Future<List<DocumentSnapshot>> getData(
+      BuildContext context, String collectionName) async {
     var documents = <DocumentSnapshot>[];
     documents.clear();
     QuerySnapshot queryList =

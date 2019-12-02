@@ -5,6 +5,7 @@ import 'auth.dart';
 import 'fridge_list.dart';
 import 'search.dart';
 import 'grocery_list.dart';
+
 class MyFridge extends StatelessWidget {
   MyFridge({this.onSignedOut, this.auth});
   final BaseAuth auth;
@@ -21,11 +22,9 @@ class MyFridge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     GroceryList().getData(context, 'fridge_list').then((list) {
-        _documents = list;
-    }
-    );
+      _documents = list;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text("My Fridge"),

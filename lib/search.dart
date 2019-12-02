@@ -42,8 +42,6 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    //final suggestionList = items.where((n) => n.name.contains(query)).toList();
-
     final suggest = query.isEmpty
         ? recentItems.where((a) {
             final x = GroceryItem.fromJson(a.data);
@@ -72,30 +70,5 @@ class DataSearch extends SearchDelegate<String> {
                   title: Text(GroceryItem.fromJson(a.data).name),
                 ))
             .toList());
-
-//    return ListView.builder(
-//      itemBuilder: (context,index)=> ListTile(
-//        onTap: () {
-//          Navigator.push(
-//            context,
-//             MaterialPageRoute(
-//               builder: (context) =>
-//                   DetailedPage(documentReference: documents[index].reference)
-//             ),
-//          );
-//        },
-//        leading: Icon(Icons.fastfood),
-//        title: RichText(text: TextSpan(
-//            text: suggestionList[index].substring(0,query.length),
-//            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-//            children: [
-//              TextSpan(text: suggestionList[index].substring(query.length),
-//                style: TextStyle(color: Colors.grey),
-//              )
-//            ]
-//        )),
-//      ),
-//      itemCount: suggestionList.length,
-//    );
   }
 }
