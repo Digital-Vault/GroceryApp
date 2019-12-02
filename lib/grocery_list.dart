@@ -6,10 +6,28 @@ import 'search.dart';
 import 'auth.dart';
 import 'detailed_page.dart';
 
-class GroceryList extends StatelessWidget {
+enum MenuItems { alphabetically, expiryDate, logout }
+
+class GroceryList extends StatefulWidget {
   GroceryList({this.onSignedOut, this.auth});
+
   final BaseAuth auth;
   final VoidCallback onSignedOut;
+
+  @override
+  State<StatefulWidget> createState() {
+    return _GroceryList(
+      onSignedOut: onSignedOut,
+      auth: auth,
+    );
+  }
+}
+
+class _GroceryList extends State<GroceryList> {
+  _GroceryList({this.onSignedOut, this.auth});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  String _order = 'name';
   var _documents = <DocumentSnapshot>[];
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -36,11 +54,38 @@ class GroceryList extends StatelessWidget {
                     context: context,
                     delegate: DataSearch(documents: _documents));
               }),
-          FlatButton(
-            child: Text('Logout',
-                style: TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: () => _signOut(context),
-          )
+          PopupMenuButton<MenuItems>(
+            onSelected: (MenuItems result) {
+              if (result == MenuItems.logout) {
+                _signOut(context);
+              } else if (result == MenuItems.alphabetically) {
+                setState(() {
+                  _order = 'name';
+                });
+              } else if (result == MenuItems.expiryDate) {
+                setState(() {
+                  _order = 'expiryDate';
+                });
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.alphabetically,
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  title: Text('Sort Alphabetically'),
+                ),
+              ),
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.expiryDate,
+                child: Text('Sort by Expiry Date'),
+              ),
+              const PopupMenuItem<MenuItems>(
+                value: MenuItems.logout,
+                child: Text('Logout'),
+              ),
+            ],
+          ),
         ],
       ),
       body: _buildBody(context),
@@ -51,7 +96,7 @@ class GroceryList extends StatelessWidget {
     final firestore = FirestoreProvider.of(context);
 
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('user1_list').snapshots(),
+      stream: firestore.collection('user1_list').orderBy(_order).snapshots(),
       builder: _builder,
     );
   }
