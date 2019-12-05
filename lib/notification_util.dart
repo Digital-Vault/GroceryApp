@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 
 import 'main.dart';
 
@@ -36,8 +37,9 @@ Future<void> cancelNotification() async {
 }
 
 /// Schedules a notification that specifies a different icon, sound and vibration pattern
-Future<void> scheduleNotification() async {
-  var scheduledNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+Future<void> scheduleNotification(int time) async {
+  var scheduledNotificationDateTime =
+      DateTime.now().add(Duration(seconds: time));
   var vibrationPattern = Int64List(4);
   vibrationPattern[0] = 0;
   vibrationPattern[1] = 1000;
@@ -48,10 +50,7 @@ Future<void> scheduleNotification() async {
       'your other channel id',
       'your other channel name',
       'your other channel description',
-      icon: 'secondary_icon',
-      sound: 'slow_spring_board',
-      largeIcon: 'sample_large_icon',
-      largeIconBitmapSource: BitmapSource.Drawable,
+      icon: 'app_icon',
       vibrationPattern: vibrationPattern,
       enableLights: true,
       color: const Color.fromARGB(255, 255, 0, 0),
@@ -70,6 +69,45 @@ Future<void> scheduleNotification() async {
       platformChannelSpecifics);
 }
 
+/// Schedules a notification that specifies a different icon, sound and vibration pattern
+Future<void> scheduleExpiryNotification(
+    int time, DateTime expiryDate, String itemName) async {
+  final formatter = DateFormat('yyyy-MM-dd');
+  // final formattedExpiryDate = formatter.format(expiryDate);
+  final formattedExpiryDate =
+      formatter.format(DateTime.now().add(Duration(days: 3)));
+
+  var scheduledNotificationDateTime =
+      DateTime.now().add(Duration(seconds: time));
+  var vibrationPattern = Int64List(4);
+  vibrationPattern[0] = 0;
+  vibrationPattern[1] = 1000;
+  vibrationPattern[2] = 5000;
+  vibrationPattern[3] = 2000;
+
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your other channel id',
+      'your other channel name',
+      'your other channel description',
+      icon: 'app_icon',
+      vibrationPattern: vibrationPattern,
+      enableLights: true,
+      color: const Color.fromARGB(255, 255, 0, 0),
+      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledOnMs: 1000,
+      ledOffMs: 500);
+  var iOSPlatformChannelSpecifics =
+      IOSNotificationDetails(sound: "slow_spring_board.aiff");
+  var platformChannelSpecifics = NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.schedule(
+      0,
+      '${itemName} expiring on',
+      '${formattedExpiryDate}',
+      scheduledNotificationDateTime,
+      platformChannelSpecifics);
+}
+
 Future<void> showNotificationWithNoSound() async {
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'silent channel id', 'silent channel name', 'silent channel description',
@@ -80,66 +118,6 @@ Future<void> showNotificationWithNoSound() async {
   await flutterLocalNotificationsPlugin.show(
       0, '<b>silent</b> title', '<b>silent</b> body', platformChannelSpecifics);
 }
-
-// Future<String> _downloadAndSaveImage(String url, String fileName) async {
-//   var directory = await getApplicationDocumentsDirectory();
-//   var filePath = '${directory.path}/$fileName';
-//   var response = await http.get(url);
-//   var file = File(filePath);
-//   await file.writeAsBytes(response.bodyBytes);
-//   return filePath;
-// }
-
-// Future<void> _showBigPictureNotification() async {
-//   var largeIconPath = await _downloadAndSaveImage(
-//       'http://via.placeholder.com/48x48', 'largeIcon');
-//   var bigPicturePath = await _downloadAndSaveImage(
-//       'http://via.placeholder.com/400x800', 'bigPicture');
-//   var bigPictureStyleInformation = BigPictureStyleInformation(
-//       bigPicturePath, BitmapSource.FilePath,
-//       largeIcon: largeIconPath,
-//       largeIconBitmapSource: BitmapSource.FilePath,
-//       contentTitle: 'overridden <b>big</b> content title',
-//       htmlFormatContentTitle: true,
-//       summaryText: 'summary <i>text</i>',
-//       htmlFormatSummaryText: true);
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//       'big text channel id',
-//       'big text channel name',
-//       'big text channel description',
-//       style: AndroidNotificationStyle.BigPicture,
-//       styleInformation: bigPictureStyleInformation);
-//   var platformChannelSpecifics =
-//       NotificationDetails(androidPlatformChannelSpecifics, null);
-//   await flutterLocalNotificationsPlugin.show(
-//       0, 'big text title', 'silent body', platformChannelSpecifics);
-// }
-
-// Future<void> _showBigPictureNotificationHideExpandedLargeIcon() async {
-//   var largeIconPath = await _downloadAndSaveImage(
-//       'http://via.placeholder.com/48x48', 'largeIcon');
-//   var bigPicturePath = await _downloadAndSaveImage(
-//       'http://via.placeholder.com/400x800', 'bigPicture');
-//   var bigPictureStyleInformation = BigPictureStyleInformation(
-//       bigPicturePath, BitmapSource.FilePath,
-//       hideExpandedLargeIcon: true,
-//       contentTitle: 'overridden <b>big</b> content title',
-//       htmlFormatContentTitle: true,
-//       summaryText: 'summary <i>text</i>',
-//       htmlFormatSummaryText: true);
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//       'big text channel id',
-//       'big text channel name',
-//       'big text channel description',
-//       largeIcon: largeIconPath,
-//       largeIconBitmapSource: BitmapSource.FilePath,
-//       style: AndroidNotificationStyle.BigPicture,
-//       styleInformation: bigPictureStyleInformation);
-//   var platformChannelSpecifics =
-//       NotificationDetails(androidPlatformChannelSpecifics, null);
-//   await flutterLocalNotificationsPlugin.show(
-//       0, 'big text title', 'silent body', platformChannelSpecifics);
-// }
 
 Future<void> showBigTextNotification() async {
   var bigTextStyleInformation = BigTextStyleInformation(
@@ -180,68 +158,6 @@ Future<void> showInboxNotification() async {
   await flutterLocalNotificationsPlugin.show(
       0, 'inbox title', 'inbox body', platformChannelSpecifics);
 }
-
-// Future<void> _showMessagingNotification() async {
-//   // use a platform channel to resolve an Android drawable resource to a URI.
-//   // This is NOT part of the notifications plugin. Calls made over this channel is handled by the app
-//   String imageUri = await platform.invokeMethod('drawableToUri', 'food');
-//   var messages = List<Message>();
-//   // First two person objects will use icons that part of the Android app's drawable resources
-//   var me = Person(
-//       name: 'Me',
-//       key: '1',
-//       uri: 'tel:1234567890',
-//       icon: 'me',
-//       iconSource: IconSource.Drawable);
-//   var coworker = Person(
-//       name: 'Coworker',
-//       key: '2',
-//       uri: 'tel:9876543210',
-//       icon: 'coworker',
-//       iconSource: IconSource.Drawable);
-//   // download the icon that would be use for the lunch bot person
-//   var largeIconPath = await _downloadAndSaveImage(
-//       'http://via.placeholder.com/48x48', 'largeIcon');
-//   // this person object will use an icon that was downloaded
-//   var lunchBot = Person(
-//       name: 'Lunch bot',
-//       key: 'bot',
-//       bot: true,
-//       icon: largeIconPath,
-//       iconSource: IconSource.FilePath);
-//   messages.add(Message('Hi', DateTime.now(), null));
-//   messages.add(Message(
-//       'What\'s up?', DateTime.now().add(Duration(minutes: 5)), coworker));
-//   messages.add(Message(
-//       'Lunch?', DateTime.now().add(Duration(minutes: 10)), null,
-//       dataMimeType: 'image/png', dataUri: imageUri));
-//   messages.add(Message('What kind of food would you prefer?',
-//       DateTime.now().add(Duration(minutes: 10)), lunchBot));
-//   var messagingStyle = MessagingStyleInformation(me,
-//       groupConversation: true,
-//       conversationTitle: 'Team lunch',
-//       htmlFormatContent: true,
-//       htmlFormatTitle: true,
-//       messages: messages);
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//       'message channel id',
-//       'message channel name',
-//       'message channel description',
-//       style: AndroidNotificationStyle.Messaging,
-//       styleInformation: messagingStyle);
-//   var platformChannelSpecifics =
-//       NotificationDetails(androidPlatformChannelSpecifics, null);
-//   await flutterLocalNotificationsPlugin.show(
-//       0, 'message title', 'message body', platformChannelSpecifics);
-
-//   // wait 10 seconds and add another message to simulate another response
-//   await Future.delayed(Duration(seconds: 10), () async {
-//     messages
-//         .add(Message('Thai', DateTime.now().add(Duration(minutes: 11)), null));
-//     await flutterLocalNotificationsPlugin.show(
-//         0, 'message title', 'message body', platformChannelSpecifics);
-//   });
-// }
 
 Future<void> showGroupedNotifications() async {
   var groupKey = 'com.android.example.WORK_EMAIL';
@@ -285,32 +201,6 @@ Future<void> showGroupedNotifications() async {
   await flutterLocalNotificationsPlugin.show(
       3, 'Attention', 'Two messages', platformChannelSpecifics);
 }
-
-// Future<void> _checkPendingNotificationRequests() async {
-//   var pendingNotificationRequests =
-//       await flutterLocalNotificationsPlugin.pendingNotificationRequests();
-//   for (var pendingNotificationRequest in pendingNotificationRequests) {
-//     debugPrint(
-//         'pending notification: [id: ${pendingNotificationRequest.id}, title: ${pendingNotificationRequest.title}, body: ${pendingNotificationRequest.body}, payload: ${pendingNotificationRequest.payload}]');
-//   }
-//   return showDialog<void>(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         content: Text(
-//             '${pendingNotificationRequests.length} pending notification requests'),
-//         actions: [
-//           FlatButton(
-//             child: Text('OK'),
-//             onPressed: () {
-//               Navigator.of(context).pop();
-//             },
-//           ),
-//         ],
-//       );
-//     },
-//   );
-// }
 
 Future<void> cancelAllNotifications() async {
   await flutterLocalNotificationsPlugin.cancelAll();
@@ -464,30 +354,3 @@ Future<void> showNotificationWithUpdatedChannelDescription() async {
 String _toTwoDigitString(int value) {
   return value.toString().padLeft(2, '0');
 }
-
-// Future<void> onDidReceiveLocalNotification(
-//     int id, String title, String body, String payload) async {
-//   // display a dialog with the notification details, tap ok to go to another page
-//   await showDialog(
-//     context: context,
-//     builder: (BuildContext context) => CupertinoAlertDialog(
-//       title: title != null ? Text(title) : null,
-//       content: body != null ? Text(body) : null,
-//       actions: [
-//         CupertinoDialogAction(
-//           isDefaultAction: true,
-//           child: Text('Ok'),
-//           onPressed: () async {
-//             Navigator.of(context, rootNavigator: true).pop();
-//             await Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) => SecondScreen(payload),
-//               ),
-//             );
-//           },
-//         )
-//       ],
-//     ),
-//   );
-// }
