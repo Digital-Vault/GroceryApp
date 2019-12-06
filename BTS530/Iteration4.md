@@ -7,3 +7,8 @@ From research of Google's [Cloud Firestore](https://cloud.google.com/firestore/ 
 ![alt text](./Images/BTS530_Iter4_MultipleListDesign.png)
 
 When a user logs in, their UID will be used to fetch their lists from the Cloud Firestore database.
+
+## Activity Diagram
+
+### Search
+![alt text](./Images/BTS530_Search.png)
