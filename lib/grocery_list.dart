@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/notification_util.dart';
 import 'search.dart';
 import 'auth.dart';
 import 'detailed_page.dart';
@@ -142,8 +143,8 @@ class _GroceryList extends State<GroceryList> {
       background: _dismissibleBackground(),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
+        scheduleExpiryNotification(5, groceryItem.expiryDate, groceryItem.name);
         firestore.collection('fridge_list').add(groceryItem.toJson());
-
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Moved ${groceryItem.name} to Fridge!'),

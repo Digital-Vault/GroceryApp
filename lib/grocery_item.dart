@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'notification_util.dart';
 
 part 'grocery_item.g.dart';
 
@@ -20,4 +21,10 @@ class GroceryItem {
       _$GroceryItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$GroceryItemToJson(this);
+
+  void isExpired() {
+    if (this.expiryDate.compareTo(DateTime.now()) > 0) {
+      showNotification();
+    }
+  }
 }
