@@ -15,3 +15,19 @@ When a user logs in, their UID will be used to fetch their lists from the Cloud 
 
 ### View Notification
 ![alt text](./Images/show_notification.png)
+
+### Move Item to Fridge
+### Actors
+* User
+
+### Trigger
+User swipes on the grocery item.
+### Pre-Condition
+User is on the grocery list page.
+### Post-Condition
+Item is removed from grocery list and added in fridge list.
+### Normal Flow
+1. User swipes right on a grocery item.
+2. System removes item from grocery list and updates the database.
+3. System adds the item to the fridge list.
+4. System shows a notification that the item has been moved.
