@@ -12,3 +12,6 @@ When a user logs in, their UID will be used to fetch their lists from the Cloud 
 
 ### Search
 ![alt text](./Images/BTS530_Search.png)
+
+### View Notification
+![alt text](./Images/show_notification.png)
