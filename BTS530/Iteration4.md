@@ -31,3 +31,21 @@ Item is removed from grocery list and added in fridge list.
 2. System removes item from grocery list and updates the database.
 3. System adds the item to the fridge list.
 4. System shows a notification that the item has been moved.
+
+
+### Sort Items
+### Actors
+* User
+
+### Trigger
+User taps on triple dots button on top right corner.
+
+### Pre-Condition
+User is logged in and is on the main page.
+
+### Post-Condition
+Items are sorted based on the user's preference.
+
+### Normal Flow
+1. User taps on the triple dot button on the top right corner and selects a sorting option.
+2. System sorts all the items based on the selected option and displays it.
