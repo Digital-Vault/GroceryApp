@@ -40,10 +40,10 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 
 ## Iteration 4 Tasks
 
-- [ ] Add item search functionality
-- [ ] Send notification to users
-- [ ] Add item sorting functionality
-- [ ] Research/Design how to implement multiple grocery lists
+- [x] Add item search functionality
+- [x] Send notification to users
+- [x] Add item sorting functionality
+- [x] Research/Design how to implement multiple grocery lists
 
 ## Future Possible Tasks
 
