@@ -49,3 +49,6 @@ Items are sorted based on the user's preference.
 ### Normal Flow
 1. User taps on the triple dot button on the top right corner and selects a sorting option.
 2. System sorts all the items based on the selected option and displays it.
+
+## Class Diagram
+![class](https://user-images.githubusercontent.com/25112506/72025559-6fb3c600-3270-11ea-8844-0c2799f41104.png)
