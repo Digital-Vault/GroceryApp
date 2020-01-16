@@ -54,6 +54,7 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [ ] Provide notification to users when items in the fridge_list is expiring in a week
 - [ ] Sort by expiry dates
 - [ ] Add removal functionality for both grocery_list and fridge_list
+- [ ] Add tooltips to the app
 
 ## Iteration 2 Tasks
 
