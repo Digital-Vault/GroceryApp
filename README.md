@@ -45,6 +45,41 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [x] Add item sorting functionality
 - [x] Research/Design how to implement multiple grocery lists
 
+# BTS630
+
+## Iteration 1 Tasks
+
+- [x] Allow items to move back from the fridge list to the grocery list still pending
+- [x] Create the main screen
+- [x] Create a list of dummy (placeholder) items
+- [x] Add continuous integration
+
+## Iteration 2 Tasks
+
+- [x] Remove item
+- [x] Add item
+- [x] Edit item
+
+## Iteration 3 Tasks
+
+- [x] Create "My Fridge" list
+- [x] Integrate firebase authentication
+- [x] Create a login page
+- [x] Refactor code
+- [x] Firestore database setup
+- [x] Create new database item
+- [x] Remove from database
+- [x] Add to database
+- [x] Edit database item
+- [x] Redesign add item form
+
+## Iteration 4 Tasks
+
+- [x] Add item search functionality
+- [x] Send notification to users
+- [x] Add item sorting functionality
+- [x] Research/Design how to implement multiple grocery lists
+
 ## Future Possible Tasks
 
 - [ ] Compliant with landscape orientation
