@@ -38,6 +38,7 @@ class ReceivedNotification {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final FirebaseApp app = await FirebaseApp.configure(
     name: 'app',
     options: const FirebaseOptions(
