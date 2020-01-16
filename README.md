@@ -45,27 +45,60 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [x] Add item sorting functionality
 - [x] Research/Design how to implement multiple grocery lists
 
-## Future Possible Tasks
+# BTS630
 
-- [ ] Compliant with landscape orientation
+## Iteration 1 Tasks
+
+- [ ] Allow items to move back from the fridge list to the grocery list still pending
+- [ ] Add expiry dates to grocery_items
+- [ ] Provide notification to users when items in the fridge_list is expiring in a week
+- [ ] Sort by expiry dates
+- [ ] Add removal functionality for both grocery_list and fridge_list
+- [ ] Add tooltips to the app
+- [ ] Refactor login page, change UI and add a loading bar
+
+## Iteration 2 Tasks
+
 - [ ] Create multiple "Grocery" list
-- [ ] Add "coloured visual cues" to grocery item
-- [ ] Add "move grocery item(s)" capabaility
-- [ ] Add "grocery store" as a member of grocery item
 - [ ] Add expand/collapse list functionality
-- [ ] Synchronize multiple lists between different users
+- [ ] Create categories for grocery_items
+- [ ] Sort by categories
+
+## Iteration 3 Tasks
+
+
+
+## Iteration 4 Tasks
+
 
 ## Full Task List:
- - Create a grocery item (class structure)
- - Create the main screen
- - Create a list of dummy (placeholder) items
- - Create a login page
- - Integrate firebase authentication
- - Remove item
- - Add item
- - Edit item
- - Add item category
- - Add item search
- - Add item sort (based on category, etc)
- - Send notification
- - Add continuous integration
+- Create a grocery item (class structure)
+- Create the main screen
+- Create a list of dummy (placeholder) items
+- Add continuous integration
+- Remove item
+- Add item
+- Edit item
+- Create "My Fridge" list
+- Integrate firebase authentication
+- Create a login page
+- Refactor code
+- Firestore database setup
+- Create new database item
+- Remove from database
+- Add to database
+- Edit database item
+- Redesign add item form
+- Add item search functionality
+- Send notification to users
+- Add item sorting functionality
+- Research/Design how to implement multiple grocery lists
+- Allow items to move back from the fridge list to the grocery list still pending
+- Add expiry dates to grocery_items
+- Provide notification to users when items in the fridge_list is expiring in a week
+- Sort by expiry dates
+- Add removal functionality for both grocery_list and fridge_list
+- Create multiple "Grocery" list
+- Add expand/collapse list functionality
+- Synchronize multiple lists between different users
+
