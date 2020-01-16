@@ -55,6 +55,7 @@ We plan to deliver a prototype system that allows customers to add, edit and rem
 - [ ] Sort by expiry dates
 - [ ] Add removal functionality for both grocery_list and fridge_list
 - [ ] Add tooltips to the app
+- [ ] Refactor login page, change UI and add a loading bar
 
 ## Iteration 2 Tasks
 
