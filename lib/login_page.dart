@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'loading_screen.dart';
 import 'auth.dart';
 
 class loginPage extends StatefulWidget {
@@ -13,8 +14,10 @@ enum FormType { login, register }
 
 class _LoginPageState extends State<loginPage> {
   final formKey = GlobalKey<FormState>();
+  bool _loading = false;
   String _email;
   String _password;
+  String _error = "";
   FormType _formType = FormType.login;
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -40,7 +43,11 @@ class _LoginPageState extends State<loginPage> {
         }
         widget.onSignedIn();
       } catch (e) {
-        print('Login Error: $e');
+        //print('Login Error: $e');
+        setState(() {
+          _error = e.message;
+          _loading = false;
+        });
       }
     }
   }
@@ -61,28 +68,38 @@ class _LoginPageState extends State<loginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: (SizedBox(
-        width: 500.0,
-        height: 800.0,
-        child: Scaffold(
-            resizeToAvoidBottomPadding: false,
-            body: Builder(
-              builder: (context) => Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: buildInputs() + buildSubmitButtons(context),
-                      ))),
+    return _loading
+        ? Loading()
+        : SingleChildScrollView(
+            child: (SizedBox(
+              width: 500.0,
+              height: 800.0,
+              child: Scaffold(
+                  resizeToAvoidBottomPadding: false,
+                  body: Center(
+                    child: Builder(
+                      builder: (context) => Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/login_screen.png'),
+                                  fit: BoxFit.fill)),
+                          padding: EdgeInsets.all(16.0),
+                          child: Form(
+                              key: formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children:
+                                    buildInputs() + buildSubmitButtons(context),
+                              ))),
+                    ),
+                  )),
             )),
-      )),
-    );
+          );
   }
 
   List<Widget> buildInputs() {
     return [
+      SizedBox(height: 100),
       _buildIcon(context),
       _buildText(),
       SizedBox(height: 15),
@@ -106,17 +123,27 @@ class _LoginPageState extends State<loginPage> {
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value,
       ),
+      SizedBox(
+        height: 22.0,
+      ),
+      Text(
+        _error,
+        style: TextStyle(color: Colors.red, fontSize: 14.0),
+      )
     ];
   }
 
   List<Widget> buildSubmitButtons(BuildContext context) {
     if (_formType == FormType.login) {
       return [
-        SizedBox(height: 50),
+        SizedBox(height: 10),
         RaisedButton(
-            child: Text('Login'),
+            color: Colors.blue,
+            textColor: Colors.white,
+            child: Text('Login', style: TextStyle(fontSize: 16.0),),
             onPressed: () {
               validateAndSubmit(context);
+
               Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
@@ -127,9 +154,11 @@ class _LoginPageState extends State<loginPage> {
       ];
     } else {
       return [
-        SizedBox(height: 50),
+        SizedBox(height: 10),
         RaisedButton(
-            child: Text('Create an account'),
+            color: Colors.blue,
+            textColor: Colors.white,
+            child: Text('Create an account', style: TextStyle(fontSize: 16.0),),
             onPressed: () {
               validateAndSubmit(context);
             }),
@@ -146,18 +175,21 @@ class _LoginPageState extends State<loginPage> {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: Icon(
-        Icons.restaurant,
+        Icons.local_grocery_store,
         size: size,
+        color: Colors.blue,
       ),
     );
   }
+
+
 
   Widget _buildText() => const Padding(
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Grocery App',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
         ),
       );
 }
