@@ -223,11 +223,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.4+3"
+<<<<<<< HEAD
   flutter_localizations:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+=======
+>>>>>>> new login page ui
   flutter_spinkit:
     dependency: "direct main"
     description:
