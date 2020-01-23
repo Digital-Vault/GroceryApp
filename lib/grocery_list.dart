@@ -45,8 +45,14 @@ class _GroceryList extends State<GroceryList> {
   //determine text color based on how far away expiry date is
   TextStyle getExpiryIndicatorColor(DateTime expiryDate) {
     TextStyle expiryColour;
+    if (expiryDate == null) {
+      expiryColour = TextStyle(color: Colors.black);
+      return expiryColour;
+    }
+
     DateTime today = DateTime.now();
     int daysTillExpiry = expiryDate.difference(today).inDays;
+
     if (daysTillExpiry < 0) {
       expiryColour = TextStyle(color: Colors.brown[700]);
     }
@@ -179,7 +185,10 @@ class _GroceryList extends State<GroceryList> {
         );
       },
       child: ListTile(
-        title: Text(groceryItem.name, style: getExpiryIndicatorColor(groceryItem.expiryDate),),
+        title: Text(
+          groceryItem.name,
+          style: getExpiryIndicatorColor(groceryItem.expiryDate),
+        ),
         trailing: Text('${groceryItem.quantity}x'),
         onTap: () {
           Navigator.push(
