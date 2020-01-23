@@ -7,6 +7,7 @@ import 'package:grocery_app/notification_util.dart';
 import 'search.dart';
 import 'auth.dart';
 import 'detailed_page.dart';
+import 'package:intl/intl.dart';
 
 enum MenuItems { alphabetically, expiryDate, logout }
 
@@ -31,6 +32,7 @@ class _GroceryList extends State<GroceryList> {
   final VoidCallback onSignedOut;
   String _order = 'name';
   var _documents = <DocumentSnapshot>[];
+
   Future<void> _signOut(BuildContext context) async {
     try {
       await auth.signOut();
@@ -38,6 +40,29 @@ class _GroceryList extends State<GroceryList> {
     } catch (e) {
       print(e);
     }
+  }
+
+  //determine text color based on how far away expiry date is
+  TextStyle getExpiryIndicatorColor(DateTime expiryDate) {
+    TextStyle expiryColour;
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+    if (daysTillExpiry < 0) {
+      expiryColour = TextStyle(color: Colors.brown[700]);
+    }
+    if (daysTillExpiry == 0) {
+      expiryColour = TextStyle(color: Colors.red);
+    }
+    if (daysTillExpiry >= 1) {
+      expiryColour = TextStyle(color: Colors.deepOrange);
+    }
+    if (daysTillExpiry >= 5) {
+      expiryColour = TextStyle(color: Colors.orange[600]);
+    }
+    if (daysTillExpiry >= 10) {
+      expiryColour = TextStyle(color: Colors.green);
+    }
+    return expiryColour;
   }
 
   @override
@@ -154,7 +179,7 @@ class _GroceryList extends State<GroceryList> {
         );
       },
       child: ListTile(
-        title: Text(groceryItem.name),
+        title: Text(groceryItem.name, style: getExpiryIndicatorColor(groceryItem.expiryDate),),
         trailing: Text('${groceryItem.quantity}x'),
         onTap: () {
           Navigator.push(

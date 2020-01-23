@@ -140,10 +140,15 @@ class _LoginPageState extends State<loginPage> {
         RaisedButton(
             color: Colors.blue,
             textColor: Colors.white,
-            child: Text('Login', style: TextStyle(fontSize: 16.0),),
+            child: Text(
+              'Login',
+              style: TextStyle(fontSize: 16.0),
+            ),
             onPressed: () {
               validateAndSubmit(context);
-
+              setState(() {
+                _loading = true;
+              });
               Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
@@ -158,7 +163,10 @@ class _LoginPageState extends State<loginPage> {
         RaisedButton(
             color: Colors.blue,
             textColor: Colors.white,
-            child: Text('Create an account', style: TextStyle(fontSize: 16.0),),
+            child: Text(
+              'Create an account',
+              style: TextStyle(fontSize: 16.0),
+            ),
             onPressed: () {
               validateAndSubmit(context);
             }),
@@ -182,14 +190,13 @@ class _LoginPageState extends State<loginPage> {
     );
   }
 
-
-
   Widget _buildText() => const Padding(
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Grocery App',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
         ),
       );
 }
