@@ -13,18 +13,25 @@ class loginPage extends StatefulWidget {
 enum FormType { login, register }
 
 class _LoginPageState extends State<loginPage> {
+  //form key
   final formKey = GlobalKey<FormState>();
-  bool _loading = false;
-  String _email;
-  String _password;
-  String _error = "";
   FormType _formType = FormType.login;
+
+  //members
+  bool _loading = false;
+  String _email = "";
+  String _password = "";
+  String _error = "";
+
   bool validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
       return true;
     } else {
+      setState(() {
+        _loading = false;
+      });
       return false;
     }
   }
@@ -32,6 +39,9 @@ class _LoginPageState extends State<loginPage> {
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
       try {
+        setState(() {
+          _loading = true;
+        });
         if (_formType == FormType.login) {
           String userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
@@ -82,7 +92,7 @@ class _LoginPageState extends State<loginPage> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/login_screen.png'),
-                                  fit: BoxFit.fill)),
+                                  fit: BoxFit.cover)),
                           padding: EdgeInsets.all(16.0),
                           child: Form(
                               key: formKey,
@@ -105,6 +115,7 @@ class _LoginPageState extends State<loginPage> {
       SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Email'),
+        initialValue: _email,
         validator: (value) {
           if (value.isEmpty) {
             return ('Email can\'t be empty');
@@ -119,6 +130,7 @@ class _LoginPageState extends State<loginPage> {
       SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Password'),
+        initialValue: _password,
         obscureText: true,
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value,
@@ -129,7 +141,10 @@ class _LoginPageState extends State<loginPage> {
       Text(
         _error,
         style: TextStyle(color: Colors.red, fontSize: 14.0),
-      )
+      ),
+       Padding(
+             padding: EdgeInsets.only(
+             bottom: MediaQuery.of(context).viewInsets.bottom))
     ];
   }
 
@@ -146,16 +161,13 @@ class _LoginPageState extends State<loginPage> {
             ),
             onPressed: () {
               validateAndSubmit(context);
-              setState(() {
-                _loading = true;
-              });
-              Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text('Processing'), duration: Duration(seconds: 1)));
+              //Scaffold.of(context).showSnackBar(SnackBar(
+                  //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
           child: Text(' Create an account'),
           onPressed: moveToRegister,
-        )
+        ),
       ];
     } else {
       return [
@@ -173,7 +185,7 @@ class _LoginPageState extends State<loginPage> {
         FlatButton(
           child: Text('Have an account? Login'),
           onPressed: moveToLogin,
-        )
+        ),
       ];
     }
   }
