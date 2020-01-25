@@ -1,0 +1,123 @@
+{
+  "@@locale" : "en",
+  "addItemExistingTile" : "Edit",
+  "@addItemExistingTile" : {
+    "type" : "text",
+    "description" : "Tile of updating existing grocery item"
+  },
+  "addItemNameEmpty" : "Name must be entered",
+  "@addItemNameEmpty" : {
+    "type" : "text",
+    "description" : "Name field empty error"
+  },
+  "addItemNameHint" : "Milk",
+  "@addItemNameHint" : {
+    "type" : "text",
+    "description" : "Name field hint"
+  },
+  "addItemNameLabel" : "Name",
+  "@addItemNameLabel" : {
+    "type" : "text",
+    "description" : "Name field label"
+  },
+  "addItemNewTile" : "Add New Item",
+  "@addItemNewTile" : {
+    "type" : "text",
+    "description" : "Tile of adding new grocery item"
+  },
+  "addItemQuantityEmpty" : "Quantity cannot be empty",
+  "@addItemQuantityEmpty" : {
+    "type" : "text",
+    "description" : "Quantity field empty error"
+  },
+  "addItemQuantityHint" : "5",
+  "@addItemQuantityHint" : {
+    "type" : "text",
+    "description" : "Quantity field hint"
+  },
+  "addItemQuantityLabel" : "Quantity",
+  "@addItemQuantityLabel" : {
+    "type" : "text",
+    "description" : "Quantity field label"
+  },
+  "addItemQuantityZero" : "Quantity has to be more than 0",
+  "@addItemQuantityZero" : {
+    "type" : "text",
+    "description" : "Quantity field zero error"
+  },
+  "addItemSave" : "Save",
+  "@addItemSave" : {
+    "type" : "text",
+    "description" : "Save button in add new item"
+  },
+  "appItemSearch" : "Search",
+  "@appItemSearch" : {
+    "type" : "text",
+    "description" : "Search label when searching in home or fridge"
+  },
+  "fridgeTitle" : "My Fridge",
+  "@fridgeTitle" : {
+    "type" : "text",
+    "description" : "Tile of my fridge page"
+  },
+  "homeTitle" : "Home",
+  "@homeTitle" : {
+    "type" : "text",
+    "description" : "Home button in the bottom navigation"
+  },
+  "loginButtonLabel" : "Login",
+  "@loginButtonLabel" : {
+    "type" : "text",
+    "description" : "Login button in login page"
+  },
+  "loginCreateAccount" : "Create an Account",
+  "@loginCreateAccount" : {
+    "type" : "text",
+    "description" : "Create an account button in login page"
+  },
+  "loginEmailLabel" : "Email",
+  "@loginEmailLabel" : {
+    "type" : "text",
+    "description" : "Email field in login page"
+  },
+  "loginPasswordEmpty" : "Password can't be empty",
+  "@loginPasswordEmpty" : {
+    "type" : "text",
+    "description" : "Empty password error"
+  },
+  "loginPasswordLabel" : "Password",
+  "@loginPasswordLabel" : {
+    "type" : "text",
+    "description" : "Password field in login page"
+  },
+  "logout" : "Logout",
+  "@logout" : {
+    "type" : "text",
+    "description" : "Logout button in menu selection"
+  },
+  "navbarFridge" : "My Fridge",
+  "@navbarFridge" : {
+    "type" : "text",
+    "description" : "My Fridge button in the bottom navigation"
+  },
+  "navbarHome" : "Grocery List",
+  "@navbarHome" : {
+    "type" : "text",
+    "description" : "Title of the home page"
+  },
+  "sortAlphabetically" : "Sort Alphabetically",
+  "@sortAlphabetically" : {
+    "type" : "text",
+    "description" : "Sort Alphabetically button in menu selection"
+  },
+  "sortExpiry" : "Sort by Expiry Date",
+  "@sortExpiry" : {
+    "type" : "text",
+    "description" : "Sort by Expiry Date button in menu selection"
+  },
+  "title" : "Grocery App",
+  "@title" : {
+    "type" : "text",
+    "description" : "Title for the application"
+  }
+}
