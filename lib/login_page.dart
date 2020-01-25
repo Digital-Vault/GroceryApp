@@ -81,10 +81,12 @@ class _LoginPageState extends State<loginPage> {
     return _loading
         ? Loading()
         : SingleChildScrollView(
+            reverse: true,
             child: (SizedBox(
               width: 500.0,
               height: 800.0,
               child: Scaffold(
+                  resizeToAvoidBottomInset: false,
                   resizeToAvoidBottomPadding: false,
                   body: Center(
                     child: Builder(
@@ -141,10 +143,7 @@ class _LoginPageState extends State<loginPage> {
       Text(
         _error,
         style: TextStyle(color: Colors.red, fontSize: 14.0),
-      ),
-       Padding(
-             padding: EdgeInsets.only(
-             bottom: MediaQuery.of(context).viewInsets.bottom))
+      )
     ];
   }
 
@@ -162,7 +161,7 @@ class _LoginPageState extends State<loginPage> {
             onPressed: () {
               validateAndSubmit(context);
               //Scaffold.of(context).showSnackBar(SnackBar(
-                  //content: Text('Processing'), duration: Duration(seconds: 1)));
+              //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
           child: Text(' Create an account'),

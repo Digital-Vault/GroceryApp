@@ -43,7 +43,8 @@ class _GroceryList extends State<GroceryList> {
   }
 
   //determine text color based on how far away expiry date is
-  TextStyle getExpiryIndicatorColor(DateTime expiryDate) {
+  /*
+  TextStyle getExpiryIndicatorColor2(DateTime expiryDate) {
     TextStyle expiryColour;
     if (expiryDate == null) {
       expiryColour = TextStyle(color: Colors.black);
@@ -69,6 +70,46 @@ class _GroceryList extends State<GroceryList> {
       expiryColour = TextStyle(color: Colors.green);
     }
     return expiryColour;
+  }
+  */
+
+  //determine text color based on how far away expiry date is
+  Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
+    Text expiryInfo;
+    if (expiryDate == null) {
+      expiryInfo = Text("● Expiry date was not entered for this item.");
+      return expiryInfo;
+    }
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+    String expirySentence = "● $itemName expires in $daysTillExpiry days. (${expiryDate.day}-${expiryDate.month}-${expiryDate.year})";
+
+    if (daysTillExpiry < 0) {
+      expiryInfo = Text(
+          "● $itemName has expired!",
+          style: TextStyle(color: Colors.brown[700]));
+    }
+    if (daysTillExpiry == 0) {
+      expiryInfo = Text(
+          expirySentence,
+          style: TextStyle(color: Colors.red));
+    }
+    if (daysTillExpiry >= 1) {
+      expiryInfo = Text(
+          expirySentence,
+          style: TextStyle(color: Colors.deepOrange));
+    }
+    if (daysTillExpiry >= 5) {
+      expiryInfo = Text(
+          expirySentence,
+          style: TextStyle(color: Colors.orange));
+    }
+    if (daysTillExpiry >= 10) {
+      expiryInfo = Text(
+          expirySentence,
+          style: TextStyle(color: Colors.green));
+    }
+    return expiryInfo;
   }
 
   @override
@@ -170,7 +211,7 @@ class _GroceryList extends State<GroceryList> {
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
     final firestore = FirestoreProvider.of(context);
-
+    print(groceryItem.expiryDate);
     return Dismissible(
       key: Key(document.documentID),
       background: _dismissibleBackground(),
@@ -187,9 +228,11 @@ class _GroceryList extends State<GroceryList> {
       child: ListTile(
         title: Text(
           groceryItem.name,
-          style: getExpiryIndicatorColor(groceryItem.expiryDate),
+          //style: getExpiryIndicatorColor2(groceryItem.expiryDate),
         ),
         trailing: Text('${groceryItem.quantity}x'),
+        subtitle:
+            getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
         onTap: () {
           Navigator.push(
             context,
