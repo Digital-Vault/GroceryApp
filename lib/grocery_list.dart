@@ -7,7 +7,6 @@ import 'package:grocery_app/notification_util.dart';
 import 'search.dart';
 import 'auth.dart';
 import 'detailed_page.dart';
-import 'package:intl/intl.dart';
 
 enum MenuItems { alphabetically, expiryDate, logout }
 
