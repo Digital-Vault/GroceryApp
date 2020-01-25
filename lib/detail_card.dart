@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:grocery_app/dateFormat.dart';
 import 'package:grocery_app/grocery_item.dart';
 
 class DetailCard extends StatelessWidget {
@@ -17,7 +19,11 @@ class DetailCard extends StatelessWidget {
           children: <Widget>[
             _buildName(),
             _buildQuantity(),
+<<<<<<< HEAD
             _buildExpiryInfo()
+=======
+            _buildExpryDate(context)
+>>>>>>> Added expiry date to the grocery detail page.
           ],
         ),
       ),
@@ -51,6 +57,7 @@ class DetailCard extends StatelessWidget {
     );
   }
 
+<<<<<<< HEAD
   Widget _buildExpiryInfo() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -91,4 +98,48 @@ class DetailCard extends StatelessWidget {
     }
     return expiryInfo;
   }
+=======
+  Widget _buildExpryDate(context) {
+    var formattedExpDate = dateFormatYMMDToString(item.expiryDate);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(children: <Widget>[
+        Text(
+          'Expiry Date: ',
+          style: TextStyle(
+            fontSize: 24,
+            letterSpacing: 0,
+          ),
+        ),
+        RaisedButton(
+          child: Text(
+            formattedExpDate,
+            style: TextStyle(
+              fontSize: 24,
+              letterSpacing: 0,
+            ),
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 4.0,
+          color: Colors.blue[200],
+          onPressed: () {
+            DatePicker.showDatePicker(context,
+                theme: DatePickerTheme(
+                  containerHeight: 210.0,
+                ),
+                showTitleActions: true,
+                minTime: DateTime(2000, 1, 1),
+                maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+              print('confirm $date');
+              // _date = '${date.year} - ${date.month} - ${date.day}';
+              // setState(() {});
+            }, currentTime: DateTime.now(), locale: LocaleType.en);
+          },
+        )
+      ]),
+    );
+  }
+>>>>>>> Added expiry date to the grocery detail page.
 }
