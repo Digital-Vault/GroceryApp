@@ -41,76 +41,6 @@ class _GroceryList extends State<GroceryList> {
     }
   }
 
-  //determine text color based on how far away expiry date is
-  /*
-  TextStyle getExpiryIndicatorColor2(DateTime expiryDate) {
-    TextStyle expiryColour;
-    if (expiryDate == null) {
-      expiryColour = TextStyle(color: Colors.black);
-      return expiryColour;
-    }
-
-    DateTime today = DateTime.now();
-    int daysTillExpiry = expiryDate.difference(today).inDays;
-
-    if (daysTillExpiry < 0) {
-      expiryColour = TextStyle(color: Colors.brown[700]);
-    }
-    if (daysTillExpiry == 0) {
-      expiryColour = TextStyle(color: Colors.red);
-    }
-    if (daysTillExpiry >= 1) {
-      expiryColour = TextStyle(color: Colors.deepOrange);
-    }
-    if (daysTillExpiry >= 5) {
-      expiryColour = TextStyle(color: Colors.orange[600]);
-    }
-    if (daysTillExpiry >= 10) {
-      expiryColour = TextStyle(color: Colors.green);
-    }
-    return expiryColour;
-  }
-  */
-
-  //determine text color based on how far away expiry date is
-  Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
-    Text expiryInfo;
-    if (expiryDate == null) {
-      expiryInfo = Text("● Expiry date was not entered for $itemName.");
-      return expiryInfo;
-    }
-    DateTime today = DateTime.now();
-    int daysTillExpiry = expiryDate.difference(today).inDays;
-    String expirySentence = "● $itemName expires in $daysTillExpiry days. (${expiryDate.day}-${expiryDate.month}-${expiryDate.year})";
-
-    if (daysTillExpiry < 0) {
-      expiryInfo = Text(
-          "● $itemName has expired!",
-          style: TextStyle(color: Colors.brown[700]));
-    }
-    if (daysTillExpiry == 0) {
-      expiryInfo = Text(
-          expirySentence,
-          style: TextStyle(color: Colors.red));
-    }
-    if (daysTillExpiry >= 1) {
-      expiryInfo = Text(
-          expirySentence,
-          style: TextStyle(color: Colors.deepOrange));
-    }
-    if (daysTillExpiry >= 5) {
-      expiryInfo = Text(
-          expirySentence,
-          style: TextStyle(color: Colors.orange));
-    }
-    if (daysTillExpiry >= 10) {
-      expiryInfo = Text(
-          expirySentence,
-          style: TextStyle(color: Colors.green));
-    }
-    return expiryInfo;
-  }
-
   @override
   Widget build(BuildContext context) {
     getData(context, 'user1_list').then((list) {
@@ -230,8 +160,6 @@ class _GroceryList extends State<GroceryList> {
           //style: getExpiryIndicatorColor2(groceryItem.expiryDate),
         ),
         trailing: Text('${groceryItem.quantity}x'),
-        subtitle:
-            getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
         onTap: () {
           Navigator.push(
             context,
