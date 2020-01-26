@@ -20,7 +20,7 @@ class DetailedPage extends StatelessWidget {
       BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
     if (snapshot.hasError) {
       return Center(
-        child: Text('Failed to retrieve item details1'),
+        child: Text('Failed to retrieve item details!'),
       );
     }
     if (snapshot.hasData && snapshot.data.data != null) {

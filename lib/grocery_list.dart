@@ -76,7 +76,7 @@ class _GroceryList extends State<GroceryList> {
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;
     if (expiryDate == null) {
-      expiryInfo = Text("● Expiry date was not entered for this item.");
+      expiryInfo = Text("● Expiry date was not entered for $itemName.");
       return expiryInfo;
     }
     DateTime today = DateTime.now();
