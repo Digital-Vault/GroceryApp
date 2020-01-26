@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:grocery_app/custom_localization.dart';
-=======
 import 'package:grocery_app/date_util.dart';
->>>>>>> Added clearing icon and functionality to textFormFields.
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
+import 'package:intl/intl.dart';
 
 class SubmissionForm extends StatefulWidget {
   SubmissionForm({this.document});
@@ -97,14 +96,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
   Widget _itemNameInput() {
     return TextFormField(
       decoration: InputDecoration(
-<<<<<<< HEAD
         hintText: CustomLocalizations.of(context).addItemNameHint,
         labelText: CustomLocalizations.of(context).addItemNameLabel,
-=======
-        hintText: 'Milk',
-        labelText: 'Name',
         suffixIcon: _nameClearIcon,
->>>>>>> Added clearing icon and functionality to textFormFields.
       ),
       controller: _nameTextFieldController,
       validator: _nameValid,
@@ -130,29 +124,16 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
-<<<<<<< HEAD
   Widget _itemQuantityInput() => TextFormField(
         decoration: InputDecoration(
           hintText: CustomLocalizations.of(context).addItemQuantityHint,
           labelText: CustomLocalizations.of(context).addItemQuantityLabel,
+          suffixIcon: _qtyClearIcon,
         ),
-        initialValue: _itemInitialValue(),
+        controller: _qtyTextFieldController,
         validator: _quantityValid,
         onSaved: _onQuantitySaved,
       );
-=======
-  Widget _itemQuantityInput() {
-    return TextFormField(
-      validator: _quantityValid,
-      onSaved: _onQuantitySaved,
-      controller: _qtyTextFieldController,
-      decoration: InputDecoration(
-        hintText: '5',
-        labelText: 'Quantity',
-        suffixIcon: _qtyClearIcon,
-      ),
-    );
-  }
 
   void showQtyIconButton() {
     void _onClear() {
@@ -190,8 +171,24 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-  Widget _expiryDate() => BasicDateField();
->>>>>>> Added clearing icon and functionality to textFormFields.
+  // Widget _expiryDate() => BasicDateField();
+  Widget _expiryDate() {
+    DateTime picked;
+    return DateTimeField(
+      decoration: const InputDecoration(
+        labelText: 'Expiry Date',
+      ),
+      format: DateFormat.yMMMd(),
+      onShowPicker: (context, currentValue) async {
+        return showDatePicker(
+            context: context,
+            firstDate: DateTime(1900),
+            initialDate: currentValue ?? DateTime.now(),
+            lastDate: DateTime(2100));
+      },
+      onSaved: (val) => {_onExpirySaved(val)},
+    );
+  }
 
   String _itemInitialValue() {
     if (_item.quantity == null) {
@@ -213,6 +210,10 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   void _onQuantitySaved(String inputValue) {
     _item.quantity = int.parse(inputValue);
+  }
+
+  void _onExpirySaved(DateTime inputValue) {
+    _item.expiryDate = inputValue;
   }
 
   Padding _quantityPadding() {

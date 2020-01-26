@@ -19,11 +19,8 @@ class DetailCard extends StatelessWidget {
           children: <Widget>[
             _buildName(),
             _buildQuantity(),
-<<<<<<< HEAD
             _buildExpiryInfo()
-=======
             _buildExpryDate(context)
->>>>>>> Added expiry date to the grocery detail page.
           ],
         ),
       ),
@@ -57,7 +54,6 @@ class DetailCard extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
   Widget _buildExpiryInfo() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -98,7 +94,6 @@ class DetailCard extends StatelessWidget {
     }
     return expiryInfo;
   }
-=======
   Widget _buildExpryDate(context) {
     var formattedExpDate = dateFormatYMMDToString(item.expiryDate);
 
@@ -141,5 +136,4 @@ class DetailCard extends StatelessWidget {
       ]),
     );
   }
->>>>>>> Added expiry date to the grocery detail page.
 }

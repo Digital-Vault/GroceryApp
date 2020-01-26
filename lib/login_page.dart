@@ -15,13 +15,6 @@ enum FormType { login, register }
 class _LoginPageState extends State<loginPage> {
   //form key
   final formKey = GlobalKey<FormState>();
-<<<<<<< HEAD
-=======
-  bool _loading = false;
-  String _email;
-  String _password;
-  String _error = "";
->>>>>>> new login page ui
   FormType _formType = FormType.login;
 
   //members
@@ -88,18 +81,12 @@ class _LoginPageState extends State<loginPage> {
     return _loading
         ? Loading()
         : SingleChildScrollView(
-<<<<<<< HEAD
             reverse: true,
-=======
->>>>>>> new login page ui
             child: (SizedBox(
               width: 500.0,
               height: 800.0,
               child: Scaffold(
-<<<<<<< HEAD
                   resizeToAvoidBottomInset: false,
-=======
->>>>>>> new login page ui
                   resizeToAvoidBottomPadding: false,
                   body: Center(
                     child: Builder(
@@ -107,11 +94,7 @@ class _LoginPageState extends State<loginPage> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/login_screen.png'),
-<<<<<<< HEAD
                                   fit: BoxFit.cover)),
-=======
-                                  fit: BoxFit.fill)),
->>>>>>> new login page ui
                           padding: EdgeInsets.all(16.0),
                           child: Form(
                               key: formKey,
@@ -171,7 +154,6 @@ class _LoginPageState extends State<loginPage> {
         RaisedButton(
             color: Colors.blue,
             textColor: Colors.white,
-<<<<<<< HEAD
             child: Text(
               'Login',
               style: TextStyle(fontSize: 16.0),
@@ -180,14 +162,6 @@ class _LoginPageState extends State<loginPage> {
               validateAndSubmit(context);
               //Scaffold.of(context).showSnackBar(SnackBar(
               //content: Text('Processing'), duration: Duration(seconds: 1)));
-=======
-            child: Text('Login', style: TextStyle(fontSize: 16.0),),
-            onPressed: () {
-              validateAndSubmit(context);
-
-              Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text('Processing'), duration: Duration(seconds: 1)));
->>>>>>> new login page ui
             }),
         FlatButton(
           child: Text(' Create an account'),
@@ -200,14 +174,10 @@ class _LoginPageState extends State<loginPage> {
         RaisedButton(
             color: Colors.blue,
             textColor: Colors.white,
-<<<<<<< HEAD
             child: Text(
               'Create an account',
               style: TextStyle(fontSize: 16.0),
             ),
-=======
-            child: Text('Create an account', style: TextStyle(fontSize: 16.0),),
->>>>>>> new login page ui
             onPressed: () {
               validateAndSubmit(context);
             }),
@@ -231,19 +201,13 @@ class _LoginPageState extends State<loginPage> {
     );
   }
 
-
-
   Widget _buildText() => const Padding(
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Grocery App',
           textAlign: TextAlign.center,
-<<<<<<< HEAD
           style: TextStyle(
               fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
-=======
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
->>>>>>> new login page ui
         ),
       );
 }
