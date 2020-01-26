@@ -173,7 +173,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   // Widget _expiryDate() => BasicDateField();
   Widget _expiryDate() {
-    DateTime picked;
     return DateTimeField(
       decoration: const InputDecoration(
         labelText: 'Expiry Date',
@@ -188,14 +187,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
       },
       onSaved: (val) => {_onExpirySaved(val)},
     );
-  }
-
-  String _itemInitialValue() {
-    if (_item.quantity == null) {
-      return '';
-    } else {
-      return _item.quantity.toString();
-    }
   }
 
   String _quantityValid(String inputValue) {
@@ -260,3 +251,11 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 }
+
+// String _itemInitialValue() {
+//   if (_item.quantity == null) {
+//     return '';
+//   } else {
+//     return _item.quantity.toString();
+//   }
+// }
