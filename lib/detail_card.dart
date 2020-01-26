@@ -54,15 +54,15 @@ class DetailCard extends StatelessWidget {
   Widget _buildExpiryInfo() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
-      child:
-        getExpiryIndicatorColor(item.expiryDate, item.name),
+      child: getExpiryIndicatorColor(item.expiryDate, item.name),
     );
   }
 
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;
     if (expiryDate == null) {
-      expiryInfo = Text("Expiry date was not entered for $itemName.", style: TextStyle(color: Colors.black, fontSize: 20));
+      expiryInfo = Text("Expiry date was not entered for $itemName.",
+          style: TextStyle(color: Colors.black, fontSize: 20));
       return expiryInfo;
     }
     DateTime today = DateTime.now();
@@ -75,17 +75,20 @@ class DetailCard extends StatelessWidget {
           style: TextStyle(color: Colors.brown[700], fontSize: 20));
     }
     if (daysTillExpiry == 0) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red, fontSize: 20));
+      expiryInfo = Text(expirySentence,
+          style: TextStyle(color: Colors.red, fontSize: 20));
     }
     if (daysTillExpiry >= 1) {
-      expiryInfo =
-          Text(expirySentence, style: TextStyle(color: Colors.deepOrange, fontSize: 20));
+      expiryInfo = Text(expirySentence,
+          style: TextStyle(color: Colors.deepOrange, fontSize: 20));
     }
     if (daysTillExpiry >= 5) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.orange, fontSize: 20));
+      expiryInfo = Text(expirySentence,
+          style: TextStyle(color: Colors.orange, fontSize: 20));
     }
     if (daysTillExpiry >= 10) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.green, fontSize: 20));
+      expiryInfo = Text(expirySentence,
+          style: TextStyle(color: Colors.green, fontSize: 20));
     }
     return expiryInfo;
   }
