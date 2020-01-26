@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:grocery_app/custom_localization.dart';
+=======
+import 'package:grocery_app/date_util.dart';
+>>>>>>> Added clearing icon and functionality to textFormFields.
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 
@@ -17,10 +21,26 @@ class SubmissionForm extends StatefulWidget {
 class _SubmissionFormState extends State<SubmissionForm> {
   _SubmissionFormState({this.document});
 
+  TextEditingController _nameTextFieldController = TextEditingController();
+  TextEditingController _qtyTextFieldController = TextEditingController();
+  IconButton _nameClearIcon;
+  IconButton _qtyClearIcon;
   DocumentSnapshot document;
   GroceryItem _item;
   final _formKey = GlobalKey<FormState>();
   Firestore _firestore;
+
+  @override
+  void initState() {
+    _qtyTextFieldController.addListener(() {
+      showQtyIconButton();
+    });
+
+    _nameTextFieldController.addListener(() {
+      showNameIconButton();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +86,8 @@ class _SubmissionFormState extends State<SubmissionForm> {
             _itemNameInput(),
             _namePadding(),
             _itemQuantityInput(),
+            _namePadding(),
+            _expiryDate(),
             _quantityPadding(),
             _saveButton(),
           ],
@@ -75,10 +97,16 @@ class _SubmissionFormState extends State<SubmissionForm> {
   Widget _itemNameInput() {
     return TextFormField(
       decoration: InputDecoration(
+<<<<<<< HEAD
         hintText: CustomLocalizations.of(context).addItemNameHint,
         labelText: CustomLocalizations.of(context).addItemNameLabel,
+=======
+        hintText: 'Milk',
+        labelText: 'Name',
+        suffixIcon: _nameClearIcon,
+>>>>>>> Added clearing icon and functionality to textFormFields.
       ),
-      initialValue: _item.name,
+      controller: _nameTextFieldController,
       validator: _nameValid,
       onSaved: _onNameSaved,
     );
@@ -102,6 +130,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
+<<<<<<< HEAD
   Widget _itemQuantityInput() => TextFormField(
         decoration: InputDecoration(
           hintText: CustomLocalizations.of(context).addItemQuantityHint,
@@ -111,6 +140,58 @@ class _SubmissionFormState extends State<SubmissionForm> {
         validator: _quantityValid,
         onSaved: _onQuantitySaved,
       );
+=======
+  Widget _itemQuantityInput() {
+    return TextFormField(
+      validator: _quantityValid,
+      onSaved: _onQuantitySaved,
+      controller: _qtyTextFieldController,
+      decoration: InputDecoration(
+        hintText: '5',
+        labelText: 'Quantity',
+        suffixIcon: _qtyClearIcon,
+      ),
+    );
+  }
+
+  void showQtyIconButton() {
+    void _onClear() {
+      setState(() {
+        _qtyTextFieldController.text = "";
+        _qtyClearIcon = null;
+      });
+    }
+
+    if (_qtyTextFieldController.text != "") {
+      setState(() {
+        _qtyClearIcon = IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () => _onClear(),
+        );
+      });
+    }
+  }
+
+  void showNameIconButton() {
+    void _onClear() {
+      setState(() {
+        _nameTextFieldController.text = "";
+        _nameClearIcon = null;
+      });
+    }
+
+    if (_nameTextFieldController.text != "") {
+      setState(() {
+        _nameClearIcon = IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () => _onClear(),
+        );
+      });
+    }
+  }
+
+  Widget _expiryDate() => BasicDateField();
+>>>>>>> Added clearing icon and functionality to textFormFields.
 
   String _itemInitialValue() {
     if (_item.quantity == null) {
