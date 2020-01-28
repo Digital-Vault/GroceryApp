@@ -22,8 +22,10 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   TextEditingController _nameTextFieldController = TextEditingController();
   TextEditingController _qtyTextFieldController = TextEditingController();
+  TextEditingController _notifyTextFieldController = TextEditingController();
   IconButton _nameClearIcon;
   IconButton _qtyClearIcon;
+  IconButton _notifyClearIcon;
   DocumentSnapshot document;
   GroceryItem _item;
   final _formKey = GlobalKey<FormState>();
@@ -31,12 +33,16 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   @override
   void initState() {
+    _nameTextFieldController.addListener(() {
+      showNameIconButton();
+    });
+
     _qtyTextFieldController.addListener(() {
       showQtyIconButton();
     });
 
-    _nameTextFieldController.addListener(() {
-      showNameIconButton();
+    _notifyTextFieldController.addListener(() {
+      showNotifyIconButton();
     });
     super.initState();
   }
@@ -86,13 +92,18 @@ class _SubmissionFormState extends State<SubmissionForm> {
             _namePadding(),
             _itemQuantityInput(),
             _namePadding(),
-            _expiryDate(),
+            _expiryDateInput(),
+            _namePadding(),
+            _notifyDaysBeforeExpiry(),
             _quantityPadding(),
             _saveButton(),
           ],
         ),
       );
 
+/////////////////////////////////////////////////////////////
+  /// ******** Item Name Input Functionalities ******** ///
+/////////////////////////////////////////////////////////////
   Widget _itemNameInput() {
     return TextFormField(
       decoration: InputDecoration(
@@ -124,16 +135,60 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
-  Widget _itemQuantityInput() => TextFormField(
-        decoration: InputDecoration(
-          hintText: CustomLocalizations.of(context).addItemQuantityHint,
-          labelText: CustomLocalizations.of(context).addItemQuantityLabel,
-          suffixIcon: _qtyClearIcon,
-        ),
-        controller: _qtyTextFieldController,
-        validator: _quantityValid,
-        onSaved: _onQuantitySaved,
-      );
+  void showNameIconButton() {
+    void _onClear() {
+      setState(() {
+        _nameTextFieldController.text = "";
+        _nameClearIcon = null;
+      });
+    }
+
+    if (_nameTextFieldController.text != "") {
+      setState(() {
+        _nameClearIcon = IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () => _onClear(),
+        );
+      });
+    }
+  }
+
+/////////////////////////////////////////////////////////////
+  /// ****** Item Quantity Input Functionalities ******** ///
+/////////////////////////////////////////////////////////////
+
+  Widget _itemQuantityInput() {
+    return TextFormField(
+      validator: _quantityValid,
+      onSaved: _onQuantitySaved,
+      controller: _qtyTextFieldController,
+      decoration: InputDecoration(
+        hintText: CustomLocalizations.of(context).addItemQuantityHint,
+        labelText: CustomLocalizations.of(context).addItemQuantityLabel,
+        suffixIcon: _qtyClearIcon,
+      ),
+    );
+  }
+
+  void _onQuantitySaved(String inputValue) {
+    _item.quantity = int.parse(inputValue);
+  }
+
+  Padding _quantityPadding() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 64),
+    );
+  }
+
+  String _quantityValid(String inputValue) {
+    if (inputValue.isEmpty) {
+      return 'Quantity cannot be empty';
+    } else if ((int.parse(inputValue) <= 0)) {
+      return 'Quantity has to be more than 0';
+    } else {
+      return null;
+    }
+  }
 
   void showQtyIconButton() {
     void _onClear() {
@@ -153,26 +208,11 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-  void showNameIconButton() {
-    void _onClear() {
-      setState(() {
-        _nameTextFieldController.text = "";
-        _nameClearIcon = null;
-      });
-    }
+/////////////////////////////////////////////////////////////
+  /// ****** Item Expiry Input Functionalities ******** ///
+/////////////////////////////////////////////////////////////
 
-    if (_nameTextFieldController.text != "") {
-      setState(() {
-        _nameClearIcon = IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () => _onClear(),
-        );
-      });
-    }
-  }
-
-  // Widget _expiryDate() => BasicDateField();
-  Widget _expiryDate() {
+  Widget _expiryDateInput() {
     return DateTimeField(
       decoration: const InputDecoration(
         labelText: 'Expiry Date',
@@ -189,7 +229,28 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
-  String _quantityValid(String inputValue) {
+  void _onExpirySaved(DateTime inputValue) {
+    _item.expiryDate = inputValue;
+  }
+
+////////////////////////////////////////////////////////////////////
+  /// *** Notify Days Before Expiry Input Functionalities **** ///
+////////////////////////////////////////////////////////////////////
+
+  Widget _notifyDaysBeforeExpiry() {
+    return TextFormField(
+      validator: _notifyDaysBeforeExpiryValid,
+      onSaved: _onNotifySaved,
+      controller: _notifyTextFieldController,
+      decoration: InputDecoration(
+        hintText: '5',
+        labelText: 'Notify Days Before Expiry',
+        suffixIcon: _notifyClearIcon,
+      ),
+    );
+  }
+
+  String _notifyDaysBeforeExpiryValid(String inputValue) {
     if (inputValue.isEmpty) {
       return CustomLocalizations.of(context).addItemQuantityEmpty;
     } else if ((int.parse(inputValue) <= 0)) {
@@ -199,18 +260,26 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-  void _onQuantitySaved(String inputValue) {
-    _item.quantity = int.parse(inputValue);
+  void showNotifyIconButton() {
+    void _onClear() {
+      setState(() {
+        _notifyTextFieldController.text = "";
+        _notifyClearIcon = null;
+      });
+    }
+
+    if (_notifyTextFieldController.text != "") {
+      setState(() {
+        _notifyClearIcon = IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () => _onClear(),
+        );
+      });
+    }
   }
 
-  void _onExpirySaved(DateTime inputValue) {
-    _item.expiryDate = inputValue;
-  }
-
-  Padding _quantityPadding() {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 64),
-    );
+  void _onNotifySaved(String inputValue) {
+    _item.notifyDate = int.parse(inputValue);
   }
 
   Widget _saveButton() {
