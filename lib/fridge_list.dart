@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:grocery_app/notification_util.dart';
 import 'detailed_page.dart';
 import 'firestore_provider.dart';
 import 'grocery_item.dart';
@@ -60,27 +60,51 @@ class FridgeList extends StatelessWidget {
 
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
-
-    return ListTile(
-      title: Text(
-        groceryItem.name,
-        //style: getExpiryIndicatorColor(groceryItem.expiryDate),
-      ),
-      subtitle:
-          getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
-      trailing: Text("${groceryItem.quantity}x"),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                DetailedPage(documentReference: document.reference),
+    final firestore = FirestoreProvider.of(context);
+    return Dismissible(
+        key: Key(document.documentID),
+        background: _dismissibleBackground(),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          firestore.collection('user1_list').add(groceryItem.toJson());
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Moved ${groceryItem.name} to Grocery List!'),
+            ),
+          );
+        },
+        child: ListTile(
+          title: Text(
+            groceryItem.name,
+            //style: getExpiryIndicatorColor(groceryItem.expiryDate),
           ),
-        );
-      },
+          subtitle:
+          getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
+          trailing: Text("${groceryItem.quantity}x"),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    DetailedPage(documentReference: document.reference),
+              ),
+            );
+          },
+        )
     );
   }
 
+  Widget _dismissibleBackground() {
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.only(right: 20.0),
+      color: Colors.green,
+      child: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
+    );
+  }
   //determine text color based on how far away expiry date is
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;

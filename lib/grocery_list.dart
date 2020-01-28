@@ -144,7 +144,7 @@ class _GroceryList extends State<GroceryList> {
     return Dismissible(
       key: Key(document.documentID),
       background: _dismissibleBackground(),
-      direction: DismissDirection.endToStart,
+      direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
         scheduleExpiryNotification(5, groceryItem.expiryDate, groceryItem.name);
         firestore.collection('fridge_list').add(groceryItem.toJson());
