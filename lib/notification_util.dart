@@ -73,9 +73,9 @@ Future<void> scheduleNotification(int time) async {
 Future<void> scheduleExpiryNotification(
     int time, DateTime expiryDate, String itemName) async {
   final formatter = DateFormat('yyyy-MM-dd');
-  // final formattedExpiryDate = formatter.format(expiryDate);
-  final formattedExpiryDate =
-      formatter.format(DateTime.now().add(Duration(days: 3)));
+  final formattedExpiryDate = formatter.format(expiryDate);
+  // final formattedExpiryDate =
+  //     formatter.format(DateTime.now().add(Duration(days: 3)));
 
   var scheduledNotificationDateTime =
       DateTime.now().add(Duration(seconds: time));
