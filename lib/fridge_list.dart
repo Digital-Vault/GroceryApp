@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_app/notification_util.dart';
 import 'detailed_page.dart';
 import 'firestore_provider.dart';
 import 'grocery_item.dart';
