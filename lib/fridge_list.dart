@@ -62,7 +62,12 @@ class FridgeList extends StatelessWidget {
     final groceryItem = GroceryItem.fromJson(document.data);
 
     return ListTile(
-      title: Text(groceryItem.name),
+      title: Text(
+        groceryItem.name,
+        //style: getExpiryIndicatorColor(groceryItem.expiryDate),
+      ),
+      subtitle:
+          getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
       trailing: Text("${groceryItem.quantity}x"),
       onTap: () {
         Navigator.push(
@@ -74,5 +79,36 @@ class FridgeList extends StatelessWidget {
         );
       },
     );
+  }
+
+  //determine text color based on how far away expiry date is
+  Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
+    Text expiryInfo;
+    if (expiryDate == null) {
+      expiryInfo = Text("● Expiry date not entered for $itemName.");
+      return expiryInfo;
+    }
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+    String expirySentence = "● $itemName expires in $daysTillExpiry days.";
+
+    if (daysTillExpiry < 0) {
+      expiryInfo = Text("● $itemName has expired!",
+          style: TextStyle(color: Colors.brown[700]));
+    }
+    if (daysTillExpiry == 0) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red));
+    }
+    if (daysTillExpiry >= 1) {
+      expiryInfo =
+          Text(expirySentence, style: TextStyle(color: Colors.deepOrange));
+    }
+    if (daysTillExpiry >= 5) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.orange));
+    }
+    if (daysTillExpiry >= 10) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.green));
+    }
+    return expiryInfo;
   }
 }

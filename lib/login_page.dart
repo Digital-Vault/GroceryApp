@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'loading_screen.dart';
 import 'auth.dart';
 
 class loginPage extends StatefulWidget {
@@ -12,16 +13,25 @@ class loginPage extends StatefulWidget {
 enum FormType { login, register }
 
 class _LoginPageState extends State<loginPage> {
+  //form key
   final formKey = GlobalKey<FormState>();
-  String _email;
-  String _password;
   FormType _formType = FormType.login;
+
+  //members
+  bool _loading = false;
+  String _email = "";
+  String _password = "";
+  String _error = "";
+
   bool validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
       return true;
     } else {
+      setState(() {
+        _loading = false;
+      });
       return false;
     }
   }
@@ -29,6 +39,9 @@ class _LoginPageState extends State<loginPage> {
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
       try {
+        setState(() {
+          _loading = true;
+        });
         if (_formType == FormType.login) {
           String userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
@@ -40,7 +53,11 @@ class _LoginPageState extends State<loginPage> {
         }
         widget.onSignedIn();
       } catch (e) {
-        print('Login Error: $e');
+        //print('Login Error: $e');
+        setState(() {
+          _error = e.message;
+          _loading = false;
+        });
       }
     }
   }
@@ -61,33 +78,46 @@ class _LoginPageState extends State<loginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: (SizedBox(
-        width: 500.0,
-        height: 800.0,
-        child: Scaffold(
-            resizeToAvoidBottomPadding: false,
-            body: Builder(
-              builder: (context) => Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: buildInputs() + buildSubmitButtons(context),
-                      ))),
+    return _loading
+        ? Loading()
+        : SingleChildScrollView(
+            reverse: true,
+            child: (SizedBox(
+              width: 500.0,
+              height: 800.0,
+              child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  resizeToAvoidBottomPadding: false,
+                  body: Center(
+                    child: Builder(
+                      builder: (context) => Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/login_screen.png'),
+                                  fit: BoxFit.cover)),
+                          padding: EdgeInsets.all(16.0),
+                          child: Form(
+                              key: formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children:
+                                    buildInputs() + buildSubmitButtons(context),
+                              ))),
+                    ),
+                  )),
             )),
-      )),
-    );
+          );
   }
 
   List<Widget> buildInputs() {
     return [
+      SizedBox(height: 100),
       _buildIcon(context),
       _buildText(),
       SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Email'),
+        initialValue: _email,
         validator: (value) {
           if (value.isEmpty) {
             return ('Email can\'t be empty');
@@ -102,41 +132,59 @@ class _LoginPageState extends State<loginPage> {
       SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(labelText: 'Password'),
+        initialValue: _password,
         obscureText: true,
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value,
       ),
+      SizedBox(
+        height: 22.0,
+      ),
+      Text(
+        _error,
+        style: TextStyle(color: Colors.red, fontSize: 14.0),
+      )
     ];
   }
 
   List<Widget> buildSubmitButtons(BuildContext context) {
     if (_formType == FormType.login) {
       return [
-        SizedBox(height: 50),
+        SizedBox(height: 10),
         RaisedButton(
-            child: Text('Login'),
+            color: Colors.blue,
+            textColor: Colors.white,
+            child: Text(
+              'Login',
+              style: TextStyle(fontSize: 16.0),
+            ),
             onPressed: () {
               validateAndSubmit(context);
-              Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text('Processing'), duration: Duration(seconds: 1)));
+              //Scaffold.of(context).showSnackBar(SnackBar(
+              //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
           child: Text(' Create an account'),
           onPressed: moveToRegister,
-        )
+        ),
       ];
     } else {
       return [
-        SizedBox(height: 50),
+        SizedBox(height: 10),
         RaisedButton(
-            child: Text('Create an account'),
+            color: Colors.blue,
+            textColor: Colors.white,
+            child: Text(
+              'Create an account',
+              style: TextStyle(fontSize: 16.0),
+            ),
             onPressed: () {
               validateAndSubmit(context);
             }),
         FlatButton(
           child: Text('Have an account? Login'),
           onPressed: moveToLogin,
-        )
+        ),
       ];
     }
   }
@@ -146,8 +194,9 @@ class _LoginPageState extends State<loginPage> {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: Icon(
-        Icons.restaurant,
+        Icons.local_grocery_store,
         size: size,
+        color: Colors.blue,
       ),
     );
   }
@@ -157,7 +206,8 @@ class _LoginPageState extends State<loginPage> {
         child: Text(
           'Grocery App',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
         ),
       );
 }

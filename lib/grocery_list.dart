@@ -31,6 +31,7 @@ class _GroceryList extends State<GroceryList> {
   final VoidCallback onSignedOut;
   String _order = 'name';
   var _documents = <DocumentSnapshot>[];
+
   Future<void> _signOut(BuildContext context) async {
     try {
       await auth.signOut();
@@ -139,7 +140,7 @@ class _GroceryList extends State<GroceryList> {
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
     final firestore = FirestoreProvider.of(context);
-
+    print(groceryItem.expiryDate);
     return Dismissible(
       key: Key(document.documentID),
       background: _dismissibleBackground(),
@@ -154,7 +155,10 @@ class _GroceryList extends State<GroceryList> {
         );
       },
       child: ListTile(
-        title: Text(groceryItem.name),
+        title: Text(
+          groceryItem.name,
+          //style: getExpiryIndicatorColor2(groceryItem.expiryDate),
+        ),
         trailing: Text('${groceryItem.quantity}x'),
         onTap: () {
           Navigator.push(
