@@ -51,7 +51,7 @@ class _GroceryList extends State<GroceryList> {
         title: Text(CustomLocalizations.of(context).homeTitle),
         actions: [
           IconButton(
-            tooltip: "Search for grocery Item",
+              tooltip: "Search for grocery Item",
               icon: Icon(Icons.search),
               onPressed: () {
                 showSearch(
