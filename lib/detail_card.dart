@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:grocery_app/dateFormat.dart';
+import 'date_util.dart';
 import 'package:grocery_app/grocery_item.dart';
 
 class DetailCard extends StatelessWidget {
@@ -19,8 +18,8 @@ class DetailCard extends StatelessWidget {
           children: <Widget>[
             _buildName(),
             _buildQuantity(),
-            _buildExpiryInfo()
-            _buildExpryDate(context)
+            _buildExpiryInfo(),
+            _buildExpryDate()
           ],
         ),
       ),
@@ -94,9 +93,12 @@ class DetailCard extends StatelessWidget {
     }
     return expiryInfo;
   }
-  Widget _buildExpryDate(context) {
-    var formattedExpDate = dateFormatYMMDToString(item.expiryDate);
 
+  Widget _buildExpryDate() {
+    String formattedExpDate;
+    if (item.expiryDate != null) {
+      formattedExpDate = dateFormatYMMDToString(item.expiryDate);
+    }
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(children: <Widget>[
@@ -109,7 +111,7 @@ class DetailCard extends StatelessWidget {
         ),
         RaisedButton(
           child: Text(
-            formattedExpDate,
+            formattedExpDate ?? "No expiry date",
             style: TextStyle(
               fontSize: 24,
               letterSpacing: 0,
@@ -120,17 +122,17 @@ class DetailCard extends StatelessWidget {
           elevation: 4.0,
           color: Colors.blue[200],
           onPressed: () {
-            DatePicker.showDatePicker(context,
-                theme: DatePickerTheme(
-                  containerHeight: 210.0,
-                ),
-                showTitleActions: true,
-                minTime: DateTime(2000, 1, 1),
-                maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
-              print('confirm $date');
-              // _date = '${date.year} - ${date.month} - ${date.day}';
-              // setState(() {});
-            }, currentTime: DateTime.now(), locale: LocaleType.en);
+            // DatePicker.showDatePicker(context,
+            //     theme: DatePickerTheme(
+            //       containerHeight: 210.0,
+            //     ),
+            //     showTitleActions: true,
+            //     minTime: DateTime(2000, 1, 1),
+            //     maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+            //   setState(() {
+            //     item.expiryDate = date;
+            //   });
+            // }, currentTime: DateTime.now(), locale: LocaleType.en);
           },
         )
       ]),

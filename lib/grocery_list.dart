@@ -41,8 +41,6 @@ class _GroceryList extends State<GroceryList> {
     }
   }
 
-<<<<<<< HEAD
-=======
   //determine text color based on how far away expiry date is
   /*
   TextStyle getExpiryIndicatorColor2(DateTime expiryDate) {
@@ -106,7 +104,6 @@ class _GroceryList extends State<GroceryList> {
     return expiryInfo;
   }
 
->>>>>>> Added expiry notification functionality.
   @override
   Widget build(BuildContext context) {
     getData(context, 'user1_list').then((list) {
