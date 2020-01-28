@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 
@@ -45,9 +46,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   String _appBarTitle() {
     if (_newItem()) {
-      return 'Add New Item';
+      return CustomLocalizations.of(context).addItemNewTile;
     } else {
-      return 'Edit ${_item.name}';
+      return '${CustomLocalizations.of(context).addItemExistingTile} ${_item.name}';
     }
   }
 
@@ -73,9 +74,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   Widget _itemNameInput() {
     return TextFormField(
-      decoration: const InputDecoration(
-        hintText: 'Milk',
-        labelText: 'Name',
+      decoration: InputDecoration(
+        hintText: CustomLocalizations.of(context).addItemNameHint,
+        labelText: CustomLocalizations.of(context).addItemNameLabel,
       ),
       initialValue: _item.name,
       validator: _nameValid,
@@ -85,7 +86,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   String _nameValid(String inputValue) {
     if (inputValue.isEmpty) {
-      return 'Name must be entered';
+      return CustomLocalizations.of(context).addItemNameEmpty;
     } else {
       return null;
     }
@@ -102,9 +103,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
   }
 
   Widget _itemQuantityInput() => TextFormField(
-        decoration: const InputDecoration(
-          hintText: '5',
-          labelText: 'Quantity',
+        decoration: InputDecoration(
+          hintText: CustomLocalizations.of(context).addItemQuantityHint,
+          labelText: CustomLocalizations.of(context).addItemQuantityLabel,
         ),
         initialValue: _itemInitialValue(),
         validator: _quantityValid,
@@ -121,9 +122,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   String _quantityValid(String inputValue) {
     if (inputValue.isEmpty) {
-      return 'Quantity cannot be empty';
+      return CustomLocalizations.of(context).addItemQuantityEmpty;
     } else if ((int.parse(inputValue) <= 0)) {
-      return 'Quantity has to be more than 0';
+      return CustomLocalizations.of(context).addItemQuantityZero;
     } else {
       return null;
     }
@@ -145,8 +146,8 @@ class _SubmissionFormState extends State<SubmissionForm> {
       padding: const EdgeInsets.all(16),
       child: RaisedButton(
         onPressed: _submitForm,
-        child: const Text(
-          'SAVE',
+        child: Text(
+          CustomLocalizations.of(context).addItemSave.toUpperCase(),
           style: TextStyle(fontSize: 23, color: Colors.white),
         ),
       ),

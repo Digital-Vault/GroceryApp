@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,7 +47,7 @@ class _GroceryList extends State<GroceryList> {
     });
     return Scaffold(
       appBar: AppBar(
-        title: Text("Grocery List"),
+        title: Text(CustomLocalizations.of(context).homeTitle),
         actions: [
           IconButton(
               icon: Icon(Icons.search),
@@ -70,20 +71,21 @@ class _GroceryList extends State<GroceryList> {
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.alphabetically,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(0),
-                  title: Text('Sort Alphabetically'),
+                  title:
+                      Text(CustomLocalizations.of(context).sortAlphabetically),
                 ),
               ),
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.expiryDate,
-                child: Text('Sort by Expiry Date'),
+                child: Text(CustomLocalizations.of(context).sortExpiry),
               ),
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.logout,
-                child: Text('Logout'),
+                child: Text(CustomLocalizations.of(context).logout),
               ),
             ],
           ),

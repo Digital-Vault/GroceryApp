@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/custom_localization.dart';
 
 import 'auth.dart';
 import 'fridge_list.dart';
@@ -43,7 +44,7 @@ class _MyFridge extends State<MyFridge> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Fridge"),
+        title: Text(CustomLocalizations.of(context).fridgeTitle),
         actions: [
           IconButton(
               icon: Icon(Icons.search),
@@ -67,20 +68,21 @@ class _MyFridge extends State<MyFridge> {
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.alphabetically,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(0),
-                  title: Text('Sort Alphabetically'),
+                  title:
+                      Text(CustomLocalizations.of(context).sortAlphabetically),
                 ),
               ),
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.expiryDate,
-                child: Text('Sort by Expiry Date'),
+                child: Text(CustomLocalizations.of(context).sortExpiry),
               ),
-              const PopupMenuItem<MenuItems>(
+              PopupMenuItem<MenuItems>(
                 value: MenuItems.logout,
-                child: Text('Logout'),
+                child: Text(CustomLocalizations.of(context).logout),
               ),
             ],
           ),

@@ -1,0 +1,123 @@
+{
+  "@@locale" : "fr",
+  "addItemExistingTile" : "Éditer",
+  "@addItemExistingTile" : {
+    "type" : "text",
+    "description" : "Tile of updating existing grocery item"
+  },
+  "addItemNameEmpty" : "Le nom doit être entré",
+  "@addItemNameEmpty" : {
+    "type" : "text",
+    "description" : "Name field empty error"
+  },
+  "addItemNameHint" : "Lait",
+  "@addItemNameHint" : {
+    "type" : "text",
+    "description" : "Name field hint"
+  },
+  "addItemNameLabel" : "Nom",
+  "@addItemNameLabel" : {
+    "type" : "text",
+    "description" : "Name field label"
+  },
+  "addItemNewTile" : "Ajouter un nouvel élément",
+  "@addItemNewTile" : {
+    "type" : "text",
+    "description" : "Tile of adding new grocery item"
+  },
+  "addItemQuantityEmpty" : "La quantité ne peut pas être vide",
+  "@addItemQuantityEmpty" : {
+    "type" : "text",
+    "description" : "Quantity field empty error"
+  },
+  "addItemQuantityHint" : "5",
+  "@addItemQuantityHint" : {
+    "type" : "text",
+    "description" : "Quantity field hint"
+  },
+  "addItemQuantityLabel" : "Quantité",
+  "@addItemQuantityLabel" : {
+    "type" : "text",
+    "description" : "Quantity field label"
+  },
+  "addItemQuantityZero" : "La quantité doit être supérieure à 0",
+  "@addItemQuantityZero" : {
+    "type" : "text",
+    "description" : "Quantity field zero error"
+  },
+  "addItemSave" : "sauvegarder",
+  "@addItemSave" : {
+    "type" : "text",
+    "description" : "Save button in add new item"
+  },
+  "appItemSearch" : "Chercher",
+  "@appItemSearch" : {
+    "type" : "text",
+    "description" : "Search label when searching in home or fridge"
+  },
+  "fridgeTitle" : "Mon frigo",
+  "@fridgeTitle" : {
+    "type" : "text",
+    "description" : "Tile of my fridge page"
+  },
+  "homeTitle" : "Accueil",
+  "@homeTitle" : {
+    "type" : "text",
+    "description" : "Home button in the bottom navigation"
+  },
+  "loginButtonLabel" : "S'identifier",
+  "@loginButtonLabel" : {
+    "type" : "text",
+    "description" : "Login button in login page"
+  },
+  "loginCreateAccount" : "Créer un compte",
+  "@loginCreateAccount" : {
+    "type" : "text",
+    "description" : "Create an account button in login page"
+  },
+  "loginEmailLabel" : "Email",
+  "@loginEmailLabel" : {
+    "type" : "text",
+    "description" : "Email field in login page"
+  },
+  "loginPasswordEmpty" : "Le mot de passe ne peut pas être vide",
+  "@loginPasswordEmpty" : {
+    "type" : "text",
+    "description" : "Empty password error"
+  },
+  "loginPasswordLabel" : "Mot de passe",
+  "@loginPasswordLabel" : {
+    "type" : "text",
+    "description" : "Password field in login page"
+  },
+  "logout" : "Se déconnecter",
+  "@logout" : {
+    "type" : "text",
+    "description" : "Logout button in menu selection"
+  },
+  "navbarFridge" : "Mon frigo",
+  "@navbarFridge" : {
+    "type" : "text",
+    "description" : "My Fridge button in the bottom navigation"
+  },
+  "navbarHome" : "Liste d'épicerie",
+  "@navbarHome" : {
+    "type" : "text",
+    "description" : "Title of the home page"
+  },
+  "sortAlphabetically" : "Trier par ordre alphabétique",
+  "@sortAlphabetically" : {
+    "type" : "text",
+    "description" : "Sort Alphabetically button in menu selection"
+  },
+  "sortExpiry" : "Trier par date d'expiration",
+  "@sortExpiry" : {
+    "type" : "text",
+    "description" : "Sort by Expiry Date button in menu selection"
+  },
+  "title" : "App d'épicerie",
+  "@title" : {
+    "type" : "text",
+    "description" : "Title for the application"
+  }
+}

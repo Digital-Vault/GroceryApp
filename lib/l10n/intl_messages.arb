@@ -1,0 +1,147 @@
+{
+  "@@last_modified": "2020-01-25T14:37:13.311500",
+  "title": "Grocery App",
+  "@title": {
+    "description": "Title for the application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "navbarHome": "Grocery List",
+  "@navbarHome": {
+    "description": "Title of the home page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Home button in the bottom navigation",
+    "type": "text",
+    "placeholders": {}
+  },
+  "navbarFridge": "My Fridge",
+  "@navbarFridge": {
+    "description": "My Fridge button in the bottom navigation",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fridgeTitle": "My Fridge",
+  "@fridgeTitle": {
+    "description": "Tile of my fridge page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemNewTile": "Add New Item",
+  "@addItemNewTile": {
+    "description": "Tile of adding new grocery item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemExistingTile": "Edit",
+  "@addItemExistingTile": {
+    "description": "Tile of updating existing grocery item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemNameLabel": "Name",
+  "@addItemNameLabel": {
+    "description": "Name field label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemNameHint": "Milk",
+  "@addItemNameHint": {
+    "description": "Name field hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemQuantityLabel": "Quantity",
+  "@addItemQuantityLabel": {
+    "description": "Quantity field label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemQuantityHint": "5",
+  "@addItemQuantityHint": {
+    "description": "Quantity field hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemSave": "Save",
+  "@addItemSave": {
+    "description": "Save button in add new item",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemQuantityEmpty": "Quantity cannot be empty",
+  "@addItemQuantityEmpty": {
+    "description": "Quantity field empty error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemQuantityZero": "Quantity has to be more than 0",
+  "@addItemQuantityZero": {
+    "description": "Quantity field zero error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemNameEmpty": "Name must be entered",
+  "@addItemNameEmpty": {
+    "description": "Name field empty error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button in menu selection",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sortAlphabetically": "Sort Alphabetically",
+  "@sortAlphabetically": {
+    "description": "Sort Alphabetically button in menu selection",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sortExpiry": "Sort by Expiry Date",
+  "@sortExpiry": {
+    "description": "Sort by Expiry Date button in menu selection",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginEmailLabel": "Email",
+  "@loginEmailLabel": {
+    "description": "Email field in login page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginPasswordLabel": "Password",
+  "@loginPasswordLabel": {
+    "description": "Password field in login page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginButtonLabel": "Login",
+  "@loginButtonLabel": {
+    "description": "Login button in login page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginCreateAccount": "Create an Account",
+  "@loginCreateAccount": {
+    "description": "Create an account button in login page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginPasswordEmpty": "Password can't be empty",
+  "@loginPasswordEmpty": {
+    "description": "Empty password error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appItemSearch": "Search",
+  "@appItemSearch": {
+    "description": "Search label when searching in home or fridge",
+    "type": "text",
+    "placeholders": {}
+  }
+}

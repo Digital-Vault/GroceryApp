@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -73,6 +75,18 @@ void main() async {
     FirestoreProvider(
       firestore: firestore,
       child: MaterialApp(
+        onGenerateTitle: (BuildContext context) =>
+            CustomLocalizations.of(context).title,
+        localizationsDelegates: [
+          const CustomLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('fr', ''),
+        ],
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -162,25 +176,27 @@ class _MyAppState extends State<MyApp> {
       MyFridge(onSignedOut: onSignedOut, auth: auth)
     ];
 
-    return MaterialApp(
-      home: Scaffold(
-        body: pageOptions[selectedPage],
-        bottomNavigationBar: FABBottomAppBar(
-          onTabSelected: _selectedTab,
-          selectedColor: Colors.lightBlue,
-          items: [
-            FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-            FABBottomAppBarItem(iconData: Icons.list, text: 'My Fridge'),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SubmissionForm()),
-                )),
+    return Scaffold(
+      body: pageOptions[selectedPage],
+      bottomNavigationBar: FABBottomAppBar(
+        onTabSelected: _selectedTab,
+        selectedColor: Colors.lightBlue,
+        items: [
+          FABBottomAppBarItem(
+              iconData: Icons.home,
+              text: CustomLocalizations.of(context).navbarHome),
+          FABBottomAppBarItem(
+              iconData: Icons.list,
+              text: CustomLocalizations.of(context).navbarFridge),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SubmissionForm()),
+              )),
     );
   }
 }
