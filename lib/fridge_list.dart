@@ -79,7 +79,7 @@ class FridgeList extends StatelessWidget {
             //style: getExpiryIndicatorColor(groceryItem.expiryDate),
           ),
           subtitle:
-          getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
+              getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
           trailing: Text("${groceryItem.quantity}x"),
           onTap: () {
             Navigator.push(
@@ -90,8 +90,7 @@ class FridgeList extends StatelessWidget {
               ),
             );
           },
-        )
-    );
+        ));
   }
 
   Widget _dismissibleBackground() {
@@ -105,6 +104,7 @@ class FridgeList extends StatelessWidget {
       ),
     );
   }
+
   //determine text color based on how far away expiry date is
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;
