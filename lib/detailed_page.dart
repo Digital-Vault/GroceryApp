@@ -48,6 +48,7 @@ class DetailedPage extends StatelessWidget {
 
   Widget _deleteButton(BuildContext context) {
     return IconButton(
+      tooltip: "Delete Grocery Item",
       icon: Icon(Icons.delete_forever),
       onPressed: () {
         documentReference.delete();
@@ -58,6 +59,7 @@ class DetailedPage extends StatelessWidget {
 
   Widget _editButton(BuildContext context, DocumentSnapshot document) =>
       IconButton(
+        tooltip: "Edit Grocery Item",
         icon: Icon(Icons.edit),
         onPressed: () {
           Navigator.push(
