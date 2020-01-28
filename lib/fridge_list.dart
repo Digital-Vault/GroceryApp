@@ -66,6 +66,7 @@ class FridgeList extends StatelessWidget {
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {
           firestore.collection('user1_list').add(groceryItem.toJson());
+          document.reference.delete();
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text('Moved ${groceryItem.name} to Grocery List!'),

@@ -148,6 +148,7 @@ class _GroceryList extends State<GroceryList> {
       onDismissed: (direction) {
         scheduleExpiryNotification(5, groceryItem.expiryDate, groceryItem.name);
         firestore.collection('fridge_list').add(groceryItem.toJson());
+        document.reference.delete();
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Moved ${groceryItem.name} to Fridge!'),
