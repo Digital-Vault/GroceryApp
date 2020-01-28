@@ -67,8 +67,7 @@ class DetailCard extends StatelessWidget {
     }
     DateTime today = DateTime.now();
     int daysTillExpiry = expiryDate.difference(today).inDays;
-    String expirySentence =
-        "Expires in $daysTillExpiry days. (${expiryDate.day}-${expiryDate.month}-${expiryDate.year})";
+    String expirySentence = "Expires in $daysTillExpiry days.";
 
     if (daysTillExpiry < 0) {
       expiryInfo = Text("Expired ${-1 * daysTillExpiry} days ago.",
