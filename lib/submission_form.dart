@@ -33,6 +33,15 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   @override
   void initState() {
+    if (_newItem()) {
+      _item = GroceryItem();
+    } else {
+      _item = GroceryItem.fromJson(document.data);
+      _nameTextFieldController.text = _item.name;
+      _qtyTextFieldController.text = _item.quantity.toString();
+      _notifyTextFieldController.text = _item.notifyDate.toString();
+    }
+
     _nameTextFieldController.addListener(() {
       showNameIconButton();
     });
@@ -50,12 +59,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
   @override
   Widget build(BuildContext context) {
     _firestore = FirestoreProvider.of(context);
-
-    if (_newItem()) {
-      _item = GroceryItem();
-    } else {
-      _item = GroceryItem.fromJson(document.data);
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -218,6 +221,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
         labelText: 'Expiry Date',
       ),
       format: DateFormat.yMMMd(),
+      initialValue: _item.expiryDate ?? DateTime.now(),
       onShowPicker: (context, currentValue) async {
         return showDatePicker(
             context: context,
@@ -236,6 +240,8 @@ class _SubmissionFormState extends State<SubmissionForm> {
 ////////////////////////////////////////////////////////////////////
   /// *** Notify Days Before Expiry Input Functionalities **** ///
 ////////////////////////////////////////////////////////////////////
+
+// TODO: provide default values notifyDaysBeforeExpiry
 
   Widget _notifyDaysBeforeExpiry() {
     return TextFormField(
@@ -302,7 +308,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
       _updateDatabase();
 
-      Navigator.pop(_formKey.currentContext);
+      Navigator.pop(_formKey.currentContext, setState(() {}));
     }
   }
 
@@ -320,11 +326,3 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 }
-
-// String _itemInitialValue() {
-//   if (_item.quantity == null) {
-//     return '';
-//   } else {
-//     return _item.quantity.toString();
-//   }
-// }
