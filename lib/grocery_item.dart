@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'notification_util.dart';
-
 part 'grocery_item.g.dart';
 
 /// A grocery item.
