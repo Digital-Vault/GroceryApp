@@ -255,7 +255,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
-<<<<<<< HEAD
   String _notifyDaysBeforeExpiryValid(String inputValue) {
     if (inputValue.isEmpty) {
       return CustomLocalizations.of(context).addItemQuantityEmpty;
@@ -266,8 +265,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-=======
->>>>>>> Removed constraints for _notifyDaysBeforeExpiry.
   void showNotifyIconButton() {
     void _onClear() {
       setState(() {

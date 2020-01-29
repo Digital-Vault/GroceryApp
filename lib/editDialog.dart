@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:grocery_app/grocery_item.dart';
 
-typedef void VoidCallback();
+import 'date_util.dart';
 
-class ExpiryDialog extends StatelessWidget {
-  ExpiryDialog({this.onSubmitButton});
-
-  final void Function(DateTime, int) onSubmitButton;
+class ExpiryDialog extends StatefulWidget {
+  ExpiryDialog({@required this.item});
+  final GroceryItem item;
 
   @override
-  Widget build(BuildContext context) {
-    DateTime expiryDate;
-    int notifyDays;
+  _ExpiryDialogState createState() => _ExpiryDialogState(item: item);
+}
 
+class _ExpiryDialogState extends State<ExpiryDialog> {
+  _ExpiryDialogState({this.item});
+  String text = "No expiry date";
+  DateTime expiryDate;
+  int notifyDays;
+
+  GroceryItem item;
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Alert Dialog title"),
+      title: Text("Please enter in expiry date and notification time"),
       content: Container(
         width: double.maxFinite,
         child: ListView(
@@ -31,7 +39,7 @@ class ExpiryDialog extends StatelessWidget {
               ),
               RaisedButton(
                 child: Text(
-                  "No expiry date",
+                  text,
                   style: TextStyle(
                     fontSize: 14,
                     letterSpacing: 0,
@@ -50,13 +58,16 @@ class ExpiryDialog extends StatelessWidget {
                       minTime: DateTime(2000, 1, 1),
                       maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
                     expiryDate = date;
+                    setState(() {
+                      text = dateFormatYMMDToString(date);
+                    });
                   }, currentTime: DateTime.now(), locale: LocaleType.en);
                 },
               )
             ]),
             Row(children: <Widget>[
               Text(
-                'Enter in expiry date: ',
+                'Notify me: ',
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 0,
@@ -81,8 +92,9 @@ class ExpiryDialog extends StatelessWidget {
         FlatButton(
           child: Text("Submit"),
           onPressed: () {
-            onSubmitButton(expiryDate, notifyDays);
-            Navigator.of(context).pop();
+            item.expiryDate = expiryDate;
+            item.notifyDate = notifyDays;
+            Navigator.of(context).pop(item);
           },
         ),
       ],

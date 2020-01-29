@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
+import 'package:grocery_app/editDialog.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -202,6 +203,19 @@ class _GroceryList extends State<GroceryList> {
     );
   }
 
+  Future<GroceryItem> _showDialog(
+      BuildContext context, GroceryItem item) async {
+    // flutter defined function
+    final groceryItem = item;
+
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ExpiryDialog(item: groceryItem);
+      },
+    );
+  }
+
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
     final firestore = FirestoreProvider.of(context);
@@ -211,10 +225,17 @@ class _GroceryList extends State<GroceryList> {
       background: _dismissibleBackground(),
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
-        scheduleExpiryNotification(
-            groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
-        firestore.collection('fridge_list').add(groceryItem.toJson());
-        document.reference.delete();
+        if (groceryItem.expiryDate == null) {
+          _showDialog(context, groceryItem).then((newItem) {
+            firestore.collection('fridge_list2').add(newItem.toJson());
+            scheduleExpiryNotification(
+                newItem.notifyDate, newItem.expiryDate, groceryItem.name);
+          });
+        } else {
+          firestore.collection('fridge_list2').add(groceryItem.toJson());
+          scheduleExpiryNotification(
+              groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
+        }
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Moved ${groceryItem.name} to Fridge!'),
