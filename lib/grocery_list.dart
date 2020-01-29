@@ -227,12 +227,12 @@ class _GroceryList extends State<GroceryList> {
       onDismissed: (direction) {
         if (groceryItem.expiryDate == null) {
           _showDialog(context, groceryItem).then((newItem) {
-            firestore.collection('fridge_list2').add(newItem.toJson());
+            firestore.collection('fridge_list').add(newItem.toJson());
             scheduleExpiryNotification(
                 newItem.notifyDate, newItem.expiryDate, groceryItem.name);
           });
         } else {
-          firestore.collection('fridge_list2').add(groceryItem.toJson());
+          firestore.collection('fridge_list').add(groceryItem.toJson());
           scheduleExpiryNotification(
               groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
         }
