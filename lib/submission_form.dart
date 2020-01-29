@@ -254,15 +254,15 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
-  String _notifyDaysBeforeExpiryValid(String inputValue) {
-    if (inputValue.isEmpty) {
-      return CustomLocalizations.of(context).addItemQuantityEmpty;
-    } else if ((int.parse(inputValue) <= 0)) {
-      return CustomLocalizations.of(context).addItemQuantityZero;
-    } else {
-      return null;
-    }
-  }
+  // String _notifyDaysBeforeExpiryValid(String inputValue) {
+  //   if (inputValue.isEmpty) {
+  //     return CustomLocalizations.of(context).addItemQuantityEmpty;
+  //   } else if ((int.parse(inputValue) <= 0)) {
+  //     return CustomLocalizations.of(context).addItemQuantityZero;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   void showNotifyIconButton() {
     void _onClear() {
