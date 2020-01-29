@@ -48,12 +48,14 @@ class _MyFridge extends State<MyFridge> {
         actions: [
           IconButton(
               icon: Icon(Icons.search),
+              tooltip: "Search for Grocery Items",
               onPressed: () {
                 showSearch(
                     context: context,
                     delegate: DataSearch(documents: _documents));
               }),
           PopupMenuButton<MenuItems>(
+            tooltip: "Menu button for sorting items and logging out",
             onSelected: (MenuItems result) {
               if (result == MenuItems.logout) {
                 _signOut(context);

@@ -51,6 +51,7 @@ class _GroceryList extends State<GroceryList> {
         title: Text(CustomLocalizations.of(context).homeTitle),
         actions: [
           IconButton(
+              tooltip: "Search for grocery Item",
               icon: Icon(Icons.search),
               onPressed: () {
                 showSearch(
@@ -58,6 +59,7 @@ class _GroceryList extends State<GroceryList> {
                     delegate: DataSearch(documents: _documents));
               }),
           PopupMenuButton<MenuItems>(
+            tooltip: "Menu Button for sorting grocery items and logging out",
             onSelected: (MenuItems result) {
               if (result == MenuItems.logout) {
                 _signOut(context);
@@ -144,10 +146,11 @@ class _GroceryList extends State<GroceryList> {
     return Dismissible(
       key: Key(document.documentID),
       background: _dismissibleBackground(),
-      direction: DismissDirection.endToStart,
+      direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
         scheduleExpiryNotification(5, groceryItem.expiryDate, groceryItem.name);
         firestore.collection('fridge_list').add(groceryItem.toJson());
+        document.reference.delete();
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Moved ${groceryItem.name} to Fridge!'),

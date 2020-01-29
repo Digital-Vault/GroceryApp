@@ -192,6 +192,7 @@ class _MyAppState extends State<MyApp> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+          tooltip: "Add grocery Item",
           child: const Icon(Icons.add),
           onPressed: () => Navigator.push(
                 context,
