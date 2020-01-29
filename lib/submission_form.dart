@@ -245,7 +245,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   Widget _notifyDaysBeforeExpiry() {
     return TextFormField(
-      validator: _notifyDaysBeforeExpiryValid,
       onSaved: _onNotifySaved,
       controller: _notifyTextFieldController,
       decoration: InputDecoration(
@@ -256,6 +255,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     );
   }
 
+<<<<<<< HEAD
   String _notifyDaysBeforeExpiryValid(String inputValue) {
     if (inputValue.isEmpty) {
       return CustomLocalizations.of(context).addItemQuantityEmpty;
@@ -266,6 +266,8 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
+=======
+>>>>>>> Removed constraints for _notifyDaysBeforeExpiry.
   void showNotifyIconButton() {
     void _onClear() {
       setState(() {
