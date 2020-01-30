@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'date_util.dart';
 import 'package:grocery_app/grocery_item.dart';
 
 class DetailCard extends StatelessWidget {
@@ -17,7 +18,8 @@ class DetailCard extends StatelessWidget {
           children: <Widget>[
             _buildName(),
             _buildQuantity(),
-            _buildExpiryInfo()
+            _buildExpiryInfo(),
+            _buildExpryDate()
           ],
         ),
       ),
@@ -90,5 +92,50 @@ class DetailCard extends StatelessWidget {
           style: TextStyle(color: Colors.green, fontSize: 20));
     }
     return expiryInfo;
+  }
+
+  Widget _buildExpryDate() {
+    String formattedExpDate;
+    if (item.expiryDate != null) {
+      formattedExpDate = dateFormatYMMDToString(item.expiryDate);
+    }
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(children: <Widget>[
+        Text(
+          'Expiry Date: ',
+          style: TextStyle(
+            fontSize: 24,
+            letterSpacing: 0,
+          ),
+        ),
+        RaisedButton(
+          child: Text(
+            formattedExpDate ?? "No expiry date",
+            style: TextStyle(
+              fontSize: 24,
+              letterSpacing: 0,
+            ),
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 4.0,
+          color: Colors.blue[200],
+          onPressed: () {
+            // DatePicker.showDatePicker(context,
+            //     theme: DatePickerTheme(
+            //       containerHeight: 210.0,
+            //     ),
+            //     showTitleActions: true,
+            //     minTime: DateTime(2000, 1, 1),
+            //     maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+            //   setState(() {
+            //     item.expiryDate = date;
+            //   });
+            // }, currentTime: DateTime.now(), locale: LocaleType.en);
+          },
+        )
+      ]),
+    );
   }
 }

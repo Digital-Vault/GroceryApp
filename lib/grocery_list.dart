@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
+import 'package:grocery_app/editDialog.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,6 +40,69 @@ class _GroceryList extends State<GroceryList> {
     } catch (e) {
       print(e);
     }
+  }
+
+  //determine text color based on how far away expiry date is
+  /*
+  TextStyle getExpiryIndicatorColor2(DateTime expiryDate) {
+    TextStyle expiryColour;
+    if (expiryDate == null) {
+      expiryColour = TextStyle(color: Colors.black);
+      return expiryColour;
+    }
+
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+
+    if (daysTillExpiry < 0) {
+      expiryColour = TextStyle(color: Colors.brown[700]);
+    }
+    if (daysTillExpiry == 0) {
+      expiryColour = TextStyle(color: Colors.red);
+    }
+    if (daysTillExpiry >= 1) {
+      expiryColour = TextStyle(color: Colors.deepOrange);
+    }
+    if (daysTillExpiry >= 5) {
+      expiryColour = TextStyle(color: Colors.orange[600]);
+    }
+    if (daysTillExpiry >= 10) {
+      expiryColour = TextStyle(color: Colors.green);
+    }
+    return expiryColour;
+  }
+  */
+
+  //determine text color based on how far away expiry date is
+  Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
+    Text expiryInfo;
+    if (expiryDate == null) {
+      expiryInfo = Text("● Expiry date was not entered for this item.");
+      return expiryInfo;
+    }
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+    String expirySentence =
+        "● $itemName expires in $daysTillExpiry days. (${expiryDate.day}-${expiryDate.month}-${expiryDate.year})";
+
+    if (daysTillExpiry < 0) {
+      expiryInfo = Text("● $itemName has expired!",
+          style: TextStyle(color: Colors.brown[700]));
+    }
+    if (daysTillExpiry == 0) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red));
+    }
+    if (daysTillExpiry >= 1) {
+      expiryInfo =
+          Text(expirySentence, style: TextStyle(color: Colors.deepOrange));
+    }
+    if (daysTillExpiry >= 5) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.orange));
+    }
+    if (daysTillExpiry >= 10) {
+      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.green));
+    }
+    return expiryInfo;
   }
 
   @override
@@ -139,6 +203,19 @@ class _GroceryList extends State<GroceryList> {
     );
   }
 
+  Future<GroceryItem> _showDialog(
+      BuildContext context, GroceryItem item) async {
+    // flutter defined function
+    final groceryItem = item;
+
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ExpiryDialog(item: groceryItem);
+      },
+    );
+  }
+
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
     final firestore = FirestoreProvider.of(context);
@@ -148,9 +225,17 @@ class _GroceryList extends State<GroceryList> {
       background: _dismissibleBackground(),
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
-        scheduleExpiryNotification(5, groceryItem.expiryDate, groceryItem.name);
-        firestore.collection('fridge_list').add(groceryItem.toJson());
-        document.reference.delete();
+        if (groceryItem.expiryDate == null) {
+          _showDialog(context, groceryItem).then((newItem) {
+            firestore.collection('fridge_list').add(newItem.toJson());
+            scheduleExpiryNotification(
+                newItem.notifyDate, newItem.expiryDate, groceryItem.name);
+          });
+        } else {
+          firestore.collection('fridge_list').add(groceryItem.toJson());
+          scheduleExpiryNotification(
+              groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
+        }
         Scaffold.of(context).showSnackBar(
           SnackBar(
             content: Text('Moved ${groceryItem.name} to Fridge!'),

@@ -147,6 +147,24 @@ class CustomLocalizations {
     );
   }
 
+  String get addItemNotification {
+    return Intl.message(
+      'Notify Days Before Expiry',
+      name: 'addItemNotification',
+      desc: 'Notification field on item add.',
+      locale: localeName,
+    );
+  }
+
+  String get addItemExpiry {
+    return Intl.message(
+      'Expiry Date',
+      name: 'addItemExpiry',
+      desc: 'Expiry date field on item add.',
+      locale: localeName,
+    );
+  }
+
   String get addItemNameEmpty {
     return Intl.message(
       'Name must be entered',

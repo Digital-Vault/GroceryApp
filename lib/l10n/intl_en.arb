@@ -5,6 +5,11 @@
     "type" : "text",
     "description" : "Tile of updating existing grocery item"
   },
+  "addItemExpiry" : "Expiry Date",
+  "@addItemExpiry" : {
+    "type" : "text",
+    "description" : "Expiry date field on item add."
+  },
   "addItemNameEmpty" : "Name must be entered",
   "@addItemNameEmpty" : {
     "type" : "text",
@@ -24,6 +29,11 @@
   "@addItemNewTile" : {
     "type" : "text",
     "description" : "Tile of adding new grocery item"
+  },
+  "addItemNotification" : "Notify Days Before Expiry",
+  "@addItemNotification" : {
+    "type" : "text",
+    "description" : "Notification field on item add."
   },
   "addItemQuantityEmpty" : "Quantity cannot be empty",
   "@addItemQuantityEmpty" : {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'loading_screen.dart';
 import 'auth.dart';
 
@@ -116,7 +117,8 @@ class _LoginPageState extends State<loginPage> {
       _buildText(),
       SizedBox(height: 15),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Email'),
+        decoration: InputDecoration(
+            labelText: CustomLocalizations.of(context).loginEmailLabel),
         initialValue: _email,
         validator: (value) {
           if (value.isEmpty) {
@@ -131,10 +133,13 @@ class _LoginPageState extends State<loginPage> {
       ),
       SizedBox(height: 15),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Password'),
+        decoration: InputDecoration(
+            labelText: CustomLocalizations.of(context).loginPasswordLabel),
         initialValue: _password,
         obscureText: true,
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty
+            ? CustomLocalizations.of(context).loginPasswordEmpty
+            : null,
         onSaved: (value) => _password = value,
       ),
       SizedBox(
@@ -155,7 +160,7 @@ class _LoginPageState extends State<loginPage> {
             color: Colors.blue,
             textColor: Colors.white,
             child: Text(
-              'Login',
+              CustomLocalizations.of(context).loginButtonLabel,
               style: TextStyle(fontSize: 16.0),
             ),
             onPressed: () {
@@ -164,7 +169,7 @@ class _LoginPageState extends State<loginPage> {
               //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
-          child: Text(' Create an account'),
+          child: Text(CustomLocalizations.of(context).loginCreateAccount),
           onPressed: moveToRegister,
         ),
       ];
@@ -175,7 +180,7 @@ class _LoginPageState extends State<loginPage> {
             color: Colors.blue,
             textColor: Colors.white,
             child: Text(
-              'Create an account',
+              CustomLocalizations.of(context).loginCreateAccount,
               style: TextStyle(fontSize: 16.0),
             ),
             onPressed: () {
@@ -201,13 +206,16 @@ class _LoginPageState extends State<loginPage> {
     );
   }
 
-  Widget _buildText() => const Padding(
+  Widget _buildText() => Padding(
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
-          'Grocery App',
+          CustomLocalizations.of(context).title,
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 30, fontWeight: FontWeight.w700, color: Colors.blue),
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue,
+          ),
         ),
       );
 }
