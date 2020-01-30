@@ -184,9 +184,9 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   String _quantityValid(String inputValue) {
     if (inputValue.isEmpty) {
-      return 'Quantity cannot be empty';
+      return CustomLocalizations.of(context).addItemQuantityEmpty;
     } else if ((int.parse(inputValue) <= 0)) {
-      return 'Quantity has to be more than 0';
+      return CustomLocalizations.of(context).addItemQuantityZero;
     } else {
       return null;
     }
@@ -216,8 +216,8 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   Widget _expiryDateInput() {
     return DateTimeField(
-      decoration: const InputDecoration(
-        labelText: 'Expiry Date',
+      decoration: InputDecoration(
+        labelText: CustomLocalizations.of(context).addItemExpiry,
       ),
       format: DateFormat.yMMMd(),
       initialValue: _item.expiryDate ?? DateTime.now(),
@@ -248,7 +248,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
       controller: _notifyTextFieldController,
       decoration: InputDecoration(
         hintText: '5',
-        labelText: 'Notify Days Before Expiry',
+        labelText: CustomLocalizations.of(context).addItemNotification,
         suffixIcon: _notifyClearIcon,
       ),
     );

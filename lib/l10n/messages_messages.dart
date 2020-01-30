@@ -22,11 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "addItemExistingTile": MessageLookupByLibrary.simpleMessage("Edit"),
+        "addItemExpiry": MessageLookupByLibrary.simpleMessage("Expiry Date"),
         "addItemNameEmpty":
             MessageLookupByLibrary.simpleMessage("Name must be entered"),
         "addItemNameHint": MessageLookupByLibrary.simpleMessage("Milk"),
         "addItemNameLabel": MessageLookupByLibrary.simpleMessage("Name"),
         "addItemNewTile": MessageLookupByLibrary.simpleMessage("Add New Item"),
+        "addItemNotification":
+            MessageLookupByLibrary.simpleMessage("Notify Days Before Expiry"),
         "addItemQuantityEmpty":
             MessageLookupByLibrary.simpleMessage("Quantity cannot be empty"),
         "addItemQuantityHint": MessageLookupByLibrary.simpleMessage("5"),

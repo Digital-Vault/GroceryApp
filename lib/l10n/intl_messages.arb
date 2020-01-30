@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-25T14:37:13.311500",
+  "@@last_modified": "2020-01-30T09:24:46.320037",
   "title": "Grocery App",
   "@title": {
     "description": "Title for the application",
@@ -81,6 +81,18 @@
   "addItemQuantityZero": "Quantity has to be more than 0",
   "@addItemQuantityZero": {
     "description": "Quantity field zero error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemNotification": "Notify Days Before Expiry",
+  "@addItemNotification": {
+    "description": "Notification field on item add.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addItemExpiry": "Expiry Date",
+  "@addItemExpiry": {
+    "description": "Expiry date field on item add.",
     "type": "text",
     "placeholders": {}
   },
