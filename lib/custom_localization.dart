@@ -250,7 +250,79 @@ class CustomLocalizations {
     return Intl.message(
       'Search',
       name: 'appItemSearch',
-      desc: 'Search label when searching in home or fridge',
+      desc: 'Search label when searching in home or ridge',
+      locale: localeName,
+    );
+  }
+
+  String get dateDialogTitle {
+    return Intl.message(
+      'Please enter in expiry date and notification time',
+      name: 'dateDialogTitle',
+      desc: 'Title for the date dialog',
+      locale: localeName,
+    );
+  }
+
+  String get dateDialogExpiry {
+    return Intl.message(
+      'Enter in expiry date',
+      name: 'dateDialogExpiry',
+      desc: 'Expiry field for the date dialog',
+      locale: localeName,
+    );
+  }
+
+  String get dateDialogNotify {
+    return Intl.message(
+      'Notify me',
+      name: 'dateDialogNotify',
+      desc: 'Notify field for the date dialog',
+      locale: localeName,
+    );
+  }
+
+  String get dateDialogSubmit {
+    return Intl.message(
+      'Submit',
+      name: 'dateDialogSubmit',
+      desc: 'Submit button for the date dialog',
+      locale: localeName,
+    );
+  }
+
+  String get fridgeExpiryDateNotEntered {
+    return Intl.message(
+      'Expiry date not entered for',
+      name: 'fridgeExpiryDateNotEntered',
+      desc: 'Expiry subtitle in the fridge list',
+      locale: localeName,
+    );
+  }
+
+  String get fridgeExpiryDateFirstPart {
+    return Intl.message(
+      'expires in',
+      name: 'fridgeExpiryDateFirstPart',
+      desc: 'Expiry subtitle in the fridge list',
+      locale: localeName,
+    );
+  }
+
+  String get fridgeExpiryDateSecondPart {
+    return Intl.message(
+      'days',
+      name: 'fridgeExpiryDateSecondPart',
+      desc: 'Expiry subtitle in the fridge list',
+      locale: localeName,
+    );
+  }
+
+  String get fridgeExpiryDateExpired {
+    return Intl.message(
+      'has expired',
+      name: 'fridgeExpiryDateExpired',
+      desc: 'Expiry subtitle in the fridge list',
       locale: localeName,
     );
   }
