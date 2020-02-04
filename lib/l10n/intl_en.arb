@@ -65,6 +65,46 @@
     "type" : "text",
     "description" : "Search label when searching in home or fridge"
   },
+  "dateDialogExpiry" : "Enter in expiry date",
+  "@dateDialogExpiry" : {
+    "type" : "text",
+    "description" : "Expiry field for the date dialog"
+  },
+  "dateDialogNotify" : "Notify me",
+  "@dateDialogNotify" : {
+    "type" : "text",
+    "description" : "Notify field for the date dialog"
+  },
+  "dateDialogSubmit" : "Submit",
+  "@dateDialogSubmit" : {
+    "type" : "text",
+    "description" : "Submit button for the date dialog"
+  },
+  "dateDialogTitle" : "Please enter in expiry date and notification time",
+  "@dateDialogTitle" : {
+    "type" : "text",
+    "description" : "Title for the date dialog"
+  },
+  "fridgeExpiryDateExpired" : "has expired",
+  "@fridgeExpiryDateExpired" : {
+    "type" : "text",
+    "description" : "Expiry subtitle in the fridge list"
+  },
+  "fridgeExpiryDateFirstPart" : "expires in",
+  "@fridgeExpiryDateFirstPart" : {
+    "type" : "text",
+    "description" : "Expiry subtitle in the fridge list"
+  },
+  "fridgeExpiryDateNotEntered" : "Expiry date not entered for",
+  "@fridgeExpiryDateNotEntered" : {
+    "type" : "text",
+    "description" : "Expiry subtitle in the fridge list"
+  },
+  "fridgeExpiryDateSecondPart" : "days",
+  "@fridgeExpiryDateSecondPart" : {
+    "type" : "text",
+    "description" : "Expiry subtitle in the fridge list"
+  },
   "fridgeTitle" : "My Fridge",
   "@fridgeTitle" : {
     "type" : "text",
