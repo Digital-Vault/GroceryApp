@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-30T09:24:46.320037",
+  "@@last_modified": "2020-02-04T07:49:09.952425",
   "title": "Grocery App",
   "@title": {
     "description": "Title for the application",
@@ -152,7 +152,55 @@
   },
   "appItemSearch": "Search",
   "@appItemSearch": {
-    "description": "Search label when searching in home or fridge",
+    "description": "Search label when searching in home or ridge",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dateDialogTitle": "Please enter in expiry date and notification time",
+  "@dateDialogTitle": {
+    "description": "Title for the date dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dateDialogExpiry": "Enter in expiry date",
+  "@dateDialogExpiry": {
+    "description": "Expiry field for the date dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dateDialogNotify": "Notify me",
+  "@dateDialogNotify": {
+    "description": "Notify field for the date dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dateDialogSubmit": "Submit",
+  "@dateDialogSubmit": {
+    "description": "Submit button for the date dialog",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fridgeExpiryDateNotEntered": "Expiry date not entered for",
+  "@fridgeExpiryDateNotEntered": {
+    "description": "Expiry subtitle in the fridge list",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fridgeExpiryDateFirstPart": "expires in",
+  "@fridgeExpiryDateFirstPart": {
+    "description": "Expiry subtitle in the fridge list",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fridgeExpiryDateSecondPart": "days",
+  "@fridgeExpiryDateSecondPart": {
+    "description": "Expiry subtitle in the fridge list",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fridgeExpiryDateExpired": "has expired",
+  "@fridgeExpiryDateExpired": {
+    "description": "Expiry subtitle in the fridge list",
     "type": "text",
     "placeholders": {}
   }

@@ -1,41 +1,41 @@
 {
-  "@@locale" : "fr",
-  "addItemExistingTile" : "Éditer",
+  "@@locale" : "es",
+  "addItemExistingTile" : "Editar",
   "@addItemExistingTile" : {
     "type" : "text",
     "description" : "Tile of updating existing grocery item"
   },
-  "addItemExpiry" : "Date d'expiration",
+  "addItemExpiry" : "Fecha de caducidad",
   "@addItemExpiry" : {
     "type" : "text",
     "description" : "Expiry date field on item add."
   },
-  "addItemNameEmpty" : "Le nom doit être entré",
+  "addItemNameEmpty" : "Nombre debe ser ingresado",
   "@addItemNameEmpty" : {
     "type" : "text",
     "description" : "Name field empty error"
   },
-  "addItemNameHint" : "Lait",
+  "addItemNameHint" : "Leche",
   "@addItemNameHint" : {
     "type" : "text",
     "description" : "Name field hint"
   },
-  "addItemNameLabel" : "Nom",
+  "addItemNameLabel" : "Nombre",
   "@addItemNameLabel" : {
     "type" : "text",
     "description" : "Name field label"
   },
-  "addItemNewTile" : "Ajouter un nouvel élément",
+  "addItemNewTile" : "Agregar ítem nuevo",
   "@addItemNewTile" : {
     "type" : "text",
     "description" : "Tile of adding new grocery item"
   },
-  "addItemNotification" : "Avertir jours avant expiration",
+  "addItemNotification" : "Notificar días antes del vencimiento",
   "@addItemNotification" : {
     "type" : "text",
     "description" : "Notification field on item add."
   },
-  "addItemQuantityEmpty" : "La quantité ne peut pas être vide",
+  "addItemQuantityEmpty" : "La cantidad no puede estar vacía",
   "@addItemQuantityEmpty" : {
     "type" : "text",
     "description" : "Quantity field empty error"
@@ -45,82 +45,82 @@
     "type" : "text",
     "description" : "Quantity field hint"
   },
-  "addItemQuantityLabel" : "Quantité",
+  "addItemQuantityLabel" : "Cantidad",
   "@addItemQuantityLabel" : {
     "type" : "text",
     "description" : "Quantity field label"
   },
-  "addItemQuantityZero" : "La quantité doit être supérieure à 0",
+  "addItemQuantityZero" : "La cantidad tiene que ser más de 0",
   "@addItemQuantityZero" : {
     "type" : "text",
     "description" : "Quantity field zero error"
   },
-  "addItemSave" : "sauvegarder",
+  "addItemSave" : "Salvar",
   "@addItemSave" : {
     "type" : "text",
     "description" : "Save button in add new item"
   },
-  "appItemSearch" : "Chercher",
+  "appItemSearch" : "Buscar",
   "@appItemSearch" : {
     "type" : "text",
     "description" : "Search label when searching in home or fridge"
   },
-  "dateDialogExpiry" : "Entrez la date d'expiration",
+  "dateDialogExpiry" : "Ingrese la fecha de vencimiento",
   "@dateDialogExpiry" : {
     "type" : "text",
     "description" : "Expiry field for the date dialog"
   },
-  "dateDialogNotify" : "Prévenez-moi",
+  "dateDialogNotify" : "Notificarme",
   "@dateDialogNotify" : {
     "type" : "text",
     "description" : "Notify field for the date dialog"
   },
-  "dateDialogSubmit" : "Soumettre",
+  "dateDialogSubmit" : "Enviar",
   "@dateDialogSubmit" : {
     "type" : "text",
     "description" : "Submit button for the date dialog"
   },
-  "dateDialogTitle" : "Veuillez saisir la date d'expiration et l'heure de notification",
+  "dateDialogTitle" : "Ingrese la fecha de vencimiento y la hora de notificación",
   "@dateDialogTitle" : {
     "type" : "text",
     "description" : "Title for the date dialog"
   },
-  "fridgeExpiryDateExpired" : "a expiré",
+  "fridgeExpiryDateExpired" : "ha expirado",
   "@fridgeExpiryDateExpired" : {
     "type" : "text",
     "description" : "Expiry subtitle in the fridge list"
   },
-  "fridgeExpiryDateFirstPart" : "expire dans",
+  "fridgeExpiryDateFirstPart" : "expira en",
   "@fridgeExpiryDateFirstPart" : {
     "type" : "text",
     "description" : "Expiry subtitle in the fridge list"
   },
-  "fridgeExpiryDateNotEntered" : "Date d'expiration non entrée pour",
+  "fridgeExpiryDateNotEntered" : "Fecha de caducidad no ingresada para",
   "@fridgeExpiryDateNotEntered" : {
     "type" : "text",
     "description" : "Expiry subtitle in the fridge list"
   },
-  "fridgeExpiryDateSecondPart" : "journées",
+  "fridgeExpiryDateSecondPart" : "dias",
   "@fridgeExpiryDateSecondPart" : {
     "type" : "text",
     "description" : "Expiry subtitle in the fridge list"
   },
-  "fridgeTitle" : "Mon frigo",
+  "fridgeTitle" : "Mi nevera",
   "@fridgeTitle" : {
     "type" : "text",
     "description" : "Tile of my fridge page"
   },
-  "homeTitle" : "Accueil",
+  "homeTitle" : "Hogar",
   "@homeTitle" : {
     "type" : "text",
     "description" : "Home button in the bottom navigation"
   },
-  "loginButtonLabel" : "S'identifier",
+  "loginButtonLabel" : "Iniciar sesión",
   "@loginButtonLabel" : {
     "type" : "text",
     "description" : "Login button in login page"
   },
-  "loginCreateAccount" : "Créer un compte",
+  "loginCreateAccount" : "Crea una cuenta",
   "@loginCreateAccount" : {
     "type" : "text",
     "description" : "Create an account button in login page"
@@ -130,42 +130,42 @@
     "type" : "text",
     "description" : "Email field in login page"
   },
-  "loginPasswordEmpty" : "Le mot de passe ne peut pas être vide",
+  "loginPasswordEmpty" : "La contraseña no puede estar vacía",
   "@loginPasswordEmpty" : {
     "type" : "text",
     "description" : "Empty password error"
   },
-  "loginPasswordLabel" : "Mot de passe",
+  "loginPasswordLabel" : "Contraseña",
   "@loginPasswordLabel" : {
     "type" : "text",
     "description" : "Password field in login page"
   },
-  "logout" : "Se déconnecter",
+  "logout" : "Cerrar sesión",
   "@logout" : {
     "type" : "text",
     "description" : "Logout button in menu selection"
   },
-  "navbarFridge" : "Mon frigo",
+  "navbarFridge" : "Mi nevera",
   "@navbarFridge" : {
     "type" : "text",
     "description" : "My Fridge button in the bottom navigation"
   },
-  "navbarHome" : "Liste d'épicerie",
+  "navbarHome" : "Lista de compras",
   "@navbarHome" : {
     "type" : "text",
     "description" : "Title of the home page"
   },
-  "sortAlphabetically" : "Trier par ordre alphabétique",
+  "sortAlphabetically" : "Ordenar alfabéticamente",
   "@sortAlphabetically" : {
     "type" : "text",
     "description" : "Sort Alphabetically button in menu selection"
   },
-  "sortExpiry" : "Trier par date d'expiration",
+  "sortExpiry" : "Ordenar por fecha de vencimiento",
   "@sortExpiry" : {
     "type" : "text",
     "description" : "Sort by Expiry Date button in menu selection"
   },
-  "title" : "App d'épicerie",
+  "title" : "Aplicación de supermercado",
   "@title" : {
     "type" : "text",
     "description" : "Title for the application"

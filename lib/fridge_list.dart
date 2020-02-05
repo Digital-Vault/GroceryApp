@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'detailed_page.dart';
 import 'firestore_provider.dart';
 import 'grocery_item.dart';
@@ -78,8 +79,8 @@ class FridgeList extends StatelessWidget {
             groceryItem.name,
             //style: getExpiryIndicatorColor(groceryItem.expiryDate),
           ),
-          subtitle:
-              getExpiryIndicatorColor(groceryItem.expiryDate, groceryItem.name),
+          subtitle: getExpiryIndicatorColor(
+              context, groceryItem.expiryDate, groceryItem.name),
           trailing: Text("${groceryItem.quantity}x"),
           onTap: () {
             Navigator.push(
@@ -106,18 +107,22 @@ class FridgeList extends StatelessWidget {
   }
 
   //determine text color based on how far away expiry date is
-  Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
+  Text getExpiryIndicatorColor(
+      BuildContext context, DateTime expiryDate, String itemName) {
     Text expiryInfo;
     if (expiryDate == null) {
-      expiryInfo = Text("● Expiry date not entered for $itemName.");
+      expiryInfo = Text(
+          "● ${CustomLocalizations.of(context).fridgeExpiryDateNotEntered} $itemName.");
       return expiryInfo;
     }
     DateTime today = DateTime.now();
     int daysTillExpiry = expiryDate.difference(today).inDays;
-    String expirySentence = "● $itemName expires in $daysTillExpiry days.";
+    String expirySentence =
+        "● $itemName ${CustomLocalizations.of(context).fridgeExpiryDateFirstPart} $daysTillExpiry ${CustomLocalizations.of(context).fridgeExpiryDateSecondPart}.";
 
     if (daysTillExpiry < 0) {
-      expiryInfo = Text("● $itemName has expired!",
+      expiryInfo = Text(
+          "● $itemName ${CustomLocalizations.of(context).fridgeExpiryDateExpired}!",
           style: TextStyle(color: Colors.brown[700]));
     }
     if (daysTillExpiry == 0) {
