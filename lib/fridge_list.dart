@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
-import 'detailed_page.dart';
+import 'package:grocery_app/submission_form.dart';
 import 'firestore_provider.dart';
 import 'grocery_item.dart';
 
@@ -86,8 +86,7 @@ class FridgeList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    DetailedPage(documentReference: document.reference),
+                builder: (context) => SubmissionForm(document: document),
               ),
             );
           },

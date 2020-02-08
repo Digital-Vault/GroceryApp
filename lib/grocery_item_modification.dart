@@ -1,32 +1,26 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:intl/intl.dart';
 
-class SubmissionForm extends StatefulWidget {
-  SubmissionForm({this.document});
+class GroceryItemModification extends StatefulWidget {
+  GroceryItemModification({this.document});
 
   final DocumentSnapshot document;
 
   @override
-  _SubmissionFormState createState() =>
-      _SubmissionFormState(document: document);
+  _GroceryItemModificationState createState() =>
+      _GroceryItemModificationState(document: document);
 }
 
-class _SubmissionFormState extends State<SubmissionForm> {
-  _SubmissionFormState({this.document});
+class _GroceryItemModificationState extends State<GroceryItemModification> {
+  _GroceryItemModificationState({this.document});
 
   TextEditingController _nameTextFieldController = TextEditingController();
   TextEditingController _qtyTextFieldController = TextEditingController();
-  TextEditingController _notifyTextFieldController = TextEditingController();
   IconButton _nameClearIcon;
   IconButton _qtyClearIcon;
-  IconButton _notifyClearIcon;
   DocumentSnapshot document;
   GroceryItem _item;
   CustomLocalizations _translator;
@@ -43,7 +37,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
     _nameTextFieldController.addListener(_showNameIconButton);
     _qtyTextFieldController.addListener(_showQtyIconButton);
-    _notifyTextFieldController.addListener(_showNotifyIconButton);
 
     super.initState();
   }
@@ -51,11 +44,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
   void _loadTextValues() {
     _nameTextFieldController.text = _item.name;
     _qtyTextFieldController.text = _item.quantity.toString();
-
-    if (_item.notifyDate != null) {
-      log(_item.toString());
-      _notifyTextFieldController.text = _item.notifyDate.toString();
-    }
   }
 
   @override
@@ -101,10 +89,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
             _itemNameInput(),
             _namePadding(),
             _itemQuantityInput(),
-            _namePadding(),
-            _expiryDateInput(),
-            _namePadding(),
-            _notifyDaysBeforeExpiry(),
             _quantityPadding(),
             _saveButton(),
           ],
@@ -210,68 +194,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
         );
       });
     }
-  }
-
-  Widget _expiryDateInput() {
-    return DateTimeField(
-      decoration: InputDecoration(
-        labelText: _translator.addItemExpiry,
-      ),
-      format: DateFormat.yMMMd(),
-      initialValue: _item.expiryDate,
-      onShowPicker: (context, currentValue) async {
-        final today = DateTime.now();
-
-        return showDatePicker(
-          context: context,
-          firstDate: currentValue ?? today,
-          initialDate: currentValue ?? today,
-          lastDate: DateTime(2100),
-        );
-      },
-      onSaved: _onExpirySaved,
-    );
-  }
-
-  void _onExpirySaved(DateTime inputValue) {
-    _item.expiryDate = inputValue;
-  }
-
-// TODO: provide default values notifyDaysBeforeExpiry
-
-  Widget _notifyDaysBeforeExpiry() {
-    return TextFormField(
-      onSaved: _onNotifySaved,
-      controller: _notifyTextFieldController,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        hintText: '5',
-        labelText: _translator.addItemNotification,
-        suffixIcon: _notifyClearIcon,
-      ),
-    );
-  }
-
-  void _showNotifyIconButton() {
-    void _onClear() {
-      setState(() {
-        _notifyTextFieldController.text = "";
-        _notifyClearIcon = null;
-      });
-    }
-
-    if (_notifyTextFieldController.text.isNotEmpty) {
-      setState(() {
-        _notifyClearIcon = IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () => _onClear(),
-        );
-      });
-    }
-  }
-
-  void _onNotifySaved(String inputValue) {
-    _item.notifyDate = int.tryParse(inputValue);
   }
 
   Widget _saveButton() {

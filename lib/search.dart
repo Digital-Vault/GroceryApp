@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'detailed_page.dart';
+import 'package:grocery_app/grocery_item_modification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataSearch extends SearchDelegate<String> {
@@ -63,7 +63,7 @@ class DataSearch extends SearchDelegate<String> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              DetailedPage(documentReference: a.reference),
+                              GroceryItemModification(document: a),
                         ));
                   },
                   leading: Icon(Icons.restaurant),
