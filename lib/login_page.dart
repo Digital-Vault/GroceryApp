@@ -87,25 +87,6 @@ class _LoginPageState extends State<loginPage> {
     });
   }
 
-  Future<void> Alert(BuildContext context){
-    return showDialog<void>
-      (context: context,
-       builder: (BuildContext context){
-        return AlertDialog(
-          title: Text("Not verified"),
-          content: Text("User has not been verified, please verify your email"),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("OK"),
-              onPressed: (){
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-       }
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return _loading
