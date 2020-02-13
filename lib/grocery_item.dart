@@ -9,7 +9,8 @@ class GroceryItem {
       this.expiryDate,
       this.quantity,
       this.purchased = false,
-      this.notifyDate});
+      this.notifyDate,
+      this.store});
 
   @JsonKey(nullable: false)
   String name;
@@ -19,6 +20,7 @@ class GroceryItem {
   DateTime expiryDate;
   bool purchased;
   int notifyDate;
+  String store;
 
   factory GroceryItem.fromJson(Map<String, dynamic> json) =>
       _$GroceryItemFromJson(json);

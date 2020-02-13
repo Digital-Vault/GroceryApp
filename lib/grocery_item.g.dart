@@ -9,12 +9,13 @@ part of 'grocery_item.dart';
 GroceryItem _$GroceryItemFromJson(Map<String, dynamic> json) {
   return GroceryItem(
     name: json['name'] as String,
-    quantity: json['quantity'] as int,
     expiryDate: json['expiryDate'] == null
         ? null
         : DateTime.parse(json['expiryDate'] as String),
+    quantity: json['quantity'] as int,
     purchased: json['purchased'] as bool,
     notifyDate: json['notifyDate'] as int,
+    store: json['store'] as String,
   );
 }
 
@@ -25,4 +26,5 @@ Map<String, dynamic> _$GroceryItemToJson(GroceryItem instance) =>
       'expiryDate': instance.expiryDate?.toIso8601String(),
       'purchased': instance.purchased,
       'notifyDate': instance.notifyDate,
+      'store': instance.store,
     };
