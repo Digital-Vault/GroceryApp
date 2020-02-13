@@ -336,6 +336,7 @@ class CustomLocalizationsDelegate
   bool isSupported(Locale locale) =>
       ['en', 'fr', 'zh', 'es'].contains(locale.languageCode);
 
+
   @override
   Future<CustomLocalizations> load(Locale locale) =>
       CustomLocalizations.load(locale);
