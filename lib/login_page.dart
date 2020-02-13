@@ -39,12 +39,13 @@ class _LoginPageState extends State<loginPage> {
 
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
+      String userId;
       try {
         setState(() {
           _loading = true;
         });
         if (_formType == FormType.login) {
-          String userId =
+          userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
           print('Signed in: $userId');
         } else {
@@ -52,7 +53,16 @@ class _LoginPageState extends State<loginPage> {
               .createUserWithEmailAndPassword(_email, _password);
           print('Registered user: $userId');
         }
-        widget.onSignedIn();
+        print(userId);
+        if(userId != null){
+          widget.onSignedIn();
+        } else {
+          setState(() {
+            _loading = false;
+          });
+          _error = "User has not been verified. Please verify your email";
+          print("user is null");
+        }
       } catch (e) {
         //print('Login Error: $e');
         setState(() {
@@ -77,6 +87,25 @@ class _LoginPageState extends State<loginPage> {
     });
   }
 
+  Future<void> Alert(BuildContext context){
+    return showDialog<void>
+      (context: context,
+       builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("Not verified"),
+          content: Text("User has not been verified, please verify your email"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("OK"),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+       }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return _loading

@@ -14,7 +14,8 @@ class Auth implements BaseAuth {
     FirebaseUser user = (await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password))
         .user;
-    return user.uid;
+    if (user.isEmailVerified) return user.uid;
+    return null;
   }
 
   Future<String> createUserWithEmailAndPassword(
@@ -22,7 +23,17 @@ class Auth implements BaseAuth {
     FirebaseUser user = (await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password))
         .user;
-    return user.uid;
+
+    try{
+      await user.sendEmailVerification();
+      return user.uid;
+    } catch (e){
+      print ("An error occured while trying to send email verification");
+      print(e.message);
+    } finally{
+      return null;
+    }
+
   }
 
   Future<String> currentUser() async {
@@ -34,3 +45,6 @@ class Auth implements BaseAuth {
     return FirebaseAuth.instance.signOut();
   }
 }
+
+
+
