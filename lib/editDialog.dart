@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/grocery_item.dart';
 
 import 'date_util.dart';
@@ -23,7 +24,7 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Please enter in expiry date and notification time"),
+      title: Text(CustomLocalizations.of(context).dateDialogTitle),
       content: Container(
         width: double.maxFinite,
         child: ListView(
@@ -31,7 +32,7 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
           children: <Widget>[
             Row(children: <Widget>[
               Text(
-                'Enter in expiry date: ',
+                '${CustomLocalizations.of(context).dateDialogExpiry}:',
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 0,
@@ -67,7 +68,7 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
             ]),
             Row(children: <Widget>[
               Text(
-                'Notify me: ',
+                '${CustomLocalizations.of(context).dateDialogNotify}:',
                 style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 0,
@@ -90,7 +91,7 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
       actions: <Widget>[
         // usually buttons at the bottom of the dialog
         FlatButton(
-          child: Text("Submit"),
+          child: Text(CustomLocalizations.of(context).dateDialogSubmit),
           onPressed: () {
             item.expiryDate = expiryDate;
             item.notifyDate = notifyDays;

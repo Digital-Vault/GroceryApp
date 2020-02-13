@@ -105,6 +105,7 @@ void main() async {
               languageCode: 'zh',
               scriptCode: 'Hant',
               countryCode: 'HK'), // 'zh_Hant_HK'
+          const Locale('es', ''),
         ],
         theme: ThemeData(
           primarySwatch: Colors.blue,
