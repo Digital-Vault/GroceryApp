@@ -20,32 +20,41 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'messages';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static _notInlinedMessages(_) => <String, Function> {
-    "addItemExistingTile" : MessageLookupByLibrary.simpleMessage("Edit"),
-    "addItemExpiry" : MessageLookupByLibrary.simpleMessage("Expiry Date"),
-    "addItemNameEmpty" : MessageLookupByLibrary.simpleMessage("Name must be entered"),
-    "addItemNameHint" : MessageLookupByLibrary.simpleMessage("Milk"),
-    "addItemNameLabel" : MessageLookupByLibrary.simpleMessage("Name"),
-    "addItemNewTile" : MessageLookupByLibrary.simpleMessage("Add New Item"),
-    "addItemNotification" : MessageLookupByLibrary.simpleMessage("Notify Days Before Expiry"),
-    "addItemQuantityEmpty" : MessageLookupByLibrary.simpleMessage("Quantity cannot be empty"),
-    "addItemQuantityHint" : MessageLookupByLibrary.simpleMessage("5"),
-    "addItemQuantityLabel" : MessageLookupByLibrary.simpleMessage("Quantity"),
-    "addItemQuantityZero" : MessageLookupByLibrary.simpleMessage("Quantity has to be more than 0"),
-    "addItemSave" : MessageLookupByLibrary.simpleMessage("Save"),
-    "appItemSearch" : MessageLookupByLibrary.simpleMessage("Search"),
-    "fridgeTitle" : MessageLookupByLibrary.simpleMessage("My Fridge"),
-    "homeTitle" : MessageLookupByLibrary.simpleMessage("Home"),
-    "loginButtonLabel" : MessageLookupByLibrary.simpleMessage("Login"),
-    "loginCreateAccount" : MessageLookupByLibrary.simpleMessage("Create an Account"),
-    "loginEmailLabel" : MessageLookupByLibrary.simpleMessage("Email"),
-    "loginPasswordEmpty" : MessageLookupByLibrary.simpleMessage("Password can\'t be empty"),
-    "loginPasswordLabel" : MessageLookupByLibrary.simpleMessage("Password"),
-    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
-    "navbarFridge" : MessageLookupByLibrary.simpleMessage("My Fridge"),
-    "navbarHome" : MessageLookupByLibrary.simpleMessage("Grocery List"),
-    "sortAlphabetically" : MessageLookupByLibrary.simpleMessage("Sort Alphabetically"),
-    "sortExpiry" : MessageLookupByLibrary.simpleMessage("Sort by Expiry Date"),
-    "title" : MessageLookupByLibrary.simpleMessage("Grocery App")
-  };
+  static _notInlinedMessages(_) => <String, Function>{
+        "addItemExistingTile": MessageLookupByLibrary.simpleMessage("Edit"),
+        "addItemExpiry": MessageLookupByLibrary.simpleMessage("Expiry Date"),
+        "addItemNameEmpty":
+            MessageLookupByLibrary.simpleMessage("Name must be entered"),
+        "addItemNameHint": MessageLookupByLibrary.simpleMessage("Milk"),
+        "addItemNameLabel": MessageLookupByLibrary.simpleMessage("Name"),
+        "addItemNewTile": MessageLookupByLibrary.simpleMessage("Add New Item"),
+        "addItemNotification":
+            MessageLookupByLibrary.simpleMessage("Notify Days Before Expiry"),
+        "addItemQuantityEmpty":
+            MessageLookupByLibrary.simpleMessage("Quantity cannot be empty"),
+        "addItemQuantityHint": MessageLookupByLibrary.simpleMessage("5"),
+        "addItemQuantityLabel":
+            MessageLookupByLibrary.simpleMessage("Quantity"),
+        "addItemQuantityZero": MessageLookupByLibrary.simpleMessage(
+            "Quantity has to be more than 0"),
+        "addItemSave": MessageLookupByLibrary.simpleMessage("Save"),
+        "appItemSearch": MessageLookupByLibrary.simpleMessage("Search"),
+        "fridgeTitle": MessageLookupByLibrary.simpleMessage("My Fridge"),
+        "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
+        "loginButtonLabel": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginCreateAccount":
+            MessageLookupByLibrary.simpleMessage("Create an Account"),
+        "loginEmailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+        "loginPasswordEmpty":
+            MessageLookupByLibrary.simpleMessage("Password can\'t be empty"),
+        "loginPasswordLabel": MessageLookupByLibrary.simpleMessage("Password"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "navbarFridge": MessageLookupByLibrary.simpleMessage("My Fridge"),
+        "navbarHome": MessageLookupByLibrary.simpleMessage("Grocery List"),
+        "sortAlphabetically":
+            MessageLookupByLibrary.simpleMessage("Sort Alphabetically"),
+        "sortExpiry":
+            MessageLookupByLibrary.simpleMessage("Sort by Expiry Date"),
+        "title": MessageLookupByLibrary.simpleMessage("Grocery App")
+      };
 }
