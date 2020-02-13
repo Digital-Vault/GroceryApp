@@ -109,8 +109,7 @@ class FridgeList extends StatelessWidget {
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;
     if (expiryDate == null) {
-      expiryInfo = Text("● Expiry date not entered for $itemName.");
-      return expiryInfo;
+      return null;
     }
     DateTime today = DateTime.now();
     int daysTillExpiry = expiryDate.difference(today).inDays;
@@ -118,20 +117,10 @@ class FridgeList extends StatelessWidget {
 
     if (daysTillExpiry < 0) {
       expiryInfo = Text("● $itemName has expired!",
-          style: TextStyle(color: Colors.brown[700]));
+          style: TextStyle(color: Colors.red[700]));
     }
-    if (daysTillExpiry == 0) {
+    if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
       expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red));
-    }
-    if (daysTillExpiry >= 1) {
-      expiryInfo =
-          Text(expirySentence, style: TextStyle(color: Colors.deepOrange));
-    }
-    if (daysTillExpiry >= 5) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.orange));
-    }
-    if (daysTillExpiry >= 10) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.green));
     }
     return expiryInfo;
   }
