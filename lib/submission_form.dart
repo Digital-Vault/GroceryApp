@@ -314,13 +314,27 @@ class _SubmissionFormState extends State<SubmissionForm> {
     return _formKey.currentState.validate();
   }
 
-  void _updateDatabase() {
+  void _updateDatabase() async {
     final jsonItem = _item.toJson();
-
     if (_newItem()) {
-      _firestore.collection('user1_list').add(jsonItem);
+      bool isDup = await _isDuplicateItem(jsonItem["name"]);
+      if (!isDup) {
+        await _firestore.collection('user1_list').add(jsonItem);
+      }
     } else {
-      document.reference.updateData(jsonItem);
+      await document.reference.updateData(jsonItem);
     }
+  }
+
+  Future<bool> _isDuplicateItem(String itemName) async {
+    QuerySnapshot queryList =
+        await _firestore.collection('user1_list').getDocuments();
+    var GroceryItems = queryList.documents;
+    for (int i = 0; i < GroceryItems.length; i++) {
+      if (GroceryItems[i].data["name"] == itemName) {
+        return true;
+      }
+    }
+    return false;
   }
 }
