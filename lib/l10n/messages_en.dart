@@ -39,6 +39,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Quantity has to be more than 0"),
         "addItemSave": MessageLookupByLibrary.simpleMessage("Save"),
         "appItemSearch": MessageLookupByLibrary.simpleMessage("Search"),
+        "dateDialogExpiry":
+            MessageLookupByLibrary.simpleMessage("Enter in expiry date"),
+        "dateDialogNotify": MessageLookupByLibrary.simpleMessage("Notify me"),
+        "dateDialogSubmit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "dateDialogTitle": MessageLookupByLibrary.simpleMessage(
+            "Please enter in expiry date and notification time"),
+        "fridgeExpiryDateExpired":
+            MessageLookupByLibrary.simpleMessage("has expired"),
+        "fridgeExpiryDateFirstPart":
+            MessageLookupByLibrary.simpleMessage("expires in"),
+        "fridgeExpiryDateNotEntered":
+            MessageLookupByLibrary.simpleMessage("Expiry date not entered for"),
+        "fridgeExpiryDateSecondPart":
+            MessageLookupByLibrary.simpleMessage("days"),
         "fridgeTitle": MessageLookupByLibrary.simpleMessage("My Fridge"),
         "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
         "loginButtonLabel": MessageLookupByLibrary.simpleMessage("Login"),

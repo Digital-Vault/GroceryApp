@@ -86,6 +86,7 @@ void main() async {
         supportedLocales: [
           const Locale('en', ''),
           const Locale('fr', ''),
+          const Locale('es', ''),
         ],
         theme: ThemeData(
           primarySwatch: Colors.blue,
