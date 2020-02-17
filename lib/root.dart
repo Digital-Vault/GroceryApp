@@ -20,16 +20,14 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     widget.auth.currentUser().then((userId) {
-      FirebaseAuth.instance.currentUser().then((us){
+      FirebaseAuth.instance.currentUser().then((us) {
         setState(() {
-          print(userId.runtimeType);
-          print(us.isEmailVerified);
-          authStatus =
-          userId == null || !us.isEmailVerified ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+          authStatus = userId == null || !us.isEmailVerified
+              ? AuthStatus.notSignedIn
+              : AuthStatus.signedIn;
           print("this is the userId: $userId");
         });
       });
-
     });
   }
 

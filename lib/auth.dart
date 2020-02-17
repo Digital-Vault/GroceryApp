@@ -24,16 +24,15 @@ class Auth implements BaseAuth {
             .createUserWithEmailAndPassword(email: email, password: password))
         .user;
 
-    try{
+    try {
       await user.sendEmailVerification();
       return user.uid;
-    } catch (e){
-      print ("An error occured while trying to send email verification");
+    } catch (e) {
+      print("An error occured while trying to send email verification");
       print(e.message);
-    } finally{
+    } finally {
       return null;
     }
-
   }
 
   Future<String> currentUser() async {
@@ -45,6 +44,3 @@ class Auth implements BaseAuth {
     return FirebaseAuth.instance.signOut();
   }
 }
-
-
-

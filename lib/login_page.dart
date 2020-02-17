@@ -54,14 +54,13 @@ class _LoginPageState extends State<loginPage> {
           print('Registered user: $userId');
         }
         print(userId);
-        if(userId != null){
+        if (userId != null) {
           widget.onSignedIn();
         } else {
           setState(() {
             _loading = false;
           });
           _error = "User has not been verified. Please verify your email";
-          print("user is null");
         }
       } catch (e) {
         //print('Login Error: $e');
