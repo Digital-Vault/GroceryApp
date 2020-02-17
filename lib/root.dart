@@ -25,7 +25,6 @@ class _RootPageState extends State<RootPage> {
           authStatus = userId == null || !us.isEmailVerified
               ? AuthStatus.notSignedIn
               : AuthStatus.signedIn;
-          print("this is the userId: $userId");
         });
       });
     });
