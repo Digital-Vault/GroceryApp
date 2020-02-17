@@ -48,9 +48,10 @@ class _LoginPageState extends State<loginPage> {
           userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
         } else {
-          String userId = await widget.auth
+          userId = await widget.auth
               .createUserWithEmailAndPassword(_email, _password);
         }
+        print(userId);
         if (userId != null) {
           widget.onSignedIn();
         } else {
