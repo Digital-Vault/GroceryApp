@@ -8,6 +8,8 @@ import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:intl/intl.dart';
 
+import 'date_util.dart';
+
 class SubmissionForm extends StatefulWidget {
   SubmissionForm({this.document});
 
@@ -102,7 +104,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
             _padding(),
             _itemQuantityInput(),
             _padding(),
-            _expiryDateInput(),
+            dateInput(label: "Expiry Date", onSaved: _onExpirySaved),
             _padding(),
             _notifyDaysBeforeExpiry(),
             _extraPadding(),

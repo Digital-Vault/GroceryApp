@@ -6,6 +6,10 @@ String dateFormatYMMDToString(DateTime date) {
   return DateFormat.yMMMd().format(date);
 }
 
+DateTime maxDate() {
+  return DateTime(2100);
+}
+
 Widget dateInput({label, onSaved}) {
   return DateTimeField(
     decoration: InputDecoration(
@@ -19,7 +23,7 @@ Widget dateInput({label, onSaved}) {
         context: context,
         firstDate: currentValue ?? today,
         initialDate: currentValue ?? today,
-        lastDate: DateTime(2100),
+        lastDate: maxDate(),
       );
     },
     onSaved: onSaved,
