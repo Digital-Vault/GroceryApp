@@ -99,13 +99,13 @@ class _SubmissionFormState extends State<SubmissionForm> {
         child: ListView(
           children: <Widget>[
             _itemNameInput(),
-            _namePadding(),
+            _padding(),
             _itemQuantityInput(),
-            _namePadding(),
+            _padding(),
             _expiryDateInput(),
-            _namePadding(),
+            _padding(),
             _notifyDaysBeforeExpiry(),
-            _quantityPadding(),
+            _extraPadding(),
             _saveButton(),
           ],
         ),
@@ -136,7 +136,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.name = inputValue;
   }
 
-  Padding _namePadding() {
+  Padding _padding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 32),
     );
@@ -178,7 +178,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.quantity = int.parse(inputValue);
   }
 
-  Padding _quantityPadding() {
+  Padding _extraPadding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 64),
     );
