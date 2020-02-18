@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/editDialog.dart';
+import 'package:grocery_app/expiryDialog.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -206,12 +206,12 @@ class _GroceryList extends State<GroceryList> {
   Future<GroceryItem> _showDialog(
       BuildContext context, GroceryItem item) async {
     // flutter defined function
-    final groceryItem = item;
+    // final groceryItem = item;
 
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ExpiryDialog(item: groceryItem);
+        return ExpiryDialog(item: item);
       },
     );
   }
@@ -226,11 +226,7 @@ class _GroceryList extends State<GroceryList> {
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
         if (groceryItem.expiryDate == null) {
-          _showDialog(context, groceryItem).then((newItem) {
-            firestore.collection('fridge_list').add(newItem.toJson());
-            scheduleExpiryNotification(
-                newItem.notifyDate, newItem.expiryDate, groceryItem.name);
-          });
+          _showDialog(context, groceryItem).then((newItem) {});
         } else {
           firestore.collection('fridge_list').add(groceryItem.toJson());
           scheduleExpiryNotification(

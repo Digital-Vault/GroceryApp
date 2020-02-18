@@ -1,9 +1,15 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/date_util.dart';
 import 'package:grocery_app/grocery_item.dart';
+import 'package:grocery_app/firestore_provider.dart';
+import 'package:intl/intl.dart';
+
+import 'firestore_provider.dart';
+import 'notification_util.dart';
 
 class ExpiryDialog extends StatefulWidget {
   ExpiryDialog({@required this.item});
@@ -19,12 +25,11 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
   IconButton _notifyClearIcon;
   DateTime _expiryDate;
   int _notifyDays;
-  CustomLocalizations _translator;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     _notifyTextFieldController.addListener(_showNotifyIconButton);
-
     super.initState();
   }
 
@@ -33,30 +38,31 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(CustomLocalizations.of(context).dateDialogTitle),
-      content: Container(
-          width: double.maxFinite,
-          child: ListView(shrinkWrap: true, children: <Widget>[
-            dateInput(label: "Expiry Date", onSaved: _onExpirySaved),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(bottom: 32),
+              padding: EdgeInsets.all(8.0),
+              child: dateInput(label: "Expiry Date", onSaved: _onExpirySaved),
             ),
-            _notifyDaysBeforeExpiry()
-          ])),
+            Padding(
+                padding: EdgeInsets.all(8.0), child: _notifyDaysBeforeExpiry()),
+          ],
+        ),
+      ),
       actions: <Widget>[
         FlatButton(
           child: Text(CustomLocalizations.of(context).dateDialogSubmit),
-          onPressed: () {
-            item.expiryDate = _expiryDate;
-            item.notifyDate = _notifyDays;
-            Navigator.of(context).pop(item);
-          },
+          onPressed: _submitForm,
         ),
       ],
     );
   }
 
   void _onExpirySaved(DateTime date) {
-    _expiryDate = date;
+    this._expiryDate = date;
   }
 
   Widget _notifyDaysBeforeExpiry() {
@@ -70,6 +76,10 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
         suffixIcon: _notifyClearIcon,
       ),
     );
+  }
+
+  void _onNotifySaved(String notifyDays) {
+    _notifyDays = int.tryParse(notifyDays);
   }
 
   void _showNotifyIconButton() {
@@ -90,7 +100,20 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
     }
   }
 
-  void _onNotifySaved(String notifyDays) {
-    _notifyDays = int.tryParse(notifyDays);
+  void _submitForm() {
+    final firestore = FirestoreProvider.of(context);
+    if (_formValid()) {
+      _formKey.currentState.save();
+
+      item.expiryDate = _expiryDate;
+      item.notifyDate = _notifyDays;
+      firestore.collection('fridge_list').add(item.toJson());
+      scheduleExpiryNotification(item.notifyDate, item.expiryDate, item.name);
+      Navigator.pop(_formKey.currentContext);
+    }
+  }
+
+  bool _formValid() {
+    return _formKey.currentState.validate();
   }
 }
