@@ -1,0 +1,133 @@
+{
+  "@@locale" : "zh",
+  "addItemExistingTile" : "编辑",
+  "@addItemExistingTile" : {
+    "type" : "text",
+    "description" : "Tile of updating existing grocery item"
+  },
+  "addItemExpiry" : "到期日",
+  "@addItemExpiry" : {
+    "type" : "text",
+    "description" : "Expiry date field on item add."
+  },
+  "addItemNameEmpty" :"无空名",
+  "@addItemNameEmpty" : {
+    "type" : "text",
+    "description" : "Name field empty error"
+  },
+  "addItemNameHint" : "牛奶",
+  "@addItemNameHint" : {
+    "type" : "text",
+    "description" : "Name field hint"
+  },
+  "addItemNameLabel" : "名字",
+  "@addItemNameLabel" : {
+    "type" : "text",
+    "description" : "Name field label"
+  },
+  "addItemNewTile" : "新增项目",
+  "@addItemNewTile" : {
+    "type" : "text",
+    "description" : "Tile of adding new grocery item"
+  },
+  "addItemNotification" : "直到通知的天数",
+  "@addItemNotification" : {
+    "type" : "text",
+    "description" : "Notification field on item add."
+  },
+  "addItemQuantityEmpty" : "所需数量",
+  "@addItemQuantityEmpty" : {
+    "type" : "text",
+    "description" : "Quantity field empty error"
+  },
+  "addItemQuantityHint" : "5",
+  "@addItemQuantityHint" : {
+    "type" : "text",
+    "description" : "Quantity field hint"
+  },
+  "addItemQuantityLabel" : "数量",
+  "@addItemQuantityLabel" : {
+    "type" : "text",
+    "description" : "Quantity field label"
+  },
+  "addItemQuantityZero" : "数量必须大于零",
+  "@addItemQuantityZero" : {
+    "type" : "text",
+    "description" : "Quantity field zero error"
+  },
+  "addItemSave" : "保存",
+  "@addItemSave" : {
+    "type" : "text",
+    "description" : "Save button in add new item"
+  },
+  "appItemSearch" : "搜查",
+  "@appItemSearch" : {
+    "type" : "text",
+    "description" : "Search label when searching in home or fridge"
+  },
+  "fridgeTitle" : "我的冰箱",
+  "@fridgeTitle" : {
+    "type" : "text",
+    "description" : "Tile of my fridge page"
+  },
+  "homeTitle" : "家",
+  "@homeTitle" : {
+    "type" : "text",
+    "description" : "Home button in the bottom navigation"
+  },
+  "loginButtonLabel" : "登录",
+  "@loginButtonLabel" : {
+    "type" : "text",
+    "description" : "Login button in login page"
+  },
+  "loginCreateAccount" : "创建帐号",
+  "@loginCreateAccount" : {
+    "type" : "text",
+    "description" : "Create an account button in login page"
+  },
+  "loginEmailLabel" : "电子邮件",
+  "@loginEmailLabel" : {
+    "type" : "text",
+    "description" : "Email field in login page"
+  },
+  "loginPasswordEmpty" : "需要密码",
+  "@loginPasswordEmpty" : {
+    "type" : "text",
+    "description" : "Empty password error"
+  },
+  "loginPasswordLabel" : "需要密码",
+  "@loginPasswordLabel" : {
+    "type" : "text",
+    "description" : "Password field in login page"
+  },
+  "logout" : "登出",
+  "@logout" : {
+    "type" : "text",
+    "description" : "Logout button in menu selection"
+  },
+  "navbarFridge" : "我的冰箱",
+  "@navbarFridge" : {
+    "type" : "text",
+    "description" : "My Fridge button in the bottom navigation"
+  },
+  "navbarHome" : "杂货清单",
+  "@navbarHome" : {
+    "type" : "text",
+    "description" : "Title of the home page"
+  },
+  "sortAlphabetically" : "按字母顺序排序",
+  "@sortAlphabetically" : {
+    "type" : "text",
+    "description" : "Sort Alphabetically button in menu selection"
+  },
+  "sortExpiry" : "按有效期排序",
+  "@sortExpiry" : {
+    "type" : "text",
+    "description" : "Sort by Expiry Date button in menu selection"
+  },
+  "title" : "杂货申请",
+  "@title" : {
+    "type" : "text",
+    "description" : "Title for the application"
+  }
+}
