@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/grocery_item.dart';
 
-import 'date_util.dart';
+import 'package:grocery_app/custom_localization.dart';
+import 'package:grocery_app/date_util.dart';
+import 'package:grocery_app/grocery_item.dart';
 
 class ExpiryDialog extends StatefulWidget {
   ExpiryDialog({@required this.item});
@@ -16,9 +15,18 @@ class ExpiryDialog extends StatefulWidget {
 
 class _ExpiryDialogState extends State<ExpiryDialog> {
   _ExpiryDialogState({this.item});
-  String text = "No expiry date";
-  DateTime expiryDate;
-  int notifyDays;
+  TextEditingController _notifyTextFieldController = TextEditingController();
+  IconButton _notifyClearIcon;
+  DateTime _expiryDate;
+  int _notifyDays;
+  CustomLocalizations _translator;
+
+  @override
+  void initState() {
+    _notifyTextFieldController.addListener(_showNotifyIconButton);
+
+    super.initState();
+  }
 
   GroceryItem item;
   @override
@@ -26,79 +34,63 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
     return AlertDialog(
       title: Text(CustomLocalizations.of(context).dateDialogTitle),
       content: Container(
-        width: double.maxFinite,
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            Row(children: <Widget>[
-              Text(
-                '${CustomLocalizations.of(context).dateDialogExpiry}:',
-                style: TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                ),
-              ),
-              RaisedButton(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 14,
-                    letterSpacing: 0,
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0)),
-                elevation: 4.0,
-                color: Colors.blue[200],
-                onPressed: () {
-                  DatePicker.showDatePicker(context,
-                      theme: DatePickerTheme(
-                        containerHeight: 210.0,
-                      ),
-                      showTitleActions: true,
-                      minTime: DateTime(2000, 1, 1),
-                      maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
-                    expiryDate = date;
-                    setState(() {
-                      text = dateFormatYMMDToString(date);
-                    });
-                  }, currentTime: DateTime.now(), locale: LocaleType.en);
-                },
-              )
-            ]),
-            Row(children: <Widget>[
-              Text(
-                '${CustomLocalizations.of(context).dateDialogNotify}:',
-                style: TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ],
-                    onSubmitted: (val) {
-                      notifyDays = int.parse(val);
-                    }),
-              )
-            ])
-          ],
-        ),
-      ),
+          width: double.maxFinite,
+          child: ListView(shrinkWrap: true, children: <Widget>[
+            dateInput(label: "Expiry Date", onSaved: _onExpirySaved),
+            Padding(
+              padding: EdgeInsets.only(bottom: 32),
+            ),
+            _notifyDaysBeforeExpiry()
+          ])),
       actions: <Widget>[
-        // usually buttons at the bottom of the dialog
         FlatButton(
           child: Text(CustomLocalizations.of(context).dateDialogSubmit),
           onPressed: () {
-            item.expiryDate = expiryDate;
-            item.notifyDate = notifyDays;
+            item.expiryDate = _expiryDate;
+            item.notifyDate = _notifyDays;
             Navigator.of(context).pop(item);
           },
         ),
       ],
     );
+  }
+
+  void _onExpirySaved(DateTime date) {
+    _expiryDate = date;
+  }
+
+  Widget _notifyDaysBeforeExpiry() {
+    return TextFormField(
+      onSaved: _onNotifySaved,
+      controller: _notifyTextFieldController,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        hintText: '5',
+        labelText: "Notify days before",
+        suffixIcon: _notifyClearIcon,
+      ),
+    );
+  }
+
+  void _showNotifyIconButton() {
+    void _onClear() {
+      setState(() {
+        _notifyTextFieldController.text = "";
+        _notifyClearIcon = null;
+      });
+    }
+
+    if (_notifyTextFieldController.text.isNotEmpty) {
+      setState(() {
+        _notifyClearIcon = IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () => _onClear(),
+        );
+      });
+    }
+  }
+
+  void _onNotifySaved(String notifyDays) {
+    _notifyDays = int.tryParse(notifyDays);
   }
 }
