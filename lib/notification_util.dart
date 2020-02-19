@@ -71,7 +71,7 @@ Future<void> scheduleNotification(int time) async {
 
 /// Schedules a notification that specifies a different icon, sound and vibration pattern
 Future<void> scheduleExpiryNotification(
-    int time, DateTime expiryDate, String itemName) async {
+    int time, DateTime expiryDate, String itemName, String docID) async {
   final formatter = DateFormat('yyyy-MM-dd');
   final formattedExpiryDate = formatter.format(expiryDate);
   // final formattedExpiryDate =
@@ -105,7 +105,8 @@ Future<void> scheduleExpiryNotification(
       '${itemName} expiring on',
       '${formattedExpiryDate}',
       scheduledNotificationDateTime,
-      platformChannelSpecifics);
+      platformChannelSpecifics,
+      payload: docID);
 }
 
 Future<void> showNotificationWithNoSound() async {

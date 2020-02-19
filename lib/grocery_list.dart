@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/editDialog.dart';
+import 'package:grocery_app/expiryDialog.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -204,14 +204,14 @@ class _GroceryList extends State<GroceryList> {
   }
 
   Future<GroceryItem> _showDialog(
-      BuildContext context, GroceryItem item) async {
+      BuildContext context, DocumentSnapshot document) async {
     // flutter defined function
-    final groceryItem = item;
+    // final groceryItem = item;
 
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ExpiryDialog(item: groceryItem);
+        return ExpiryDialog(item: document);
       },
     );
   }
@@ -224,17 +224,15 @@ class _GroceryList extends State<GroceryList> {
       key: Key(document.documentID),
       background: _dismissibleBackground(),
       direction: DismissDirection.startToEnd,
-      onDismissed: (direction) {
+      onDismissed: (direction) async {
         if (groceryItem.expiryDate == null) {
-          _showDialog(context, groceryItem).then((newItem) {
-            firestore.collection('fridge_list').add(newItem.toJson());
-            scheduleExpiryNotification(
-                newItem.notifyDate, newItem.expiryDate, groceryItem.name);
-          });
+          await _showDialog(context, document).then((newItem) {});
         } else {
-          firestore.collection('fridge_list').add(groceryItem.toJson());
-          scheduleExpiryNotification(
-              groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
+          var docRef = await firestore
+              .collection('fridge_list')
+              .add(groceryItem.toJson());
+          await scheduleExpiryNotification(groceryItem.notifyDate,
+              groceryItem.expiryDate, groceryItem.name, docRef.documentID);
         }
         Scaffold.of(context).showSnackBar(
           SnackBar(

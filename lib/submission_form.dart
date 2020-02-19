@@ -1,12 +1,13 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:intl/intl.dart';
+
+import 'date_util.dart';
 
 class SubmissionForm extends StatefulWidget {
   SubmissionForm({this.document});
@@ -99,13 +100,13 @@ class _SubmissionFormState extends State<SubmissionForm> {
         child: ListView(
           children: <Widget>[
             _itemNameInput(),
-            _namePadding(),
+            _padding(),
             _itemQuantityInput(),
-            _namePadding(),
-            _expiryDateInput(),
-            _namePadding(),
+            _padding(),
+            dateInput(label: "Expiry Date", onSaved: _onExpirySaved),
+            _padding(),
             _notifyDaysBeforeExpiry(),
-            _quantityPadding(),
+            _extraPadding(),
             _saveButton(),
           ],
         ),
@@ -136,7 +137,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.name = inputValue;
   }
 
-  Padding _namePadding() {
+  Padding _padding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 32),
     );
@@ -178,7 +179,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.quantity = int.parse(inputValue);
   }
 
-  Padding _quantityPadding() {
+  Padding _extraPadding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 64),
     );
@@ -210,27 +211,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
         );
       });
     }
-  }
-
-  Widget _expiryDateInput() {
-    return DateTimeField(
-      decoration: InputDecoration(
-        labelText: _translator.addItemExpiry,
-      ),
-      format: DateFormat.yMMMd(),
-      initialValue: _item.expiryDate,
-      onShowPicker: (context, currentValue) async {
-        final today = DateTime.now();
-
-        return showDatePicker(
-          context: context,
-          firstDate: currentValue ?? today,
-          initialDate: currentValue ?? today,
-          lastDate: DateTime(2100),
-        );
-      },
-      onSaved: _onExpirySaved,
-    );
   }
 
   void _onExpirySaved(DateTime inputValue) {

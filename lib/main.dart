@@ -175,9 +175,14 @@ class _MyAppState extends State<MyApp> {
       );
     });
     selectNotificationSubject.stream.listen((String payload) async {
+      var firebase = FirestoreProvider.of(context);
+      var docRef = firebase.collection("fridge_list").document(payload);
+      var docSnap = await docRef.get();
+
       await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RootPage()),
+        MaterialPageRoute(
+            builder: (context) => GroceryItemModification(document: docSnap)),
       );
     });
   }
