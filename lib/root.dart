@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/main.dart';
@@ -19,9 +20,12 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     widget.auth.currentUser().then((userId) {
-      setState(() {
-        authStatus =
-            userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+      FirebaseAuth.instance.currentUser().then((us) {
+        setState(() {
+          authStatus = userId == null || !us.isEmailVerified
+              ? AuthStatus.notSignedIn
+              : AuthStatus.signedIn;
+        });
       });
     });
   }

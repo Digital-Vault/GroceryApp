@@ -8,7 +8,6 @@ import 'package:grocery_app/firestore_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grocery_app/grocery_item_modification.dart';
-import 'package:grocery_app/submission_form.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'auth.dart';
@@ -87,6 +86,25 @@ void main() async {
         supportedLocales: [
           const Locale('en', ''),
           const Locale('fr', ''),
+          const Locale.fromSubtags(languageCode: 'zh'), // generic Chinese 'zh'
+          const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hans'), // generic simplified Chinese 'zh_Hans'
+          const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hant'), // generic traditional Chinese 'zh_Hant'
+          const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hans',
+              countryCode: 'CN'), // 'zh_Hans_CN'
+          const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hant',
+              countryCode: 'TW'), // 'zh_Hant_TW'
+          const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hant',
+              countryCode: 'HK'), // 'zh_Hant_HK'
           const Locale('es', ''),
         ],
         theme: ThemeData(
@@ -203,7 +221,8 @@ class _MyAppState extends State<MyApp> {
           child: const Icon(Icons.add),
           onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SubmissionForm()),
+                MaterialPageRoute(
+                    builder: (context) => GroceryItemModification()),
               )),
     );
   }
