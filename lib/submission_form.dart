@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:intl/intl.dart';
 
 import 'date_util.dart';
 
@@ -212,27 +211,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
         );
       });
     }
-  }
-
-  Widget _expiryDateInput() {
-    return DateTimeField(
-      decoration: InputDecoration(
-        labelText: _translator.addItemExpiry,
-      ),
-      format: DateFormat.yMMMd(),
-      initialValue: _item.expiryDate,
-      onShowPicker: (context, currentValue) async {
-        final today = DateTime.now();
-
-        return showDatePicker(
-          context: context,
-          firstDate: currentValue ?? today,
-          initialDate: currentValue ?? today,
-          lastDate: DateTime(2100),
-        );
-      },
-      onSaved: _onExpirySaved,
-    );
   }
 
   void _onExpirySaved(DateTime inputValue) {

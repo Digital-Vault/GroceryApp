@@ -226,12 +226,12 @@ class _GroceryList extends State<GroceryList> {
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) async {
         if (groceryItem.expiryDate == null) {
-          _showDialog(context, document).then((newItem) {});
+          await _showDialog(context, document).then((newItem) {});
         } else {
           var docRef = await firestore
               .collection('fridge_list')
               .add(groceryItem.toJson());
-          scheduleExpiryNotification(groceryItem.notifyDate,
+          await scheduleExpiryNotification(groceryItem.notifyDate,
               groceryItem.expiryDate, groceryItem.name, docRef.documentID);
         }
         Scaffold.of(context).showSnackBar(
