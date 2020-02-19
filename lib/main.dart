@@ -7,7 +7,7 @@ import 'package:grocery_app/firestore_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_app/submission_form.dart';
+import 'package:grocery_app/grocery_item_modification.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'auth.dart';
@@ -216,7 +216,8 @@ class _MyAppState extends State<MyApp> {
           child: const Icon(Icons.add),
           onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SubmissionForm()),
+                MaterialPageRoute(
+                    builder: (context) => GroceryItemModification()),
               )),
     );
   }

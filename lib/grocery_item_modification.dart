@@ -21,6 +21,14 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
   TextEditingController _qtyTextFieldController = TextEditingController();
   IconButton _nameClearIcon;
   IconButton _qtyClearIcon;
+  String _storeValue;
+  final List<String> _stores = [
+    'Walmart',
+    'Shoppers',
+    'Lablaw',
+    'Sobeys',
+    'Metro'
+  ];
   DocumentSnapshot document;
   GroceryItem _item;
   CustomLocalizations _translator;
@@ -44,6 +52,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
   void _loadTextValues() {
     _nameTextFieldController.text = _item.name;
     _qtyTextFieldController.text = _item.quantity.toString();
+    _storeValue = _item.store;
   }
 
   @override
@@ -77,7 +86,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
 
   Widget _formBody() {
     return Padding(
-      padding: EdgeInsets.only(top: 32, left: 32, right: 32),
+      padding: EdgeInsets.all(32),
       child: _form(),
     );
   }
@@ -87,9 +96,11 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
         child: ListView(
           children: <Widget>[
             _itemNameInput(),
-            _namePadding(),
+            _padding(),
             _itemQuantityInput(),
-            _quantityPadding(),
+            _padding(),
+            _storeInput(),
+            _lastItemPadding(),
             _saveButton(),
           ],
         ),
@@ -120,7 +131,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
     _item.name = inputValue;
   }
 
-  Padding _namePadding() {
+  Padding _padding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 32),
     );
@@ -162,12 +173,6 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
     _item.quantity = int.parse(inputValue);
   }
 
-  Padding _quantityPadding() {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 64),
-    );
-  }
-
   String _quantityValid(String inputValue) {
     if (inputValue.isEmpty) {
       return _translator.addItemQuantityEmpty;
@@ -194,6 +199,36 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
         );
       });
     }
+  }
+
+  Widget _storeInput() {
+    return DropdownButtonFormField(
+      value: _storeValue,
+      hint: Text('store'),
+      icon: Icon(Icons.arrow_downward),
+      onSaved: _onStoreSave,
+      onChanged: (String newValue) {
+        setState(() {
+          _storeValue = newValue;
+        });
+      },
+      items: _stores.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+
+  void _onStoreSave(String store) {
+    _item.store = store;
+  }
+
+  Padding _lastItemPadding() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 64),
+    );
   }
 
   Widget _saveButton() {
