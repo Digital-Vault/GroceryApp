@@ -317,7 +317,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   void _updateDatabase() async {
     final jsonItem = _item.toJson();
     if (_newItem()) {
-      bool isDup = await _isDuplicateItem(jsonItem["name"]);
+      bool isDup = await _isDuplicateItem(jsonItem["name"], jsonItem);
       if (!isDup) {
         await _firestore.collection('user1_list').add(jsonItem);
       }
@@ -326,12 +326,16 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-  Future<bool> _isDuplicateItem(String itemName) async {
+  Future<bool> _isDuplicateItem(
+      String itemName, Map<String, dynamic> jsonItem) async {
     QuerySnapshot queryList =
         await _firestore.collection('user1_list').getDocuments();
     var GroceryItems = queryList.documents;
     for (int i = 0; i < GroceryItems.length; i++) {
       if (GroceryItems[i].data["name"] == itemName) {
+        await GroceryItems[i].reference.updateData({
+          'quantity': GroceryItems[i].data["quantity"] + jsonItem["quantity"]
+        });
         return true;
       }
     }
