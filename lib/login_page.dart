@@ -39,20 +39,27 @@ class _LoginPageState extends State<loginPage> {
 
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
+      String userId;
       try {
         setState(() {
           _loading = true;
         });
         if (_formType == FormType.login) {
-          String userId =
+          userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
-          print('Signed in: $userId');
         } else {
-          String userId = await widget.auth
+          userId = await widget.auth
               .createUserWithEmailAndPassword(_email, _password);
-          print('Registered user: $userId');
         }
-        widget.onSignedIn();
+        print(userId);
+        if (userId != null) {
+          widget.onSignedIn();
+        } else {
+          setState(() {
+            _loading = false;
+          });
+          _error = "User has not been verified. Please verify your email";
+        }
       } catch (e) {
         //print('Login Error: $e');
         setState(() {

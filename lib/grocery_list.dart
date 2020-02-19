@@ -4,10 +4,10 @@ import 'package:grocery_app/editDialog.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/grocery_item_modification.dart';
 import 'package:grocery_app/notification_util.dart';
 import 'search.dart';
 import 'auth.dart';
-import 'detailed_page.dart';
 
 enum MenuItems { alphabetically, expiryDate, logout }
 
@@ -220,8 +220,7 @@ class _GroceryList extends State<GroceryList> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  DetailedPage(documentReference: document.reference),
+              builder: (context) => GroceryItemModification(document: document),
             ),
           );
         },

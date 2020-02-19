@@ -1,32 +1,34 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/custom_localization.dart';
 import 'package:grocery_app/firestore_provider.dart';
 import 'package:grocery_app/grocery_item.dart';
-import 'package:intl/intl.dart';
 
-class SubmissionForm extends StatefulWidget {
-  SubmissionForm({this.document});
+class GroceryItemModification extends StatefulWidget {
+  GroceryItemModification({this.document});
 
   final DocumentSnapshot document;
 
   @override
-  _SubmissionFormState createState() =>
-      _SubmissionFormState(document: document);
+  _GroceryItemModificationState createState() =>
+      _GroceryItemModificationState(document: document);
 }
 
-class _SubmissionFormState extends State<SubmissionForm> {
-  _SubmissionFormState({this.document});
+class _GroceryItemModificationState extends State<GroceryItemModification> {
+  _GroceryItemModificationState({this.document});
 
   TextEditingController _nameTextFieldController = TextEditingController();
   TextEditingController _qtyTextFieldController = TextEditingController();
-  TextEditingController _notifyTextFieldController = TextEditingController();
   IconButton _nameClearIcon;
   IconButton _qtyClearIcon;
-  IconButton _notifyClearIcon;
+  String _storeValue;
+  final List<String> _stores = [
+    'Walmart',
+    'Shoppers',
+    'Lablaw',
+    'Sobeys',
+    'Metro'
+  ];
   DocumentSnapshot document;
   GroceryItem _item;
   CustomLocalizations _translator;
@@ -43,7 +45,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
     _nameTextFieldController.addListener(_showNameIconButton);
     _qtyTextFieldController.addListener(_showQtyIconButton);
-    _notifyTextFieldController.addListener(_showNotifyIconButton);
 
     super.initState();
   }
@@ -51,11 +52,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   void _loadTextValues() {
     _nameTextFieldController.text = _item.name;
     _qtyTextFieldController.text = _item.quantity.toString();
-
-    if (_item.notifyDate != null) {
-      log(_item.toString());
-      _notifyTextFieldController.text = _item.notifyDate.toString();
-    }
+    _storeValue = _item.store;
   }
 
   @override
@@ -89,7 +86,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   Widget _formBody() {
     return Padding(
-      padding: EdgeInsets.only(top: 32, left: 32, right: 32),
+      padding: EdgeInsets.all(32),
       child: _form(),
     );
   }
@@ -99,13 +96,11 @@ class _SubmissionFormState extends State<SubmissionForm> {
         child: ListView(
           children: <Widget>[
             _itemNameInput(),
-            _namePadding(),
+            _padding(),
             _itemQuantityInput(),
-            _namePadding(),
-            _expiryDateInput(),
-            _namePadding(),
-            _notifyDaysBeforeExpiry(),
-            _quantityPadding(),
+            _padding(),
+            _storeInput(),
+            _lastItemPadding(),
             _saveButton(),
           ],
         ),
@@ -136,7 +131,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.name = inputValue;
   }
 
-  Padding _namePadding() {
+  Padding _padding() {
     return Padding(
       padding: EdgeInsets.only(bottom: 32),
     );
@@ -178,12 +173,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.quantity = int.parse(inputValue);
   }
 
-  Padding _quantityPadding() {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 64),
-    );
-  }
-
   String _quantityValid(String inputValue) {
     if (inputValue.isEmpty) {
       return _translator.addItemQuantityEmpty;
@@ -212,66 +201,34 @@ class _SubmissionFormState extends State<SubmissionForm> {
     }
   }
 
-  Widget _expiryDateInput() {
-    return DateTimeField(
-      decoration: InputDecoration(
-        labelText: _translator.addItemExpiry,
-      ),
-      format: DateFormat.yMMMd(),
-      initialValue: _item.expiryDate,
-      onShowPicker: (context, currentValue) async {
-        final today = DateTime.now();
-
-        return showDatePicker(
-          context: context,
-          firstDate: currentValue ?? today,
-          initialDate: currentValue ?? today,
-          lastDate: DateTime(2100),
-        );
+  Widget _storeInput() {
+    return DropdownButtonFormField(
+      value: _storeValue,
+      hint: Text('store'),
+      icon: Icon(Icons.arrow_downward),
+      onSaved: _onStoreSave,
+      onChanged: (String newValue) {
+        setState(() {
+          _storeValue = newValue;
+        });
       },
-      onSaved: _onExpirySaved,
-    );
-  }
-
-  void _onExpirySaved(DateTime inputValue) {
-    _item.expiryDate = inputValue;
-  }
-
-// TODO: provide default values notifyDaysBeforeExpiry
-
-  Widget _notifyDaysBeforeExpiry() {
-    return TextFormField(
-      onSaved: _onNotifySaved,
-      controller: _notifyTextFieldController,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        hintText: '5',
-        labelText: _translator.addItemNotification,
-        suffixIcon: _notifyClearIcon,
-      ),
-    );
-  }
-
-  void _showNotifyIconButton() {
-    void _onClear() {
-      setState(() {
-        _notifyTextFieldController.text = "";
-        _notifyClearIcon = null;
-      });
-    }
-
-    if (_notifyTextFieldController.text.isNotEmpty) {
-      setState(() {
-        _notifyClearIcon = IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () => _onClear(),
+      items: _stores.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
         );
-      });
-    }
+      }).toList(),
+    );
   }
 
-  void _onNotifySaved(String inputValue) {
-    _item.notifyDate = int.tryParse(inputValue);
+  void _onStoreSave(String store) {
+    _item.store = store;
+  }
+
+  Padding _lastItemPadding() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 64),
+    );
   }
 
   Widget _saveButton() {
@@ -302,31 +259,14 @@ class _SubmissionFormState extends State<SubmissionForm> {
     return _formKey.currentState.validate();
   }
 
-  void _updateDatabase() async {
+  void _updateDatabase() {
+    final firestore = FirestoreProvider.of(context);
     final jsonItem = _item.toJson();
-    if (_newItem()) {
-      bool isDup = await _isDuplicateItem(jsonItem["name"], jsonItem);
-      if (!isDup) {
-        await _firestore.collection('user1_list').add(jsonItem);
-      }
-    } else {
-      await document.reference.updateData(jsonItem);
-    }
-  }
 
-  Future<bool> _isDuplicateItem(
-      String itemName, Map<String, dynamic> jsonItem) async {
-    QuerySnapshot queryList =
-        await _firestore.collection('user1_list').getDocuments();
-    var GroceryItems = queryList.documents;
-    for (int i = 0; i < GroceryItems.length; i++) {
-      if (GroceryItems[i].data["name"] == itemName) {
-        await GroceryItems[i].reference.updateData({
-          'quantity': GroceryItems[i].data["quantity"] + jsonItem["quantity"]
-        });
-        return true;
-      }
+    if (_newItem()) {
+      firestore.collection('user1_list').add(jsonItem);
+    } else {
+      document.reference.updateData(jsonItem);
     }
-    return false;
   }
 }
