@@ -204,14 +204,14 @@ class _GroceryList extends State<GroceryList> {
   }
 
   Future<GroceryItem> _showDialog(
-      BuildContext context, GroceryItem item) async {
+      BuildContext context, DocumentSnapshot document) async {
     // flutter defined function
     // final groceryItem = item;
 
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ExpiryDialog(item: item);
+        return ExpiryDialog(item: document);
       },
     );
   }
@@ -224,13 +224,15 @@ class _GroceryList extends State<GroceryList> {
       key: Key(document.documentID),
       background: _dismissibleBackground(),
       direction: DismissDirection.startToEnd,
-      onDismissed: (direction) {
+      onDismissed: (direction) async {
         if (groceryItem.expiryDate == null) {
-          _showDialog(context, groceryItem).then((newItem) {});
+          _showDialog(context, document).then((newItem) {});
         } else {
-          firestore.collection('fridge_list').add(groceryItem.toJson());
-          scheduleExpiryNotification(
-              groceryItem.notifyDate, groceryItem.expiryDate, groceryItem.name);
+          var docRef = await firestore
+              .collection('fridge_list')
+              .add(groceryItem.toJson());
+          scheduleExpiryNotification(groceryItem.notifyDate,
+              groceryItem.expiryDate, groceryItem.name, docRef.documentID);
         }
         Scaffold.of(context).showSnackBar(
           SnackBar(

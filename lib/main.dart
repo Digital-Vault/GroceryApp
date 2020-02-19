@@ -7,6 +7,7 @@ import 'package:grocery_app/firestore_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/grocery_item_modification.dart';
 import 'package:grocery_app/submission_form.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -156,9 +157,14 @@ class _MyAppState extends State<MyApp> {
       );
     });
     selectNotificationSubject.stream.listen((String payload) async {
+      var firebase = FirestoreProvider.of(context);
+      var docRef = firebase.collection("fridge_list").document(payload);
+      var docSnap = await docRef.get();
+
       await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RootPage()),
+        MaterialPageRoute(
+            builder: (context) => GroceryItemModification(document: docSnap)),
       );
     });
   }

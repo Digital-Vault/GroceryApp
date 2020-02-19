@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +14,7 @@ import 'notification_util.dart';
 
 class ExpiryDialog extends StatefulWidget {
   ExpiryDialog({@required this.item});
-  final GroceryItem item;
+  final DocumentSnapshot item;
 
   @override
   _ExpiryDialogState createState() => _ExpiryDialogState(item: item);
@@ -25,6 +26,7 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
   IconButton _notifyClearIcon;
   DateTime _expiryDate;
   int _notifyDays;
+  DocumentSnapshot item;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -33,7 +35,6 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
     super.initState();
   }
 
-  GroceryItem item;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -100,15 +101,19 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
     }
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     final firestore = FirestoreProvider.of(context);
     if (_formValid()) {
       _formKey.currentState.save();
+      GroceryItem updatedItem = GroceryItem.fromJson(item.data);
 
-      item.expiryDate = _expiryDate;
-      item.notifyDate = _notifyDays;
-      firestore.collection('fridge_list').add(item.toJson());
-      scheduleExpiryNotification(item.notifyDate, item.expiryDate, item.name);
+      updatedItem.expiryDate = _expiryDate;
+      updatedItem.notifyDate = _notifyDays;
+      var docRef =
+          await firestore.collection('fridge_list').add(updatedItem.toJson());
+
+      await scheduleExpiryNotification(updatedItem.notifyDate,
+          updatedItem.expiryDate, updatedItem.name, docRef.documentID);
       Navigator.pop(_formKey.currentContext);
     }
   }
