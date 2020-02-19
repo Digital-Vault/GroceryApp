@@ -303,6 +303,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
   }
 
   void _updateDatabase() async {
+    final _firestore = FirestoreProvider.of(context);
     final jsonItem = _item.toJson();
     if (_newItem()) {
       bool isDup = await _isDuplicateItem(jsonItem["name"], jsonItem);
@@ -316,6 +317,7 @@ class _SubmissionFormState extends State<SubmissionForm> {
 
   Future<bool> _isDuplicateItem(
       String itemName, Map<String, dynamic> jsonItem) async {
+    final _firestore = FirestoreProvider.of(context);
     QuerySnapshot queryList =
         await _firestore.collection('user1_list').getDocuments();
     var GroceryItems = queryList.documents;
