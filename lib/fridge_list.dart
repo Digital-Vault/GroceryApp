@@ -74,23 +74,45 @@ class FridgeList extends StatelessWidget {
             ),
           );
         },
-        child: ListTile(
-          title: Text(
-            groceryItem.name,
-            //style: getExpiryIndicatorColor(groceryItem.expiryDate),
-          ),
-          subtitle: getExpiryIndicatorColor(
-              context, groceryItem.expiryDate, groceryItem.name),
-          trailing: Text("${groceryItem.quantity}x"),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SubmissionForm(document: document),
+        child: Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    left: BorderSide(
+                        color: borderColor(groceryItem.expiryDate), width: 4))),
+            child: ListTile(
+              title: Text(
+                groceryItem.name,
+                //style: getExpiryIndicatorColor(groceryItem.expiryDate),
               ),
-            );
-          },
-        ));
+              subtitle: getExpiryIndicatorColor(
+                  context, groceryItem.expiryDate, groceryItem.name),
+              trailing: Text("${groceryItem.quantity}x"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubmissionForm(document: document),
+                  ),
+                );
+              },
+            )));
+  }
+
+  MaterialColor borderColor(DateTime expiryDate) {
+    if (expiryDate == null) {
+      return null;
+    }
+    DateTime today = DateTime.now();
+    int daysTillExpiry = expiryDate.difference(today).inDays;
+    MaterialColor colors;
+    if (daysTillExpiry < 0) {
+      colors = Colors.red;
+    } else if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
+      colors = Colors.orange;
+    } else {
+      colors = Colors.green;
+    }
+    return colors;
   }
 
   Widget _dismissibleBackground() {
@@ -118,11 +140,10 @@ class FridgeList extends StatelessWidget {
         "● $itemName ${CustomLocalizations.of(context).fridgeExpiryDateFirstPart} $daysTillExpiry ${CustomLocalizations.of(context).fridgeExpiryDateSecondPart}.";
 
     if (daysTillExpiry < 0) {
-      expiryInfo = Text("● $itemName has expired!",
-          style: TextStyle(color: Colors.red[700]));
+      expiryInfo = Text("● $itemName has expired!");
     }
     if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red));
+      expiryInfo = Text(expirySentence);
     }
     return expiryInfo;
   }
