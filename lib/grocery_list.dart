@@ -30,7 +30,7 @@ class _GroceryList extends State<GroceryList> {
   _GroceryList({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
-  String _order = 'name';
+  //String _order = 'store';
   var _documents = <DocumentSnapshot>[];
 
   Future<void> _signOut(BuildContext context) async {
@@ -98,11 +98,11 @@ class _GroceryList extends State<GroceryList> {
                 _signOut(context);
               } else if (result == MenuItems.alphabetically) {
                 setState(() {
-                  _order = 'name';
+                  //_order = 'name';
                 });
               } else if (result == MenuItems.expiryDate) {
                 setState(() {
-                  _order = 'expiryDate';
+                  // _order = 'expiryDate';
                 });
               }
             },
@@ -135,7 +135,7 @@ class _GroceryList extends State<GroceryList> {
     final firestore = FirestoreProvider.of(context);
 
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('user1_list').orderBy(_order).snapshots(),
+      stream: firestore.collection('user1_list').orderBy('store').snapshots(),
       builder: _builder,
     );
   }
@@ -208,20 +208,24 @@ class _GroceryList extends State<GroceryList> {
           ),
         );
       },
-      child: ListTile(
-        title: Text(
-          groceryItem.name,
-          //style: getExpiryIndicatorColor2(groceryItem.expiryDate),
+      child: Container(
+        child: ListTile(
+          leading: returnLogo(groceryItem),
+          title: Text(
+            groceryItem.name,
+            //style: getExpiryIndicatorColor2(groceryItem.expiryDate),
+          ),
+          trailing: Text('${groceryItem.quantity}x'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    GroceryItemModification(document: document),
+              ),
+            );
+          },
         ),
-        trailing: Text('${groceryItem.quantity}x'),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GroceryItemModification(document: document),
-            ),
-          );
-        },
       ),
     );
   }
@@ -236,6 +240,52 @@ class _GroceryList extends State<GroceryList> {
         color: Colors.white,
       ),
     );
+  }
+
+  Widget returnLogo(GroceryItem item) {
+    if (item.store == 'Walmart') {
+      return ImageIcon(
+        AssetImage('assets/walmart.png'),
+        color: Colors.blue,
+        size: 70,
+      );
+    } else if (item.store == 'Shoppers') {
+      return ImageIcon(
+        AssetImage('assets/Shoppers.png'),
+        color: Colors.red,
+        size: 70,
+      );
+    } else if (item.store == 'Sobeys') {
+      return ImageIcon(
+        AssetImage('assets/Sobeys.png'),
+        color: Colors.green,
+        size: 70,
+      );
+    } else if (item.store == 'Shoppers') {
+      return ImageIcon(
+        AssetImage('assets/Shoppers.png'),
+        color: Colors.green,
+        size: 70,
+      );
+    } else if (item.store == 'Lablaw') {
+      return ImageIcon(
+        AssetImage('assets/l.png'),
+        color: Colors.black,
+        size: 70,
+      );
+    } else if (item.store == 'Metro') {
+      return ImageIcon(
+        AssetImage('assets/Metro.png'),
+        color: Colors.red,
+        size: 70,
+      );
+    } else {
+      return ImageIcon(
+        AssetImage('assets/cart.png'),
+        color: Colors.red,
+        size: 70,
+      );
+    }
   }
 
   Future<List<DocumentSnapshot>> getData(
