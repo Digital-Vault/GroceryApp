@@ -76,8 +76,9 @@ class FridgeList extends StatelessWidget {
         },
         child: Container(
             decoration: BoxDecoration(
-                border: Border(left: BorderSide(color: borderColor(groceryItem.expiryDate), width: 4))
-            ),
+                border: Border(
+                    left: BorderSide(
+                        color: borderColor(groceryItem.expiryDate), width: 4))),
             child: ListTile(
               title: Text(
                 groceryItem.name,
@@ -94,11 +95,10 @@ class FridgeList extends StatelessWidget {
                   ),
                 );
               },
-            )
-        ));
+            )));
   }
 
-  MaterialColor borderColor(DateTime expiryDate){
+  MaterialColor borderColor(DateTime expiryDate) {
     if (expiryDate == null) {
       return null;
     }
@@ -106,16 +106,15 @@ class FridgeList extends StatelessWidget {
     int daysTillExpiry = expiryDate.difference(today).inDays;
     MaterialColor colors;
     if (daysTillExpiry < 0) {
-      colors =  Colors.red;
-    }else if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
+      colors = Colors.red;
+    } else if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
       colors = Colors.orange;
-    }else {
+    } else {
       colors = Colors.green;
     }
     return colors;
-
-
   }
+
   Widget _dismissibleBackground() {
     return Container(
       alignment: Alignment.centerRight,
