@@ -141,11 +141,10 @@ class FridgeList extends StatelessWidget {
         "● $itemName ${CustomLocalizations.of(context).fridgeExpiryDateFirstPart} $daysTillExpiry ${CustomLocalizations.of(context).fridgeExpiryDateSecondPart}.";
 
     if (daysTillExpiry < 0) {
-      expiryInfo = Text("● $itemName has expired!",
-          style: TextStyle(color: Colors.red[700]));
+      expiryInfo = Text("● $itemName has expired!");
     }
     if (daysTillExpiry < 5 && daysTillExpiry >= 0) {
-      expiryInfo = Text(expirySentence, style: TextStyle(color: Colors.red));
+      expiryInfo = Text(expirySentence);
     }
     return expiryInfo;
   }
