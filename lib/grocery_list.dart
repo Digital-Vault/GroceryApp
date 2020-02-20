@@ -30,7 +30,7 @@ class _GroceryList extends State<GroceryList> {
   _GroceryList({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
-  String _order = 'store';
+  //String _order = 'store';
   var _documents = <DocumentSnapshot>[];
 
   Future<void> _signOut(BuildContext context) async {
