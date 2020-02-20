@@ -282,14 +282,33 @@ class _SubmissionFormState extends State<SubmissionForm> {
     return _formKey.currentState.validate();
   }
 
-  void _updateDatabase() {
-    final firestore = FirestoreProvider.of(context);
+  void _updateDatabase() async {
+    final _firestore = FirestoreProvider.of(context);
     final jsonItem = _item.toJson();
-
     if (_newItem()) {
-      firestore.collection('user1_list').add(jsonItem);
+      bool isDup = await _isDuplicateItem(jsonItem["name"], jsonItem);
+      if (!isDup) {
+        await _firestore.collection('user1_list').add(jsonItem);
+      }
     } else {
-      document.reference.updateData(jsonItem);
+      await document.reference.updateData(jsonItem);
     }
+  }
+
+  Future<bool> _isDuplicateItem(
+      String itemName, Map<String, dynamic> jsonItem) async {
+    final _firestore = FirestoreProvider.of(context);
+    QuerySnapshot queryList =
+        await _firestore.collection('user1_list').getDocuments();
+    var GroceryItems = queryList.documents;
+    for (int i = 0; i < GroceryItems.length; i++) {
+      if (GroceryItems[i].data["name"] == itemName) {
+        await GroceryItems[i].reference.updateData({
+          'quantity': GroceryItems[i].data["quantity"] + jsonItem["quantity"]
+        });
+        return true;
+      }
+    }
+    return false;
   }
 }

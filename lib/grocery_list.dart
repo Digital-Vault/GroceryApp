@@ -43,37 +43,6 @@ class _GroceryList extends State<GroceryList> {
   }
 
   //determine text color based on how far away expiry date is
-  /*
-  TextStyle getExpiryIndicatorColor2(DateTime expiryDate) {
-    TextStyle expiryColour;
-    if (expiryDate == null) {
-      expiryColour = TextStyle(color: Colors.black);
-      return expiryColour;
-    }
-
-    DateTime today = DateTime.now();
-    int daysTillExpiry = expiryDate.difference(today).inDays;
-
-    if (daysTillExpiry < 0) {
-      expiryColour = TextStyle(color: Colors.brown[700]);
-    }
-    if (daysTillExpiry == 0) {
-      expiryColour = TextStyle(color: Colors.red);
-    }
-    if (daysTillExpiry >= 1) {
-      expiryColour = TextStyle(color: Colors.deepOrange);
-    }
-    if (daysTillExpiry >= 5) {
-      expiryColour = TextStyle(color: Colors.orange[600]);
-    }
-    if (daysTillExpiry >= 10) {
-      expiryColour = TextStyle(color: Colors.green);
-    }
-    return expiryColour;
-  }
-  */
-
-  //determine text color based on how far away expiry date is
   Text getExpiryIndicatorColor(DateTime expiryDate, String itemName) {
     Text expiryInfo;
     if (expiryDate == null) {
@@ -219,7 +188,6 @@ class _GroceryList extends State<GroceryList> {
   Widget _buildItemRow(BuildContext context, DocumentSnapshot document) {
     final groceryItem = GroceryItem.fromJson(document.data);
     final firestore = FirestoreProvider.of(context);
-    print(groceryItem.expiryDate);
     return Dismissible(
       key: Key(document.documentID),
       background: _dismissibleBackground(),
