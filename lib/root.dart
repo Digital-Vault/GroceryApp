@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/main.dart';
-import 'login_page.dart';
-import 'auth.dart';
+import 'screens/login/login_page.dart';
+import 'widgets/auth.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});

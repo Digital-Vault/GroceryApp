@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/firestore_provider.dart';
+import 'widgets/custom_localization.dart';
+import 'widgets/firestore_provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_app/grocery_item_modification.dart';
+import 'widgets/grocery_item_modification.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'auth.dart';
-import 'grocery_list.dart';
-import 'my_fridge.dart';
+import 'widgets/auth.dart';
+import 'screens/grocery/grocery_list.dart';
+import 'screens/fridge/my_fridge.dart';
 import 'root.dart';
-import 'fab_bottom_app.dart';
+import 'widgets/fab_bottom_app.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();

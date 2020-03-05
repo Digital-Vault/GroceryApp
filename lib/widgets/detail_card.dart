@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'date_util.dart';
-import 'package:grocery_app/grocery_item.dart';
+import '../util/date_util.dart';
+import '../models/grocery_item.dart';
 
 class DetailCard extends StatelessWidget {
   DetailCard({@required this.item}) : assert(item != null);

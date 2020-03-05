@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/custom_localization.dart';
+import '../../widgets/custom_localization.dart';
 import 'loading_screen.dart';
-import 'auth.dart';
+import '../../widgets/auth.dart';
 
 class loginPage extends StatefulWidget {
   loginPage({this.auth, this.onSignedIn});

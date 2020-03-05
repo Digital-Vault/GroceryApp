@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/expiryDialog.dart';
-import 'package:grocery_app/firestore_provider.dart';
-import 'package:grocery_app/grocery_item.dart';
+import '../../widgets/custom_localization.dart';
+import '../../widgets/expiryDialog.dart';
+import '../../widgets/firestore_provider.dart';
+import '../../models/grocery_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_app/grocery_item_modification.dart';
-import 'package:grocery_app/notification_util.dart';
-import 'search.dart';
-import 'auth.dart';
+import '../../widgets/grocery_item_modification.dart';
+import '../../util/notification_util.dart';
+import '../../widgets/auth.dart';
+import '../../widgets/search.dart';
 
 enum MenuItems { alphabetically, expiryDate, logout }
 
