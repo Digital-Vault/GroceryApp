@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/grocery_item_modification.dart';
+import '../models/grocery_item.dart';
+import 'grocery_item_modification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataSearch extends SearchDelegate<String> {

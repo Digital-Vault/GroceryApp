@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_app/custom_localization.dart';
-
-import 'auth.dart';
+import '../../widgets/custom_localization.dart';
+import '../../widgets/auth.dart';
 import 'fridge_list.dart';
-import 'search.dart';
-import 'grocery_list.dart';
+import '../../widgets/search.dart';
+import '../grocery/grocery_list.dart';
 
 class MyFridge extends StatefulWidget {
   MyFridge({this.onSignedOut, this.auth});

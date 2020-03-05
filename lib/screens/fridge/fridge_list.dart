@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/submission_form.dart';
-import 'firestore_provider.dart';
-import 'grocery_item.dart';
+import '../../widgets/custom_localization.dart';
+import 'submission_form.dart';
+import '../../widgets/firestore_provider.dart';
+import '../../models/grocery_item.dart';
 
 class FridgeList extends StatelessWidget {
   const FridgeList({this.sortOrder});

@@ -1,15 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:grocery_app/custom_localization.dart';
-import 'package:grocery_app/date_util.dart';
-import 'package:grocery_app/grocery_item.dart';
-import 'package:grocery_app/firestore_provider.dart';
-
+import 'custom_localization.dart';
+import '../util/date_util.dart';
+import '../models/grocery_item.dart';
 import 'firestore_provider.dart';
-import 'notification_util.dart';
+import '../util/notification_util.dart';
 
 class ExpiryDialog extends StatefulWidget {
   ExpiryDialog({@required this.item});
