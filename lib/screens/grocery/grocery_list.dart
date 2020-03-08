@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/custom_localization.dart';
 import '../../widgets/expiryDialog.dart';
@@ -31,7 +32,54 @@ class _GroceryList extends State<GroceryList> {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   //String _order = 'store';
+  String _groceryCollectionName;
+  String _fridgeCollectionName;
   var _documents = <DocumentSnapshot>[];
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user) async {
+      await _findGroceryCollectionName(user.uid);
+      await _findFridgeCollectionName(user.uid);
+    });
+  }
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    // TODO temperory remove this function
+    // It needs to be fixed
+    // _documents = await getData(context, _groceryCollectionName);
+  }
+
+  Future<void> _findGroceryCollectionName(String id) async {
+    final firestore = FirestoreProvider.of(context);
+
+    firestore
+        .collection('user_information')
+        .where('uid', isEqualTo: id)
+        .snapshots()
+        .listen((snapshot) {
+      setState(() {
+        _groceryCollectionName = snapshot.documents.first.data['groceryList'];
+      });
+    });
+  }
+
+  Future<void> _findFridgeCollectionName(String id) async {
+    final firestore = FirestoreProvider.of(context);
+
+    firestore
+        .collection('user_information')
+        .where('uid', isEqualTo: id)
+        .snapshots()
+        .listen((snapshot) {
+      setState(() {
+        _fridgeCollectionName = snapshot.documents.first.data['fridgeList'];
+      });
+    });
+  }
 
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -76,9 +124,6 @@ class _GroceryList extends State<GroceryList> {
 
   @override
   Widget build(BuildContext context) {
-    getData(context, 'user1_list').then((list) {
-      _documents = list;
-    });
     return Scaffold(
       appBar: AppBar(
         title: Text(CustomLocalizations.of(context).homeTitle),
@@ -132,12 +177,19 @@ class _GroceryList extends State<GroceryList> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final firestore = FirestoreProvider.of(context);
+    if (_groceryCollectionName != null) {
+      final firestore = FirestoreProvider.of(context);
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('user1_list').orderBy('store').snapshots(),
-      builder: _builder,
-    );
+      return StreamBuilder<QuerySnapshot>(
+        stream: firestore
+            .collection(_groceryCollectionName)
+            .orderBy('store')
+            .snapshots(),
+        builder: _builder,
+      );
+    }
+
+    return CircularProgressIndicator();
   }
 
   Widget _builder(BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -194,10 +246,10 @@ class _GroceryList extends State<GroceryList> {
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) async {
         if (groceryItem.expiryDate == null) {
-          await _showDialog(context, document).then((newItem) {});
+          await _showDialog(context, document);
         } else {
           var docRef = await firestore
-              .collection('fridge_list')
+              .collection(_fridgeCollectionName)
               .add(groceryItem.toJson());
           await scheduleExpiryNotification(groceryItem.notifyDate,
               groceryItem.expiryDate, groceryItem.name, docRef.documentID);
