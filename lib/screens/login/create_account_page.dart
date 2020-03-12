@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../widgets/custom_localization.dart';
-import 'loading_screen.dart';
 import '../../widgets/auth.dart';
-import 'create_account_page.dart';
+import '../../widgets/custom_localization.dart';
 
-class loginPage extends StatefulWidget {
-  loginPage({this.auth, this.onSignedIn});
+class createAccountPage extends StatefulWidget {
+  createAccountPage({this.auth});
   final BaseAuth auth;
-  final VoidCallback onSignedIn;
   @override
-  State<StatefulWidget> createState() => _LoginPageState();
+  State<StatefulWidget> createState() => _CreateAccountPage();
 }
 
-class _LoginPageState extends State<loginPage> {
+class _CreateAccountPage extends State<createAccountPage> {
   //form key
   final formKey = GlobalKey<FormState>();
 
   //members
-  bool _loading = false;
   String _email = "";
   String _password = "";
   String _error = "";
@@ -28,37 +24,18 @@ class _LoginPageState extends State<loginPage> {
       form.save();
       return true;
     } else {
-      setState(() {
-        _loading = false;
-      });
       return false;
     }
   }
 
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
-      String userId;
       try {
-        setState(() {
-          _loading = true;
-        });
-        userId =
-            await widget.auth.SignInWithEmailAndPassword(_email, _password);
-
-        print(userId);
-        if (userId != null) {
-          widget.onSignedIn();
-        } else {
-          setState(() {
-            _loading = false;
-          });
-          _error = "User has not been verified. Please verify your email";
-        }
+        await widget.auth.createUserWithEmailAndPassword(_email, _password);
       } catch (e) {
         //print('Login Error: $e');
         setState(() {
           _error = e.message;
-          _loading = false;
         });
       }
     }
@@ -66,35 +43,32 @@ class _LoginPageState extends State<loginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _loading
-        ? Loading()
-        : SingleChildScrollView(
-            reverse: true,
-            child: (SizedBox(
-              width: 500.0,
-              height: 800.0,
-              child: Scaffold(
-                  resizeToAvoidBottomInset: false,
-                  resizeToAvoidBottomPadding: false,
-                  body: Center(
-                    child: Builder(
-                      builder: (context) => Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/login_screen.png'),
-                                  fit: BoxFit.cover)),
-                          padding: EdgeInsets.all(16.0),
-                          child: Form(
-                              key: formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children:
-                                    buildInputs() + buildSubmitButtons(context),
-                              ))),
-                    ),
-                  )),
+    return SingleChildScrollView(
+      reverse: true,
+      child: (SizedBox(
+        width: 500.0,
+        height: 800.0,
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomPadding: false,
+            body: Center(
+              child: Builder(
+                builder: (context) => Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/login_screen.png'),
+                            fit: BoxFit.cover)),
+                    padding: EdgeInsets.all(16.0),
+                    child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: buildInputs() + buildSubmitButtons(context),
+                        ))),
+              ),
             )),
-          );
+      )),
+    );
   }
 
   List<Widget> buildInputs() {
@@ -146,7 +120,7 @@ class _LoginPageState extends State<loginPage> {
           color: Colors.blue,
           textColor: Colors.white,
           child: Text(
-            CustomLocalizations.of(context).loginButtonLabel,
+            CustomLocalizations.of(context).loginCreateAccount,
             style: TextStyle(fontSize: 16.0),
           ),
           onPressed: () {
@@ -155,15 +129,9 @@ class _LoginPageState extends State<loginPage> {
             //content: Text('Processing'), duration: Duration(seconds: 1)));
           }),
       FlatButton(
-        child: Text("Create Account"),
+        child: Text("Have an account? Login"),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => createAccountPage(
-                      auth: widget.auth,
-                    )),
-          );
+          Navigator.pop(context);
         },
       ),
     ];
