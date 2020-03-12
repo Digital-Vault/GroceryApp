@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/auth.dart';
 import '../../widgets/custom_localization.dart';
-import 'login_page.dart';
 
 class createAccountPage extends StatefulWidget {
   createAccountPage({this.auth});
@@ -15,7 +14,6 @@ class _CreateAccountPage extends State<createAccountPage> {
   final formKey = GlobalKey<FormState>();
 
   //members
-  bool _loading = false;
   String _email = "";
   String _password = "";
   String _error = "";
@@ -26,9 +24,6 @@ class _CreateAccountPage extends State<createAccountPage> {
       form.save();
       return true;
     } else {
-      setState(() {
-        _loading = false;
-      });
       return false;
     }
   }
@@ -36,15 +31,11 @@ class _CreateAccountPage extends State<createAccountPage> {
   void validateAndSubmit(BuildContext context) async {
     if (validateAndSave()) {
       try {
-        setState(() {
-          _loading = true;
-        });
         await widget.auth.createUserWithEmailAndPassword(_email, _password);
       } catch (e) {
         //print('Login Error: $e');
         setState(() {
           _error = e.message;
-          _loading = false;
         });
       }
     }
