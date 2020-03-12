@@ -176,6 +176,10 @@ class _LoginPageState extends State<loginPage> {
               //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
+          child: Text("Forgot your password?"),
+          onPressed: () {},
+        ),
+        FlatButton(
           child: Text(CustomLocalizations.of(context).loginCreateAccount),
           onPressed: moveToRegister,
         ),
