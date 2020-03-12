@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/settings/settings_page.dart';
 import '../../widgets/custom_localization.dart';
 import '../../widgets/expiryDialog.dart';
 import '../../widgets/firestore_provider.dart';
@@ -10,7 +11,7 @@ import '../../util/notification_util.dart';
 import '../../widgets/auth.dart';
 import '../../widgets/search.dart';
 
-enum MenuItems { alphabetically, expiryDate, logout }
+enum MenuItems { alphabetically, expiryDate, logout, settings }
 
 class GroceryList extends StatefulWidget {
   GroceryList({this.onSignedOut, this.auth});
@@ -149,6 +150,9 @@ class _GroceryList extends State<GroceryList> {
                 setState(() {
                   // _order = 'expiryDate';
                 });
+              } else if (result == MenuItems.settings) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()));
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
@@ -167,6 +171,10 @@ class _GroceryList extends State<GroceryList> {
               PopupMenuItem<MenuItems>(
                 value: MenuItems.logout,
                 child: Text(CustomLocalizations.of(context).logout),
+              ),
+              PopupMenuItem<MenuItems>(
+                value: MenuItems.settings,
+                child: Text('Settings'),
               ),
             ],
           ),

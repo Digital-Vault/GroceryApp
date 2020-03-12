@@ -293,7 +293,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
   }
 
   Future<String> _findGroceryCollectionName(String id) async {
-    final firestore = FirestoreProvider.of(context);
+    final firestore = FirestoreProvider.of(_formKey.currentContext);
 
     var users = await firestore
         .collection('user_information')
