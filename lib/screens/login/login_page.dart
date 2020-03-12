@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_localization.dart';
 import 'loading_screen.dart';
 import '../../widgets/auth.dart';
-
+import 'create_account_page.dart';
 class loginPage extends StatefulWidget {
   loginPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
@@ -11,12 +11,10 @@ class loginPage extends StatefulWidget {
   State<StatefulWidget> createState() => _LoginPageState();
 }
 
-enum FormType { login, register }
 
 class _LoginPageState extends State<loginPage> {
   //form key
   final formKey = GlobalKey<FormState>();
-  FormType _formType = FormType.login;
 
   //members
   bool _loading = false;
@@ -44,13 +42,9 @@ class _LoginPageState extends State<loginPage> {
         setState(() {
           _loading = true;
         });
-        if (_formType == FormType.login) {
-          userId =
+        userId =
               await widget.auth.SignInWithEmailAndPassword(_email, _password);
-        } else {
-          userId = await widget.auth
-              .createUserWithEmailAndPassword(_email, _password);
-        }
+
         print(userId);
         if (userId != null) {
           widget.onSignedIn();
@@ -70,19 +64,7 @@ class _LoginPageState extends State<loginPage> {
     }
   }
 
-  void moveToRegister() {
-    formKey.currentState.reset();
-    setState(() {
-      _formType = FormType.register;
-    });
-  }
 
-  void moveToLogin() {
-    formKey.currentState.reset();
-    setState(() {
-      _formType = FormType.login;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +103,7 @@ class _LoginPageState extends State<loginPage> {
     return [
       SizedBox(height: 100),
       _buildIcon(context),
-      _buildText(),
+      _buildText(context),
       SizedBox(height: 15),
       TextFormField(
         decoration: InputDecoration(
@@ -160,7 +142,6 @@ class _LoginPageState extends State<loginPage> {
   }
 
   List<Widget> buildSubmitButtons(BuildContext context) {
-    if (_formType == FormType.login) {
       return [
         SizedBox(height: 10),
         RaisedButton(
@@ -176,29 +157,16 @@ class _LoginPageState extends State<loginPage> {
               //content: Text('Processing'), duration: Duration(seconds: 1)));
             }),
         FlatButton(
-          child: Text(CustomLocalizations.of(context).loginCreateAccount),
-          onPressed: moveToRegister,
+          child: Text("Create Account"),
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => createAccountPage(auth: widget.auth,)),
+            );
+          },
         ),
       ];
-    } else {
-      return [
-        SizedBox(height: 10),
-        RaisedButton(
-            color: Colors.blue,
-            textColor: Colors.white,
-            child: Text(
-              CustomLocalizations.of(context).loginCreateAccount,
-              style: TextStyle(fontSize: 16.0),
-            ),
-            onPressed: () {
-              validateAndSubmit(context);
-            }),
-        FlatButton(
-          child: Text('Have an account? Login'),
-          onPressed: moveToLogin,
-        ),
-      ];
-    }
+
   }
 
   Widget _buildIcon(BuildContext context) {
@@ -213,7 +181,7 @@ class _LoginPageState extends State<loginPage> {
     );
   }
 
-  Widget _buildText() => Padding(
+  Widget _buildText(BuildContext context) => Padding(
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           CustomLocalizations.of(context).title,
