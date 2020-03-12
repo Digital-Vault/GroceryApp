@@ -141,10 +141,7 @@ class _CreateAccountPage extends State<createAccountPage>{
       FlatButton(
         child: Text("Have an account? Login"),
         onPressed: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => loginPage()),
-          );
+          Navigator.pop(context);
         },
       ),
     ];
