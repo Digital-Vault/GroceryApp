@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'custom_localization.dart';
 import 'firestore_provider.dart';
@@ -265,7 +266,9 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
     if (_newItem()) {
       bool isDup = await _isDuplicateItem(jsonItem["name"], jsonItem);
       if (!isDup) {
-        await _firestore.collection('user1_list').add(jsonItem);
+        final user = await FirebaseAuth.instance.currentUser();
+        final collectionName = await _findGroceryCollectionName(user.uid);
+        await _firestore.collection(collectionName).add(jsonItem);
       }
     } else {
       await document.reference.updateData(jsonItem);
@@ -287,5 +290,17 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
       }
     }
     return false;
+  }
+
+  Future<String> _findGroceryCollectionName(String id) async {
+    final firestore = FirestoreProvider.of(context);
+
+    var users = await firestore
+        .collection('user_information')
+        .where('uid', isEqualTo: id)
+        .getDocuments();
+
+    var currentUser = users.documents.first;
+    return currentUser.data['groceryList'];
   }
 }

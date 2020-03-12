@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'custom_localization.dart';
@@ -22,12 +23,30 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
   DateTime _expiryDate;
   int _notifyDays;
   DocumentSnapshot item;
+  String _fridgeCollectionName;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     _notifyTextFieldController.addListener(_showNotifyIconButton);
+    FirebaseAuth.instance.currentUser().then((user) async {
+      await _findFridgeCollectionName(user.uid);
+    });
     super.initState();
+  }
+
+  Future<void> _findFridgeCollectionName(String id) async {
+    final firestore = FirestoreProvider.of(context);
+
+    firestore
+        .collection('user_information')
+        .where('uid', isEqualTo: id)
+        .snapshots()
+        .listen((snapshot) {
+      setState(() {
+        _fridgeCollectionName = snapshot.documents.first.data['fridgeList'];
+      });
+    });
   }
 
   @override
@@ -104,8 +123,9 @@ class _ExpiryDialogState extends State<ExpiryDialog> {
 
       updatedItem.expiryDate = _expiryDate;
       updatedItem.notifyDate = _notifyDays;
-      var docRef =
-          await firestore.collection('fridge_list').add(updatedItem.toJson());
+      var docRef = await firestore
+          .collection(_fridgeCollectionName)
+          .add(updatedItem.toJson());
 
       await scheduleExpiryNotification(updatedItem.notifyDate,
           updatedItem.expiryDate, updatedItem.name, docRef.documentID);

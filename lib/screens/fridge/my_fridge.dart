@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grocery_app/widgets/firestore_provider.dart';
 import '../../widgets/custom_localization.dart';
 import '../../widgets/auth.dart';
 import 'fridge_list.dart';
@@ -25,6 +27,7 @@ class _MyFridge extends State<MyFridge> {
   final VoidCallback onSignedOut;
   var _documents = <DocumentSnapshot>[];
   var _order = 'name';
+  String _fridgeCollectionName;
 
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -36,10 +39,37 @@ class _MyFridge extends State<MyFridge> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _getData(context, 'fridge_list').then((list) {
-      _documents = list;
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user) async {
+      await _findFridgeCollectionName(user.uid);
     });
+  }
+
+  Future<void> _findFridgeCollectionName(String id) async {
+    final firestore = FirestoreProvider.of(context);
+
+    firestore
+        .collection('user_information')
+        .where('uid', isEqualTo: id)
+        .snapshots()
+        .listen((snapshot) {
+      setState(() {
+        _fridgeCollectionName = snapshot.documents.first.data['fridgeList'];
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO temporarily removes search
+    // _getData(context, 'fridge_list').then((list) {
+    //   _documents = list;
+    // });
+
+    if (_fridgeCollectionName == null) {
+      return CircularProgressIndicator();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -89,20 +119,22 @@ class _MyFridge extends State<MyFridge> {
           ),
         ],
       ),
-      body: FridgeList(sortOrder: _order),
+      body:
+          FridgeList(collectionName: _fridgeCollectionName, sortOrder: _order),
     );
   }
 
-  Future<List<DocumentSnapshot>> _getData(
-      BuildContext context, String collectionName) async {
-    var documents = <DocumentSnapshot>[];
-    documents.clear();
-    QuerySnapshot queryList =
-        await Firestore.instance.collection(collectionName).getDocuments();
-    var GroceryItems = queryList.documents;
-    for (int i = 0; i < GroceryItems.length; i++) {
-      documents.add(GroceryItems[i]);
-    }
-    return documents;
-  }
+  // TODO dont remove
+  // Future<List<DocumentSnapshot>> _getData(
+  //     BuildContext context, String collectionName) async {
+  //   var documents = <DocumentSnapshot>[];
+  //   documents.clear();
+  //   QuerySnapshot queryList =
+  //       await Firestore.instance.collection(collectionName).getDocuments();
+  //   var GroceryItems = queryList.documents;
+  //   for (int i = 0; i < GroceryItems.length; i++) {
+  //     documents.add(GroceryItems[i]);
+  //   }
+  //   return documents;
+  // }
 }

@@ -6,7 +6,8 @@ import '../../widgets/firestore_provider.dart';
 import '../../models/grocery_item.dart';
 
 class FridgeList extends StatelessWidget {
-  const FridgeList({this.sortOrder});
+  const FridgeList({this.collectionName, this.sortOrder});
+  final String collectionName;
   final String sortOrder;
 
   @override
@@ -21,7 +22,7 @@ class FridgeList extends StatelessWidget {
 
     return StreamBuilder<QuerySnapshot>(
       stream:
-          firestore.collection('fridge_list').orderBy(sortOrder).snapshots(),
+          firestore.collection(collectionName).orderBy(sortOrder).snapshots(),
       builder: _builder,
     );
   }
