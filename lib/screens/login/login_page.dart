@@ -3,6 +3,7 @@ import '../../widgets/custom_localization.dart';
 import 'loading_screen.dart';
 import '../../widgets/auth.dart';
 import 'create_account_page.dart';
+
 class loginPage extends StatefulWidget {
   loginPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
@@ -10,7 +11,6 @@ class loginPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
-
 
 class _LoginPageState extends State<loginPage> {
   //form key
@@ -43,7 +43,7 @@ class _LoginPageState extends State<loginPage> {
           _loading = true;
         });
         userId =
-              await widget.auth.SignInWithEmailAndPassword(_email, _password);
+            await widget.auth.SignInWithEmailAndPassword(_email, _password);
 
         print(userId);
         if (userId != null) {
@@ -63,8 +63,6 @@ class _LoginPageState extends State<loginPage> {
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -142,31 +140,33 @@ class _LoginPageState extends State<loginPage> {
   }
 
   List<Widget> buildSubmitButtons(BuildContext context) {
-      return [
-        SizedBox(height: 10),
-        RaisedButton(
-            color: Colors.blue,
-            textColor: Colors.white,
-            child: Text(
-              CustomLocalizations.of(context).loginButtonLabel,
-              style: TextStyle(fontSize: 16.0),
-            ),
-            onPressed: () {
-              validateAndSubmit(context);
-              //Scaffold.of(context).showSnackBar(SnackBar(
-              //content: Text('Processing'), duration: Duration(seconds: 1)));
-            }),
-        FlatButton(
-          child: Text("Create Account"),
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => createAccountPage(auth: widget.auth,)),
-            );
-          },
-        ),
-      ];
-
+    return [
+      SizedBox(height: 10),
+      RaisedButton(
+          color: Colors.blue,
+          textColor: Colors.white,
+          child: Text(
+            CustomLocalizations.of(context).loginButtonLabel,
+            style: TextStyle(fontSize: 16.0),
+          ),
+          onPressed: () {
+            validateAndSubmit(context);
+            //Scaffold.of(context).showSnackBar(SnackBar(
+            //content: Text('Processing'), duration: Duration(seconds: 1)));
+          }),
+      FlatButton(
+        child: Text("Create Account"),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => createAccountPage(
+                      auth: widget.auth,
+                    )),
+          );
+        },
+      ),
+    ];
   }
 
   Widget _buildIcon(BuildContext context) {

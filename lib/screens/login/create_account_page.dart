@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import '../../widgets/auth.dart';
 import '../../widgets/custom_localization.dart';
 import 'login_page.dart';
-class createAccountPage extends StatefulWidget{
+
+class createAccountPage extends StatefulWidget {
   createAccountPage({this.auth});
   final BaseAuth auth;
   @override
   State<StatefulWidget> createState() => _CreateAccountPage();
 }
-class _CreateAccountPage extends State<createAccountPage>{
+
+class _CreateAccountPage extends State<createAccountPage> {
   //form key
   final formKey = GlobalKey<FormState>();
 
@@ -48,8 +50,6 @@ class _CreateAccountPage extends State<createAccountPage>{
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -72,8 +72,7 @@ class _CreateAccountPage extends State<createAccountPage>{
                         key: formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children:
-                          buildInputs() + buildSubmitButtons(context),
+                          children: buildInputs() + buildSubmitButtons(context),
                         ))),
               ),
             )),
@@ -140,12 +139,11 @@ class _CreateAccountPage extends State<createAccountPage>{
           }),
       FlatButton(
         child: Text("Have an account? Login"),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
         },
       ),
     ];
-
   }
 
   Widget _buildIcon(BuildContext context) {
@@ -161,15 +159,15 @@ class _CreateAccountPage extends State<createAccountPage>{
   }
 
   Widget _buildText(BuildContext context) => Padding(
-    padding: EdgeInsets.only(top: 20, bottom: 10),
-    child: Text(
-      CustomLocalizations.of(context).title,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.w700,
-        color: Colors.blue,
-      ),
-    ),
-  );
+        padding: EdgeInsets.only(top: 20, bottom: 10),
+        child: Text(
+          CustomLocalizations.of(context).title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue,
+          ),
+        ),
+      );
 }
