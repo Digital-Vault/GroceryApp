@@ -148,7 +148,7 @@ class _GroceryList extends State<GroceryList> {
                 });
               } else if (result == MenuItems.addedDate) {
                 setState(() {
-                   _order = 'addedDate';
+                  _order = 'addedDate';
                 });
               } else if (result == MenuItems.settings) {
                 Navigator.push(context,

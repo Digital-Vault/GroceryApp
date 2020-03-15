@@ -7,7 +7,7 @@ class GroceryItem {
   GroceryItem(
       {this.name,
       this.expiryDate,
-        this.addedDate,
+      this.addedDate,
       this.quantity,
       this.purchased = false,
       this.notifyDate,
