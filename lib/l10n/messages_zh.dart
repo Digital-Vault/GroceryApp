@@ -44,8 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "navbarFridge": MessageLookupByLibrary.simpleMessage("我的冰箱"),
         "navbarHome": MessageLookupByLibrary.simpleMessage("杂货清单"),
-        "sortAlphabetically": MessageLookupByLibrary.simpleMessage("按字母顺序排序"),
-        "sortExpiry": MessageLookupByLibrary.simpleMessage("按有效期排序"),
+        "sortStore": MessageLookupByLibrary.simpleMessage("按字母顺序排序"),
+        "sortAdded": MessageLookupByLibrary.simpleMessage("按有效期排序"),
         "title": MessageLookupByLibrary.simpleMessage("杂货申请")
       };
 }

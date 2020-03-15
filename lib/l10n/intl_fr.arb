@@ -155,13 +155,13 @@
     "type" : "text",
     "description" : "Title of the home page"
   },
-  "sortAlphabetically" : "Trier par ordre alphabétique",
-  "@sortAlphabetically" : {
+  "sortStore" : "Trier par ordre alphabétique",
+  "@sortStore" : {
     "type" : "text",
     "description" : "Sort Alphabetically button in menu selection"
   },
-  "sortExpiry" : "Trier par date d'expiration",
-  "@sortExpiry" : {
+  "sortAdded" : "Trier par date d'expiration",
+  "@sortAdded" : {
     "type" : "text",
     "description" : "Sort by Expiry Date button in menu selection"
   },
