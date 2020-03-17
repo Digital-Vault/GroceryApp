@@ -216,8 +216,6 @@ class _SubmissionFormState extends State<SubmissionForm> {
     _item.expiryDate = inputValue;
   }
 
-// TODO: provide default values notifyDaysBeforeExpiry
-
   Widget _notifyDaysBeforeExpiry() {
     return TextFormField(
       onSaved: _onNotifySaved,
