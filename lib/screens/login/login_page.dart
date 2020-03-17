@@ -166,6 +166,12 @@ class _LoginPageState extends State<loginPage> {
           );
         },
       ),
+      FlatButton(
+        child: Text("Forgot your password?"),
+        onPressed: () {
+          //...
+        },
+      ),
     ];
   }
 
