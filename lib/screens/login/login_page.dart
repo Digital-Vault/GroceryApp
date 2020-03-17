@@ -70,6 +70,10 @@ class _LoginPageState extends State<loginPage> {
     }
   }
 
+  void sendPasswordResetEmail(BuildContext context) async {
+    await widget.auth.sendPasswordResetEmail(_email);
+  }
+
   void moveToRegister() {
     formKey.currentState.reset();
     setState(() {
