@@ -103,8 +103,7 @@ class _MyFridge extends State<MyFridge> {
                 value: MenuItems.store,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(0),
-                  title:
-                      Text(CustomLocalizations.of(context).sortAdded),
+                  title: Text(CustomLocalizations.of(context).sortAdded),
                 ),
               ),
               PopupMenuItem<MenuItems>(
