@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_localization.dart';
 import 'loading_screen.dart';
 import '../../widgets/auth.dart';
-import 'create_account_page.dart';
 
 class resetPasswordPage extends StatefulWidget {
   resetPasswordPage({this.auth, this.onSignedIn});
@@ -19,7 +18,6 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
   //members
   bool _loading = false;
   String _email = "";
-  String _password = "";
   String _error = "";
 
   bool validateAndSave() {
