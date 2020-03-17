@@ -3,6 +3,7 @@ import '../../widgets/custom_localization.dart';
 import 'loading_screen.dart';
 import '../../widgets/auth.dart';
 import 'create_account_page.dart';
+import 'reset_password_page.dart';
 
 class loginPage extends StatefulWidget {
   loginPage({this.auth, this.onSignedIn});
@@ -169,7 +170,13 @@ class _LoginPageState extends State<loginPage> {
       FlatButton(
         child: Text("Forgot your password?"),
         onPressed: () {
-          //...
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => resetPasswordPage(
+                      auth: widget.auth,
+                    )),
+          );
         },
       ),
     ];
