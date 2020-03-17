@@ -183,7 +183,7 @@ class CustomLocalizations {
     );
   }
 
-  String get sortAlphabetically {
+  String get sortStore {
     return Intl.message(
       'Sort by Store',
       name: 'sortStore',
@@ -192,7 +192,7 @@ class CustomLocalizations {
     );
   }
 
-  String get sortExpiry {
+  String get sortAdded {
     return Intl.message(
       'Sort by Added Date',
       name: 'sortAdded',
