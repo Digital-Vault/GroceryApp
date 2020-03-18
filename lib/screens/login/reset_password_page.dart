@@ -18,6 +18,7 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
   //members
   bool _loading = false;
   String _email = "";
+  String _success = "";
   String _error = "";
 
   bool validateAndSave() {
@@ -37,8 +38,13 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
     if (validateAndSave()) {
       try {
         await widget.auth.resetPassword(_email);
+        setState(() {
+          _success = "✓ Email successfully sent. Check your inbox.";
+          _error = "";
+        });
       } catch (e) {
         setState(() {
+          _success = "";
           _error = e.message;
         });
       }
@@ -105,6 +111,10 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
       Text(
         _error,
         style: TextStyle(color: Colors.red, fontSize: 14.0),
+      ),
+      Text(
+        _success,
+        style: TextStyle(color: Colors.green, fontSize: 14.0),
       )
     ];
   }
