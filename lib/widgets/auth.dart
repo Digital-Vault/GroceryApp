@@ -37,7 +37,7 @@ class Auth implements BaseAuth {
   }
 
   void resetPassword(String email) {
-    unawaited(FirebaseAuth.instance.sendPasswordResetEmail(email: email)) ;
+    unawaited(FirebaseAuth.instance.sendPasswordResetEmail(email: email));
   }
 
   Future<String> currentUser() async {
