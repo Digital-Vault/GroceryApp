@@ -12,6 +12,9 @@ GroceryItem _$GroceryItemFromJson(Map<String, dynamic> json) {
     expiryDate: json['expiryDate'] == null
         ? null
         : DateTime.parse(json['expiryDate'] as String),
+    addedDate: json['addedDate'] == null
+        ? null
+        : DateTime.parse(json['addedDate'] as String),
     quantity: json['quantity'] as int,
     purchased: json['purchased'] as bool,
     notifyDate: json['notifyDate'] as int,
@@ -24,6 +27,7 @@ Map<String, dynamic> _$GroceryItemToJson(GroceryItem instance) =>
       'name': instance.name,
       'quantity': instance.quantity,
       'expiryDate': instance.expiryDate?.toIso8601String(),
+      'addedDate': instance.addedDate?.toIso8601String(),
       'purchased': instance.purchased,
       'notifyDate': instance.notifyDate,
       'store': instance.store,

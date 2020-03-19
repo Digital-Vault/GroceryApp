@@ -7,6 +7,7 @@ class GroceryItem {
   GroceryItem(
       {this.name,
       this.expiryDate,
+      this.addedDate,
       this.quantity,
       this.purchased = false,
       this.notifyDate,
@@ -18,6 +19,7 @@ class GroceryItem {
   @JsonKey(nullable: false)
   int quantity;
   DateTime expiryDate;
+  DateTime addedDate;
   bool purchased;
   int notifyDate;
   String store;

@@ -183,20 +183,20 @@ class CustomLocalizations {
     );
   }
 
-  String get sortAlphabetically {
+  String get sortStore {
     return Intl.message(
-      'Sort Alphabetically',
-      name: 'sortAlphabetically',
-      desc: 'Sort Alphabetically button in menu selection',
+      'Sort by Store',
+      name: 'sortStore',
+      desc: 'Sort by Store button in menu selection',
       locale: localeName,
     );
   }
 
-  String get sortExpiry {
+  String get sortAdded {
     return Intl.message(
-      'Sort by Expiry Date',
-      name: 'sortExpiry',
-      desc: 'Sort by Expiry Date button in menu selection',
+      'Sort by Added Date',
+      name: 'sortAdded',
+      desc: 'Sort by Added Date button in menu selection',
       locale: localeName,
     );
   }

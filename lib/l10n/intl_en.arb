@@ -155,15 +155,15 @@
     "type" : "text",
     "description" : "Title of the home page"
   },
-  "sortAlphabetically" : "Sort Alphabetically",
+  "sortStore" : "Sort by Store",
   "@sortAlphabetically" : {
     "type" : "text",
-    "description" : "Sort Alphabetically button in menu selection"
+    "description" : "Sort by Store button in menu selection"
   },
-  "sortExpiry" : "Sort by Expiry Date",
+  "sortAdded" : "Sort by Added Date",
   "@sortExpiry" : {
     "type" : "text",
-    "description" : "Sort by Expiry Date button in menu selection"
+    "description" : "Sort by Added Date button in menu selection"
   },
   "title" : "Grocery App",
   "@title" : {

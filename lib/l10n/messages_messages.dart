@@ -65,10 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "navbarFridge": MessageLookupByLibrary.simpleMessage("My Fridge"),
         "navbarHome": MessageLookupByLibrary.simpleMessage("Grocery List"),
-        "sortAlphabetically":
-            MessageLookupByLibrary.simpleMessage("Sort Alphabetically"),
-        "sortExpiry":
-            MessageLookupByLibrary.simpleMessage("Sort by Expiry Date"),
+        "sortStore": MessageLookupByLibrary.simpleMessage("Sort by Store"),
+        "sortAdded": MessageLookupByLibrary.simpleMessage("Sort by Added Date"),
         "title": MessageLookupByLibrary.simpleMessage("Grocery App")
       };
 }

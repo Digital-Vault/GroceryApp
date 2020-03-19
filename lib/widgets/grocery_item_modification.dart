@@ -247,6 +247,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
   }
 
   void _submitForm() {
+    _item.addedDate = DateTime.now();
     if (_formValid()) {
       _formKey.currentState.save();
 

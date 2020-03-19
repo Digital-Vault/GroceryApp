@@ -11,7 +11,7 @@ import '../../util/notification_util.dart';
 import '../../widgets/auth.dart';
 import '../../widgets/search.dart';
 
-enum MenuItems { alphabetically, expiryDate, logout, settings }
+enum MenuItems { store, addedDate, logout, settings }
 
 class GroceryList extends StatefulWidget {
   GroceryList({this.onSignedOut, this.auth});
@@ -32,7 +32,7 @@ class _GroceryList extends State<GroceryList> {
   _GroceryList({this.onSignedOut, this.auth});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
-  //String _order = 'store';
+  String _order = 'addedDate';
   String _groceryCollectionName;
   String _fridgeCollectionName;
   var _documents = <DocumentSnapshot>[];
@@ -142,13 +142,13 @@ class _GroceryList extends State<GroceryList> {
             onSelected: (MenuItems result) {
               if (result == MenuItems.logout) {
                 _signOut(context);
-              } else if (result == MenuItems.alphabetically) {
+              } else if (result == MenuItems.store) {
                 setState(() {
-                  //_order = 'name';
+                  _order = 'store';
                 });
-              } else if (result == MenuItems.expiryDate) {
+              } else if (result == MenuItems.addedDate) {
                 setState(() {
-                  // _order = 'expiryDate';
+                  _order = 'addedDate';
                 });
               } else if (result == MenuItems.settings) {
                 Navigator.push(context,
@@ -157,16 +157,15 @@ class _GroceryList extends State<GroceryList> {
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
               PopupMenuItem<MenuItems>(
-                value: MenuItems.alphabetically,
+                value: MenuItems.store,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(0),
-                  title:
-                      Text(CustomLocalizations.of(context).sortAlphabetically),
+                  title: Text(CustomLocalizations.of(context).sortStore),
                 ),
               ),
               PopupMenuItem<MenuItems>(
-                value: MenuItems.expiryDate,
-                child: Text(CustomLocalizations.of(context).sortExpiry),
+                value: MenuItems.addedDate,
+                child: Text(CustomLocalizations.of(context).sortAdded),
               ),
               PopupMenuItem<MenuItems>(
                 value: MenuItems.logout,
@@ -191,7 +190,7 @@ class _GroceryList extends State<GroceryList> {
       return StreamBuilder<QuerySnapshot>(
         stream: firestore
             .collection(_groceryCollectionName)
-            .orderBy('store')
+            .orderBy(_order)
             .snapshots(),
         builder: _builder,
       );

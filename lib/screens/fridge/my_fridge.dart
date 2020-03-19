@@ -88,28 +88,27 @@ class _MyFridge extends State<MyFridge> {
             onSelected: (MenuItems result) {
               if (result == MenuItems.logout) {
                 _signOut(context);
-              } else if (result == MenuItems.alphabetically) {
+              } else if (result == MenuItems.store) {
                 setState(() {
-                  _order = 'name';
+                  _order = 'store';
                 });
-              } else if (result == MenuItems.expiryDate) {
+              } else if (result == MenuItems.addedDate) {
                 setState(() {
-                  _order = 'expiryDate';
+                  _order = 'addedDate';
                 });
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItems>>[
               PopupMenuItem<MenuItems>(
-                value: MenuItems.alphabetically,
+                value: MenuItems.store,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(0),
-                  title:
-                      Text(CustomLocalizations.of(context).sortAlphabetically),
+                  title: Text(CustomLocalizations.of(context).sortAdded),
                 ),
               ),
               PopupMenuItem<MenuItems>(
-                value: MenuItems.expiryDate,
-                child: Text(CustomLocalizations.of(context).sortExpiry),
+                value: MenuItems.addedDate,
+                child: Text(CustomLocalizations.of(context).sortStore),
               ),
               PopupMenuItem<MenuItems>(
                 value: MenuItems.logout,
