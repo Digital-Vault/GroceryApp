@@ -26,7 +26,7 @@ class _GroceryItemModificationState extends State<GroceryItemModification> {
   final List<String> _stores = [
     'Walmart',
     'Shoppers',
-    'Lablaw',
+    'Loblaws',
     'Sobeys',
     'Metro'
   ];
