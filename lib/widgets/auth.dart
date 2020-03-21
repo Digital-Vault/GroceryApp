@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pedantic/pedantic.dart';
 
 abstract class BaseAuth {
   Future<String> SignInWithEmailAndPassword(String email, String password);
   Future<String> createUserWithEmailAndPassword(String email, String password);
   Future<String> currentUser();
-  Future<void> resetPassword(String email);
+  void resetPassword(String email);
   Future<void> signOut();
 }
 
@@ -35,8 +36,8 @@ class Auth implements BaseAuth {
     }
   }
 
-  Future<void> resetPassword(String email) async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  void resetPassword(String email) {
+    unawaited(FirebaseAuth.instance.sendPasswordResetEmail(email: email));
   }
 
   Future<String> currentUser() async {
