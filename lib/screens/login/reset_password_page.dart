@@ -19,7 +19,6 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
   bool _loading = false;
   String _email = "";
   String _success = "";
-  String _error = "";
 
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -34,21 +33,21 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
     }
   }
 
-  void sendPasswordResetEmail(BuildContext context) async {
+  Future<bool> sendPasswordResetEmail(BuildContext context) async {
     if (validateAndSave()) {
       try {
         await widget.auth.resetPassword(_email);
         setState(() {
           _success = "✓ Email successfully sent. Check your inbox.";
-          _error = "";
         });
       } catch (e) {
         setState(() {
           _success = "";
-          _error = e.message;
         });
       }
+      return true;
     }
+    return false;
   }
 
   @override
@@ -66,11 +65,8 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
                   body: Center(
                     child: Builder(
                       builder: (context) => Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/login_screen.png'),
-                                  fit: BoxFit.cover)),
-                          padding: EdgeInsets.all(16.0),
+                          color: Colors.white,
+                          padding: EdgeInsets.all(18.0),
                           child: Form(
                               key: formKey,
                               child: Column(
@@ -86,7 +82,7 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
 
   List<Widget> buildInputs() {
     return [
-      SizedBox(height: 100),
+      SizedBox(height: 150),
       _buildIcon(context),
       _buildText(context),
       SizedBox(height: 15),
@@ -106,11 +102,7 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
         onSaved: (value) => _email = value,
       ),
       SizedBox(
-        height: 22.0,
-      ),
-      Text(
-        _error,
-        style: TextStyle(color: Colors.red, fontSize: 14.0),
+        height: 10.0,
       ),
       Text(
         _success,
@@ -126,11 +118,14 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
           color: Colors.blue,
           textColor: Colors.white,
           child: Text(
-            "Send Password Reset Email",
+            "Reset Password",
             style: TextStyle(fontSize: 16.0),
           ),
-          onPressed: () {
-            sendPasswordResetEmail(context);
+          onPressed: () async {
+            final result = await sendPasswordResetEmail(context);
+            if (result) {
+              Navigator.pop(context, true);
+            }
           }),
       FlatButton(
         child: Text("Go back"),

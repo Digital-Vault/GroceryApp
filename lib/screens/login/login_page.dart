@@ -169,14 +169,19 @@ class _LoginPageState extends State<loginPage> {
       ),
       FlatButton(
         child: Text("Forgot your password?"),
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => resetPasswordPage(
                       auth: widget.auth,
                     )),
           );
+          if (result) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text("Reset email sent. Check your inbox."),
+            ));
+          }
         },
       ),
     ];
