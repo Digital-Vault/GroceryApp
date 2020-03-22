@@ -291,9 +291,9 @@ class _GroceryList extends State<GroceryList> {
 
   Widget _dismissibleBackground() {
     return Container(
-      alignment: Alignment.centerRight,
-      padding: EdgeInsets.only(right: 20.0),
-      color: Colors.green,
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(left: 20.0),
+      color: Colors.green[400],
       child: Icon(
         Icons.add,
         color: Colors.white,
