@@ -33,21 +33,10 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
     }
   }
 
-  Future<bool> sendPasswordResetEmail(BuildContext context) async {
+  void sendPasswordResetEmail() {
     if (validateAndSave()) {
-      try {
-        await widget.auth.resetPassword(_email);
-        setState(() {
-          _success = "✓ Email successfully sent. Check your inbox.";
-        });
-      } catch (e) {
-        setState(() {
-          _success = "";
-        });
-      }
-      return true;
+      widget.auth.resetPassword(_email);
     }
-    return false;
   }
 
   @override
@@ -121,9 +110,9 @@ class _ResetPasswordPageState extends State<resetPasswordPage> {
             "Reset Password",
             style: TextStyle(fontSize: 16.0),
           ),
-          onPressed: () async {
-            final result = await sendPasswordResetEmail(context);
-            if (result) {
+          onPressed: () {
+            if (validateAndSave()) {
+              sendPasswordResetEmail();
               Navigator.pop(context, true);
             }
           }),
