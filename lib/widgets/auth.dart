@@ -5,6 +5,7 @@ abstract class BaseAuth {
   Future<String> SignInWithEmailAndPassword(String email, String password);
   Future<String> createUserWithEmailAndPassword(String email, String password);
   Future<String> currentUser();
+  void resetPassword(String email);
   Future<void> signOut();
 }
 
@@ -31,6 +32,14 @@ class Auth implements BaseAuth {
       print(e.message);
     } finally {
       return null;
+    }
+  }
+
+  void resetPassword(String email) {
+    try {
+      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      // ignoring the errors in this case for security purposes
     }
   }
 
