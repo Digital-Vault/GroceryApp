@@ -255,13 +255,13 @@ class _GroceryList extends State<GroceryList> {
       onDismissed: (direction) async {
         if (groceryItem.expiryDate == null) {
           await _showDialog(context, document);
-          await document.reference.delete();
+          document.reference.delete();
         } else {
           var docRef = await firestore
               .collection(_fridgeCollectionName)
               .add(groceryItem.toJson());
 
-          await document.reference.delete();
+          document.reference.delete();
           await scheduleExpiryNotification(groceryItem.notifyDate,
               groceryItem.expiryDate, groceryItem.name, docRef.documentID);
         }
