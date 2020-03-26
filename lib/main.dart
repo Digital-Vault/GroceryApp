@@ -15,29 +15,6 @@ import 'screens/fridge/my_fridge.dart';
 import 'root.dart';
 import 'widgets/fab_bottom_app.dart';
 
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-
-// // Streams are created so that app can respond to notification-related events since the plugin is initialised in the `main` function
-// final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
-//     BehaviorSubject<ReceivedNotification>();
-
-// final BehaviorSubject<String> selectNotificationSubject =
-//     BehaviorSubject<String>();
-
-// class ReceivedNotification {
-//   final int id;
-//   final String title;
-//   final String body;
-//   final String payload;
-
-//   ReceivedNotification(
-//       {@required this.id,
-//       @required this.title,
-//       @required this.body,
-//       @required this.payload});
-// }
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final FirebaseApp app = await FirebaseApp.configure(
@@ -50,26 +27,6 @@ void main() async {
   );
   final Firestore firestore = Firestore(app: app);
   initializeNotification();
-
-  // // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-  // var initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-
-  // var initializationSettingsIOS = IOSInitializationSettings(
-  //     onDidReceiveLocalNotification:
-  //         (int id, String title, String body, String payload) async {
-  //   didReceiveLocalNotificationSubject.add(ReceivedNotification(
-  //       id: id, title: title, body: body, payload: payload));
-  // });
-
-  // var initializationSettings = InitializationSettings(
-  //     initializationSettingsAndroid, initializationSettingsIOS);
-  // await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-  //     onSelectNotification: (String payload) async {
-  //   if (payload != null) {
-  //     debugPrint('notification payload: ' + payload);
-  //   }
-  //   selectNotificationSubject.add(payload);
-  // });
 
   runApp(
     FirestoreProvider(
